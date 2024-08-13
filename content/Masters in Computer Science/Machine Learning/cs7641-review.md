@@ -34,7 +34,7 @@ Before we get into the nitty-gritties of discussing how to navigate the course, 
 <center><iframe width="500" height="300" src="https://www.youtube.com/embed/MlW7T0SUH0E" title="El Chombo - Chacarron (Official Video)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></center>
 
 >[!warning]
-The song lyrics is what you will understand if you go in blindly tuning hyperparameters without understanding the material. fhdsddhsjshjkjasaskjdihdknkamkam? 🥸
+>The song lyrics is what you will understand if you go in blindly tuning hyperparameters without understanding the material. fhdsddhsjshjkjasaskjdihdknkamkam? 🥸
 
 - **You’re lucky, work with what you have**: I am a firm believer of keeping a positive mindset and that has helped me through the course. It is important to note that most of the libraries (sklearn, mlrose, bettermdptools) used in the course didn’t exist in the past and we’re lucky to have them. The FAQs and TA blogs are really helpful too, the past cohorts did not have them. So, let’s be a bit grateful to the TAs on improving this course for us! :)
 
