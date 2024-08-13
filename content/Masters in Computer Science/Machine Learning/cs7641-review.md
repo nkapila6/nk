@@ -32,6 +32,7 @@ Before we get into the nitty-gritties of discussing how to navigate the course, 
 - **Don’t focus solely on assignments** : While assignments are the main push, definitely do the lectures and read the textbook and readings. You should not end up in a scenario where you fully perform the experiments in the assignments but are not able to understand what’s going on. Plus, the book conveys good intuition on what to focus on for analysis.
 
 <center><iframe width="500" height="300" src="https://www.youtube.com/embed/MlW7T0SUH0E" title="El Chombo - Chacarron (Official Video)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></center>
+
 >[!warning]
 The song lyrics is what you will understand if you go in blindly tuning hyperparameters without understanding the material. fhdsddhsjshjkjasaskjdihdknkamkam? 🥸
 
