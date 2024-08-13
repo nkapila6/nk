@@ -35,26 +35,25 @@ Before we get into the nitty-gritties of discussing how to navigate the course, 
 >[!warning]
 The song lyrics is what you will understand if you go in blindly tuning hyperparameters without understanding the material. fhdsddhsjshjkjasaskjdihdknkamkam? 🥸
 
-- **You’re lucky, work with what you have** : I am a firm believer of keeping a positive mindset and that has helped me through the course. It is important to note that most of the libraries (sklearn, mlrose, bettermdptools) used in the course didn’t exist in the past and we’re lucky to have them. The FAQs and TA blogs are really helpful too, the past cohorts did not have them. So, let’s be a bit grateful to the TAs on improving this course for us! :)
+- **You’re lucky, work with what you have**: I am a firm believer of keeping a positive mindset and that has helped me through the course. It is important to note that most of the libraries (sklearn, mlrose, bettermdptools) used in the course didn’t exist in the past and we’re lucky to have them. The FAQs and TA blogs are really helpful too, the past cohorts did not have them. So, let’s be a bit grateful to the TAs on improving this course for us! :)
 
-- **Follow the assignment PDF and FAQs** : \*\*\*\* An extension of the above point, follow the blogs, FAQs and assignment PDFs exclusively and you will be fine.
+- **Follow the assignment PDF and FAQs**: An extension of the above point, follow the blogs, FAQs and assignment PDFs exclusively and you will be fine.
 
-- **The TAs are not the enemy** : The TAs are here to help. While they may make mistakes, it’s important to understand like you, they’re juggling full time jobs + a OMSCS course or two + being a TA.
+- **The TAs are not the enemy**: The TAs are here to help. While they may make mistakes, it’s important to understand like you, they’re juggling full time jobs + a OMSCS course or two + being a TA.
 
 - **This course will eat your time:** I know that most people will not be able to cover everything here because real life. But come in with the mindset that you need to spend time in this course. Take it easy, do even simple tasks one day at a time, start early and you should be fine. Don’t compare your progress with others, just keep going. Remember, keep a positive mindset as this course calls for one to persevere and struggle.
 
-- **Use Overleaf** : Use [Kyle Nakamura’s LaTeX template](https://github.com/knakamura13/cs7641-ml-study-materials-2023/tree/main/Report%20LaTeX%20Templates). It’s much easier to write reports, don’t waste time using Microsoft Word.
+- **Use Overleaf**: Use [Kyle Nakamura’s LaTeX template](https://github.com/knakamura13/cs7641-ml-study-materials-2023/tree/main/Report%20LaTeX%20Templates). It’s much easier to write reports, don’t waste time using Microsoft Word.
 
-- **OHs are helpful** : You may not be able to attend all of them and that’s okay but view the recordings or summarize the transcripts. Sometimes you find some good POVs of analysis from the OHs.
+- **OHs are helpful**: You may not be able to attend all of them and that’s okay but view the recordings or summarize the transcripts. Sometimes you find some good POVs of analysis from the OHs.
 
 ## What analysis? Should I not just code the algorithms? I am a PROGRAMMER!!!
 
 *I leave it to **Prof. Isbell** to answer this, this will help your analysis*: **[Charles Isbell and Michael Littman: Machine Learning and Education | Lex Fridman Podcast #148](https://youtu.be/yzMVEbs8Zz0?t=606) (The links start at a specific time, watch until 14:50).**
 
-{% alertbox warning %}
-**WARNING** on the video:
-Do not steal code written specifically for the CS7641 course (eg: ChedCode), steal anything else, some egs: how to implement Decision Tree in sklearn, how to make a line/bar/scatter-plot, how to use pandas, you get the idea.
-{% endalertbox %}
+> [!warning]
+> Do not steal code written specifically for the CS7641 course (eg: ChedCode), steal anything else, some egs: how to implement Decision Tree in sklearn, how to make a line/bar/scatter-plot, how to use pandas, you get the idea.
+> 
 
 More information on analysis:
 
