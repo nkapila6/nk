@@ -3,6 +3,7 @@ layout: post
 title: Sacrifice is a tool
 abbrlink: 937c800a6608405481552278a354ca9d
 tags:
+  - life
 categories:
   - life
 date: 1495915200000

@@ -1,3 +1,10 @@
 @use "./base.scss";
 
 // put your custom CSS here!
+pre.poetry {
+    font-size: 1.2rem;
+    font-family: biro_script_standardRgus;
+    border: none;
+    padding: 0;
+    position: unset;
+  }

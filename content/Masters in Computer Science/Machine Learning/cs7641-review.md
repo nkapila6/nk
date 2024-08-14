@@ -3,15 +3,13 @@ layout: post
 title: "Avoid Overfitting: A Practical Guide to CS7641 Machine Learning"
 abbrlink: e18ee9b8f39b4dee816618e0fac28df5
 tags:
-  - cs7641-machine-learning
+  - machine-learning
   - omscs
-categories:
-  - course-reviews
-date: 1713556800000
-updated: 1723540856198
+  - course-reviews 
 aliases:
   - /2024/04/19/e18ee9b8f39b4dee816618e0fac28df5
-  - waifu
+date: 2024-04-20
+updated: 2024-08-12
 ---
 Tips-n-tricks blog post to navigate OMSCS’s CS7641 Machine Learning (ML) course.
 
@@ -19,7 +17,7 @@ Tips-n-tricks blog post to navigate OMSCS’s CS7641 Machine Learning (ML) cours
 
 - I took this class in Spring of 2024, the requirements of specific assignments could have changed for the upcoming semesters.
 - If you have any doubts whether the suggestions below apply to your cohort, check with the TAs, I claim no responsibility over lost marks or points.
-- Use the OMSCS study slack channel #cs7641 or study groups. 😎
+- Use the OMSCS study slack channel ```#cs7641``` or study groups. 😎
 
 Before we get into the nitty-gritties of discussing how to navigate the course, you need to get rid a couple of internal biases that can limit the derived learning.
 

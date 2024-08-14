@@ -2,7 +2,7 @@
 layout: post
 title: Preparation for Deep Learning Course
 tags:
-  - cs7643-deep-learning
+  - deep-learning
   - omscs
 categories:
   - course-prep

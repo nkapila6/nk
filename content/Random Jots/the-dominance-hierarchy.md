@@ -3,6 +3,7 @@ layout: post
 title: The Dominance Hierarchy
 abbrlink: 11cb86f6df8341f6964a66eb9b0b0c15
 tags:
+  - life
 categories:
   - life
 date: 1531425600000
