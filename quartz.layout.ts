@@ -1,25 +1,24 @@
 import { PageLayout, SharedLayout } from "./quartz/cfg"
 import * as Component from "./quartz/components"
-import { SimpleSlug } from "./quartz/util/path"
 
 // components shared across all pages
 export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
   header: [],
   afterBody: [
-    Component.Comments({
-      provider: 'giscus',
-      options: {
-        // from data-repo
-        repo: 'nkapila6/nk',
-        // from data-repo-id
-        repoId: 'R_kgDOMjKIhg',
-        // from data-category
-        category: 'Announcements',
-        // from data-category-id
-        categoryId: 'DIC_kwDOMjKIhs4ChmAO',
-      }
-    }),
+    // Component.Comments({
+    //   provider: 'giscus',
+    //   options: {
+    //     // from data-repo
+    //     repo: 'nkapila6/nk',
+    //     // from data-repo-id
+    //     repoId: 'R_kgDOMjKIhg',
+    //     // from data-category
+    //     category: 'Announcements',
+    //     // from data-category-id
+    //     categoryId: 'DIC_kwDOMjKIhs4ChmAO',
+    //   }
+    // }),
   ],
   footer: Component.Footer({
     links: {
@@ -42,19 +41,24 @@ export const defaultContentPageLayout: PageLayout = {
     Component.MobileOnly(Component.Spacer()),
     Component.Search(),
     Component.Darkmode(),
-    Component.DesktopOnly(
-      Component.RecentNotes({
-        title: "Recent Writing",
-        limit: 3,
-        linkToMore: "tags/" as SimpleSlug,
-      })
-    ),
+    Component.DesktopOnly(Component.Links()),
+    Component.DesktopOnly(Component.RecentNotes({
+      limit: 1
+    }))
+    // Component.DesktopOnly(
+    //   Component.RecentNotes({
+    //     title: "Recent Writing",
+    //     limit: 3,
+    //     linkToMore: "tags/" as SimpleSlug,
+      // })
+    // ),
     // Component.DesktopOnly(Component.TableOfContents())
   ],
   right: [
     Component.Graph(),
     Component.DesktopOnly(Component.TableOfContents()),
     Component.Backlinks(),
+    Component.MobileOnly(Component.Links())
   ],
 }
 
@@ -66,7 +70,11 @@ export const defaultListPageLayout: PageLayout = {
     Component.MobileOnly(Component.Spacer()),
     Component.Search(),
     Component.Darkmode(),
-    Component.DesktopOnly(Component.Explorer()),
+    // Component.DesktopOnly(Component.Explorer()),
+    Component.DesktopOnly(Component.RecentNotes({
+      limit: 3
+    }
+    ))
   ],
   right: [],
 }
