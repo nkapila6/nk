@@ -1,11 +1,128 @@
 @use "./base.scss";
+@use "./variables.scss" as *;
 
-// put your custom CSS here!
-pre.poetry {
-    font-size: 1.2rem;
-    font-family: biro_script_standardRgus;
-    border: none;
-    padding: 0;
-    position: 
-    unset;
+$red: #AF3029;
+$orange: #BC5215;
+$yellow: #AD8301;
+$green: #66800B;
+$cyan: #24837B;
+$blue: #205EA6;
+$purple: #5E409D;
+$magenta: #A02F6F;
+
+/* Sidebar top margins */
+.left.sidebar,
+.right.sidebar {
+  margin-top: 2.4rem !important;
+}
+
+/* Top of note area */
+.breadcrumb-container {
+  font-size: 0.9em;
+
+  & a {
+    color: var(--darkgray);
+    font-style: italic;
   }
+}
+
+.article-title {
+  margin-top: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.content-meta {
+  color: var(--gray);
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.tags {
+  font-size: 0.8em;
+  margin-top: 0 !important;
+}
+
+a.tag-link {
+  color: var(--darkgray);
+  background-color: var(--lightgray) !important;
+}
+
+/* Explorer */
+
+.folder-outer {
+  font-size: 0.9rem;
+
+  & li {
+    margin: 0.4em 0;
+  }
+}
+
+/* Recent notes */
+
+.recent-notes {
+  & .recent-ul {
+    font-size: 0.85rem;
+
+    & h3 {
+      font-size: 1rem;
+    }
+  }
+
+  & > ul.recent-ul > li {
+    margin: 0;
+  }
+
+  & .tag-link {
+    display: none;
+  }
+}
+
+/* Others */
+.page {
+  & article {
+    & > h1, & > h2, & > h3, & > h4, & > h5, & > h6 {
+      border-bottom: 1px solid var(--lightgray);
+      font-size: 1rem;
+      padding-bottom: 0.3em;
+    }
+
+    & > h1 {
+      font-size: 1.1rem;
+      color: $red;
+    }
+
+    & > h2 {
+      color: $orange;
+    }
+
+    & > h3 {
+      color: $yellow;
+    }
+
+    & > h4 {
+      color: $green;
+    }
+
+    & > h5 {
+      color: $cyan;
+    }
+
+    & > h6 {
+      color: $purple;
+    }
+  }
+
+  & .page-header {
+    @media all and (max-width: $fullPageWidth) {
+      margin-top: 1rem;
+    }
+  }
+}
+
+.page-title {
+  font-size: 1.4rem;
+
+  & a {
+    color: var(--dark);
+  }
+}
