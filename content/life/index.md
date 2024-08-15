@@ -1,5 +1,6 @@
 ---
-title: How's life been feeling lately
+title: Life
+# title: How's life been feeling lately
 date: 1
 ---
 
