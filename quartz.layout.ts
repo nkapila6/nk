@@ -4,7 +4,7 @@ import * as Component from "./quartz/components"
 // components shared across all pages
 export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
-  header: [],
+  header: [Component.LinksHeader()],
   afterBody: [
     // Component.Comments({
     //   provider: 'giscus',
@@ -33,48 +33,62 @@ export const defaultContentPageLayout: PageLayout = {
   beforeBody: [
     Component.Breadcrumbs(),
     Component.ArticleTitle(),
-    Component.ContentMeta(),
+    // Component.ContentMeta(),
     Component.TagList(),
   ],
   left: [
     Component.PageTitle(),
     Component.MobileOnly(Component.Spacer()),
     Component.Search(),
-    Component.Darkmode(),
-    Component.DesktopOnly(Component.Links()),
+    Component.MobileOnly(Component.Darkmode()),
+    Component.DesktopOnly(Component.Explorer({
+      title: "Navigation",
+      folderClickBehavior: "collapse",
+      folderDefaultState: "collapsed",
+      useSavedState: false,
+      filterFn: (node) => node.name !== "tags",
+    })),
     Component.DesktopOnly(Component.RecentNotes({
-      limit: 1
-    }))
-    // Component.DesktopOnly(
-    //   Component.RecentNotes({
-    //     title: "Recent Writing",
-    //     limit: 3,
-    //     linkToMore: "tags/" as SimpleSlug,
-      // })
-    // ),
-    // Component.DesktopOnly(Component.TableOfContents())
+      title: "Recently Created",
+      limit: 5
+    })),
   ],
   right: [
-    Component.Graph(),
+    Component.DesktopOnly(Component.Darkmode()),
     Component.DesktopOnly(Component.TableOfContents()),
-    Component.Backlinks(),
-    Component.MobileOnly(Component.Links())
+    Component.Graph(),
+    // Component.Backlinks(),
   ],
 }
 
 // components for pages that display lists of pages  (e.g. tags or folders)
 export const defaultListPageLayout: PageLayout = {
-  beforeBody: [Component.Breadcrumbs(), Component.ArticleTitle(), Component.ContentMeta()],
+  beforeBody: [Component.ArticleTitle()],
   left: [
     Component.PageTitle(),
     Component.MobileOnly(Component.Spacer()),
     Component.Search(),
     Component.Darkmode(),
-    // Component.DesktopOnly(Component.Explorer()),
     Component.DesktopOnly(Component.RecentNotes({
-      limit: 3
-    }
-    ))
+      title: "Recently Created",
+      limit: 5
+    })),
   ],
   right: [],
 }
+
+// export const defaultListPageLayout: PageLayout = {
+//   beforeBody: [Component.Breadcrumbs(), Component.ArticleTitle(), Component.ContentMeta()],
+//   left: [
+//     Component.PageTitle(),
+//     Component.MobileOnly(Component.Spacer()),
+//     Component.Search(),
+//     Component.Darkmode(),
+//     // Component.DesktopOnly(Component.Explorer()),
+//     Component.DesktopOnly(Component.RecentNotes({
+//       limit: 3
+//     }
+//     ))
+//   ],
+//   right: [],
+// }
