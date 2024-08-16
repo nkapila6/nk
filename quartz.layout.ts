@@ -41,20 +41,21 @@ export const defaultContentPageLayout: PageLayout = {
     Component.MobileOnly(Component.Spacer()),
     Component.Search(),
     Component.MobileOnly(Component.Darkmode()),
-    Component.DesktopOnly(Component.Explorer({
-      title: "Navigation",
-      folderClickBehavior: "collapse",
-      folderDefaultState: "collapsed",
-      useSavedState: false,
-      filterFn: (node) => node.name !== "tags",
-    })),
+    Component.Darkmode(),
+//  Component.DesktopOnly(Component.Explorer({
+//   title: "Navigation",
+//   folderClickBehavior: "collapse",
+//    folderDefaultState: "collapsed",
+//    useSavedState: false,
+//    filterFn: (node) => node.name !== "tags",
+//  })),
     Component.DesktopOnly(Component.RecentNotes({
       title: "Recently Created",
       limit: 5
     })),
   ],
   right: [
-    Component.DesktopOnly(Component.Darkmode()),
+//  Component.DesktopOnly(Component.Darkmode()),
     Component.Graph(),
     Component.DesktopOnly(Component.TableOfContents()),
     // Component.Backlinks(),
