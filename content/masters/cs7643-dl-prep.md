@@ -4,6 +4,8 @@ title: Preparation for Deep Learning Course
 tags:
   - deep-learning
   - omscs
+  - "#cs7643"
+  - "#preparation-work"
 categories:
   - course-prep
 date: 1713940542112

@@ -15,7 +15,7 @@ Training LSTMs and making user inferences based on data was part of my research 
 ## LSTM orchestration: an overview
 We implemented a pipeline using Metaflow \[4] to train LSTM models on the BGD2 dataset. The pipeline is structured to ensure data integrity, effective preprocessing, and robust model training and evaluation. The implementation of this pipeline offers several advantages such as a structured and scalable approach to manage various steps involved in machine learning workflows.
 
-![[Pasted image 20240814002958.png]]
+![[1-uml-metaflow-ui.png]]
 <p align="center"><em>Fig 1. UML diagram (right) for pipelining and UI showing trained models (left).</em></p>
 
 The pipeline is first broken down into ingestion, data preprocessing, model training, evaluation and logging into a cohesive pipeline. In the below sections, we talk about each of these steps in detail.
@@ -28,18 +28,18 @@ The BGD2 dataset is a big mix of data over different building usage types. Since
 - **Building Usage Type**: Office, Education, Lodging/Residential. The image does show many primary building usage types but we focus on only these 3 for now.
 - **Size in sq ft**: 1001-5000, 5001-10000, 10001-25000, 25001-50000, 50001-100000, 100001-200000, 200001-500000
 
-![[Pasted image 20240814003056.png]]
+![[2-bgd2-subsets.png]]
 <p align="center"><em>Fig 2. Image showing data filtered out of BGD2 dataset.</em></p>
 
 The BGD2 dataset has definite building sizes but we categorize our data based on size bins defined in Comstock to be able to fetch a building to benchmark against. Due to lack of availability for some size bins in the BGD2 dataset, we were able to train a total number of 19 LSTM models.
 ### Pipeline pre-processing: Dealing with missing data points
 Since the BGD2 dataset is real measured data on buildings, most of the data in 2016 is missing due to faults in the electrical meters. This will cause problems during modeling as the LSTM will not be accurately able to capture the temporal dynamics in the data which will cause issues during inference. Hence, the 2016 data was skipped altogether.
 
-![[Pasted image 20240814003115.png]]
+![[3-missing-data.png]]
 <p align="center"><em>Fig 3. Image showing missing 2016 data in the BGD2 dataset and some 
 			missing data points in the 2017 dataset.</em></p>
 
-![[Pasted image 20240814003126.png]]
+![[4-data-augmentation.png]]
 <p align="center"><em>Fig 4. Zoomed in version for one of the data points showing before (left) and after (right) filling.</em></p>
 
 Even in the 2017 part of the dataset, the missing data points were addressed by employing a weighted average of ten nearest data points to ensure accurate and consistent information for the missing data points.
@@ -55,14 +55,14 @@ Apart from dealing with outliers, using the central tendency helps maintain the 
 
 To train an LSTM on time-series data, it is essential to prepare the data in a format so that the model can learn from it. This involves creating training examples from the input data where each example corresponds to sequence of input data and corresponding target values which is known as the sliding window approach. This method ensures that the temporal dynamics of the data are captured effectively, allowing the LSTM to learn the patterns over the specified time. Furthermore, the deep-learning framework used, torch expects the input for sequence models to be prepared in this way.
 
-![[Pasted image 20240814003147.png]]
+![[5-sliding window.png]]
 <p align="center"><em>Fig 5. Example input using sliding window. 
 The lookback value of 30 creates an input of past 30 hours data 
 	so that the model can predict the 31st hour.</em></p>
 
 Cross-validation is an important task to ensure that the model can generalize and is not heavily skewed towards one part of the training set. Furthermore, to cross-validate time-series data, it is crucial to maintain the temporal order of the data. Unlike typical datasets where shuffling is acceptable, time series data requires an approach that ensures this time-dependent structure is preserved. To do this, we utilize sklearn’s TimeSeriesSplit which sequentially splits data into training and validation sets whilst maintaining temporal order.
 
-![[Pasted image 20240814003201.png]]
+![[6-cross-validation.png]]
 <p align="center"><em>Fig 6. Cross validation showing training and validation sets maintaining temporal order.</em></p>
 ### Pipeline training: chosen hyperparameters
 For our model, we consider a basic LSTM model as a reasonable starting point that balances complexity and computational efficiency. Our primary goal for forecasting is to standardize the modeling process that can be applied across various dataset and forecasting scenarios. Furthermore, using a fixed set of hyperparameters helps to simplify the modeling process and ensure the model’s performance is consistent and predictable.

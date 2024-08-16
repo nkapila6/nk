@@ -5,7 +5,9 @@ abbrlink: e18ee9b8f39b4dee816618e0fac28df5
 tags:
   - machine-learning
   - omscs
-  - course-reviews 
+  - course-reviews
+  - "#cs7641"
+  - "#preparation-work"
 aliases:
   - /2024/04/19/e18ee9b8f39b4dee816618e0fac28df5
 date: 2024-04-20
@@ -17,7 +19,7 @@ Tips-n-tricks blog post to navigate OMSCS’s CS7641 Machine Learning (ML) cours
 
 - I took this class in Spring of 2024, the requirements of specific assignments could have changed for the upcoming semesters.
 - If you have any doubts whether the suggestions below apply to your cohort, check with the TAs, I claim no responsibility over lost marks or points.
-- Use the OMSCS study slack channel ```#cs7641``` or study groups. 😎
+- Use the OMSCS study slack channel ```#cs7641``` or study groups on Discord by your cohort. 😎
 
 Before we get into the nitty-gritties of discussing how to navigate the course, you need to get rid a couple of internal biases that can limit the derived learning.
 

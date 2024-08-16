@@ -2,4 +2,4 @@
 title: Lighting
 date: 1
 ---
-This will be where my thoughts on the current state of the lighting industry shall be posted.
+My thoughts on topics in the industry such as energy efficiency, control systems, sustainability, etc  ⚡️
