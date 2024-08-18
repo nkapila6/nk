@@ -40,7 +40,6 @@ export const defaultContentPageLayout: PageLayout = {
     Component.PageTitle(),
     Component.MobileOnly(Component.Spacer()),
     Component.Search(),
-    Component.MobileOnly(Component.Darkmode()),
     Component.Darkmode(),
 //  Component.DesktopOnly(Component.Explorer({
 //   title: "Navigation",
