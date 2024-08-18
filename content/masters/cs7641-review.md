@@ -11,7 +11,7 @@ tags:
 aliases:
   - /2024/04/19/e18ee9b8f39b4dee816618e0fac28df5
 date: 2024-04-20
-updated: 2024-08-12
+updated: 2024-08-18
 ---
 Tips-n-tricks blog post to navigate OMSCS’s CS7641 Machine Learning (ML) course.
 
@@ -118,12 +118,16 @@ In this assignment, you pick 2 “interesting” datasets and apply SL algorithm
 ## Assignment 2 - Randomized Optimizations (RO)
 
 1. **Library to use**: [mlrose-hiive lib](https://github.com/hiive/mlrose) | [mlrose “non-hiive” outdated docs](https://mlrose.readthedocs.io)
+>[!info] Recommendation
+> There is a new clone of mlrose-hiive that Kyle has developed. I have worked mainly on the documentation part and added some stuff on Runners. More to come soon, WIP.
+> 
+[mlrose-ky github](https://github.com/knakamura13/mlrose-ky)
+>[mlrose-ky docs](https://nkapila6.github.io/mlrose-ky/)
 
 2. **YouTube**:
    - This [playlist](https://www.youtube.com/playlist?list=PLbMVogVj5nJSFZoiF6RDqyz_m6Srjx_MY) by Prof. Deepak Khemani, IIT Madras explains the concepts really well, the course lectures are good and in-depth.
-     {% alertbox info %}
-     Start with the 1st video (skippable) then do 9, 10, 14, 15, 16, 17. 16 & 17 may be a little more extra information than required but do watch if it peaks your curiosity.
-     {% endalertbox %}
+>[!INFO] Videos to watch
+> Start with the 1st video (skippable) then do 9, 10, 14, 15, 16, 17. 16 & 17 may be a little more extra information than required but do watch if it peaks your curiosity.
 
 3. **Books / Readings**:
    - [TA Blogs : Randomized Optimizations Category](https://sites.gatech.edu/omscs7641/category/assignments/randomized-optimization/)
@@ -137,7 +141,8 @@ In this assignment, you pick 2 “interesting” datasets and apply SL algorithm
 In this assignment, you implement RHC, SA, GA, MIMIC on a problem of your choice.
 
 - **No docs** : You’ve been spoilt by Scikit-learn in A1, now it’s time to torture you. The first thing you will come across is that the “hiive” version of mlrose has no documentation. Dive directly into code and understand the comments, use the docs just to understand how to create an optimization problem.
-- **Use the runners** : Use the runners in hiive, they give nice output dataframe that can be used for plotting.
+	- [18.08.2024] UPDATE: You can now use mlrose-ky docs which has a nice tutorial on runners [here](https://nkapila6.github.io/mlrose-ky/runners/)
+- **Use the runners** : Use the runners in mlrose-hiive/mlrose-ky, they give nice output dataframe that can be used for plotting.
 - **Code tip** : Since the runtimes for some of these ROs can be really long (like \~12-13 hours, no joke), there are 2 ways to save your results:
   - Save the output as csv and call it in another .py or notebook for plotting.
   - [Pickle your objects](https://blog.hubspot.com/website/python-pickle), literally saving the python objects. I prefer the above .csv route since pickling objects could take time. I didn’t try it in A2 but in A4, pickling sizes were huge.
@@ -201,6 +206,11 @@ I could literally skip finals and still score an A in the class, this shows the 
 
 In finals, I score a 32.5/57 which dropped my overall to 88.70 % leading to an A. The finals did not go so well since the questions were tricky and confusing but mostly from the lectures. Just do the lectures + George’s [notes](https://teapowered.dev/assets/ml-notes.pdf) and you should be fine.
 
+## Summer scaling
+For the summer cohort of 2024, the course was scaled and some additions were made as below.
+- A new hypothesis quiz was added to assist with better report writing at the start of the semester.
+- Potentially, for summer only since timelines are short, Assignment 4 on Reinforcement Learning was dropped.
+
 ## Other interesting text to review:
 
 - [Why CS7641 is an awesome class and some tips to succeed.](https://www.reddit.com/r/OMSCS/comments/18oc5ad/why_cs7641_is_an_awesome_class_and_some_tips_to/) by [suzaku18393](https://www.reddit.com/user/suzaku18393/)
@@ -210,7 +220,9 @@ In finals, I score a 32.5/57 which dropped my overall to 88.70 % leading to an A
 
 ## Changelog
 
-- First draft completed, *19th April 2024.*
-- First edit, *20th April 2024.*
-- Second edit: added TOC, more content, updated confusing information, *9th May 2024.*
-- Moved to personal blog, *12th Aug 2024*
+- [19.04.2024] First draft completed.
+- [20.05.2024] First edit.
+- [09.05.2024] Second edit: added TOC, more content, updated confusing information.
+- [12.08.2024] Moved to personal blog from my [substack](nikhilkapila.substack.com).
+- [18.08.2024] Added summer cohort section.
+- [18.08.2024] Added new [mlrose-ky library](https://github.com/knakamura13/mlrose-ky) for assignment 2.
