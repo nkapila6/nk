@@ -121,7 +121,8 @@ In this assignment, you pick 2 “interesting” datasets and apply SL algorithm
 >[!info] Recommendation
 > There is a new clone of mlrose-hiive that Kyle has developed. I have worked mainly on the documentation part and added some stuff on Runners. More to come soon, WIP.
 > 
-[mlrose-ky github](https://github.com/knakamura13/mlrose-ky)
+> [mlrose-ky github](https://github.com/knakamura13/mlrose-ky)
+> 
 >[mlrose-ky docs](https://nkapila6.github.io/mlrose-ky/)
 
 2. **YouTube**:
