@@ -100,10 +100,15 @@ More information on analysis:
 
 1. **Library to use** : *[Scikit-learn](https://scikit-learn.org)\
    (for NN, you could look at Keras, PyTorch but best to stick with sklearn’s MLPClassifier as it is used for A2)*
-2. **Books / Readings**:
+2. A1 todo list: [[/masters/resources/cs7641/sl1.docx]]
+   
+> [!WARNING] Warning on this list
+> This list worked fine for Fall 2023 and Spring 2024. I'm not sure how this scales out for your current semester so don't blame me for lost points.
+
+4. **Books / Readings**:
    - *TA blogs:[TA Blogs : Supervised Learning Category](https://sites.gatech.edu/omscs7641/category/assignments/supervised-learning/)*
    - *Mitchell chapters: Ch 1, 2, 3, 4, 8*
-3. **YouTube**
+5. **YouTube**
    - *StatQuest videos, 3Blue1Brown, CampusX - his videos are in Hindi but they provide good intuition on how the algorithms work, especially SVM and Boosting.*
    - *There are many videos on Supervised Learning, explore YouTube/MIT OCW, etc.*
 
@@ -227,3 +232,4 @@ For the summer cohort of 2024, the course was scaled and some additions were mad
 - [12.08.2024] Moved to personal blog from my [substack](nikhilkapila.substack.com).
 - [18.08.2024] Added summer cohort section.
 - [18.08.2024] Added new [mlrose-ky library](https://github.com/knakamura13/mlrose-ky) for assignment 2.
+- [30.08.2024] Added A1 to-do list.
