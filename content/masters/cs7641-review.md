@@ -99,8 +99,8 @@ More information on analysis:
 ## Assignment 1 - Supervised Learning (SL)
 
 1. **Library to use** : *[Scikit-learn](https://scikit-learn.org)\
-   (for NN, you could look at Keras, PyTorch but best to stick with sklearn’s MLPClassifier as it is used for A2)*
-2. A1 todo list: [[/masters/resources/cs7641/sl1.docx]]
+2. For NN, if you do not want to use scikit-learn, you can also use torch or skorch as these are reusable in A2.
+3. A1 todo list: [[/masters/resources/cs7641/sl1.docx]]
    
 > [!WARNING] Warning on this list
 > This list worked fine for Fall 2023 and Spring 2024. I'm not sure how this scales out for your current semester so don't blame me for lost points.
@@ -122,15 +122,9 @@ In this assignment, you pick 2 “interesting” datasets and apply SL algorithm
 
 ## Assignment 2 - Randomized Optimizations (RO)
 
-1. **Library to use**: [mlrose-hiive lib](https://github.com/hiive/mlrose) | [mlrose “non-hiive” outdated docs](https://mlrose.readthedocs.io)
->[!info] Recommendation
-> There is a new clone of mlrose-hiive that Kyle has developed. I have worked mainly on the documentation part and added some stuff on Runners. More to come soon, WIP.
-> 
-> [mlrose-ky github](https://github.com/knakamura13/mlrose-ky)
-> 
->[mlrose-ky docs](https://nkapila6.github.io/mlrose-ky/)
-
-2. **YouTube**:
+1. **Library to use**: [mlrose-ky lib](http://github.com/knakamura13/mlrose-ky) | [mlrose-ky docs](https://nkapila6.github.io/mlrose-ky)
+2. For part 2 of this assignment where you perform weight optimization using ROs and if you used torch or skorch in A1, it is recommended to use [pyperch](https://github.com/jlm429/pyperch)
+3. **YouTube**:
    - This [playlist](https://www.youtube.com/playlist?list=PLbMVogVj5nJSFZoiF6RDqyz_m6Srjx_MY) by Prof. Deepak Khemani, IIT Madras explains the concepts really well, the course lectures are good and in-depth.
 >[!INFO] Videos to watch
 > Start with the 1st video (skippable) then do 9, 10, 14, 15, 16, 17. 16 & 17 may be a little more extra information than required but do watch if it peaks your curiosity.
@@ -233,3 +227,4 @@ For the summer cohort of 2024, the course was scaled and some additions were mad
 - [18.08.2024] Added summer cohort section.
 - [18.08.2024] Added new [mlrose-ky library](https://github.com/knakamura13/mlrose-ky) for assignment 2.
 - [30.08.2024] Added A1 to-do list.
+- [15.10.2024] Updated A2 with new docs and added [pyperch library](https://github.com/jlm429/pyperch)
