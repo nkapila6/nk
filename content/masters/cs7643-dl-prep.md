@@ -15,7 +15,7 @@ updated: 1723540860097
 
 Switch between videos for different topics that give good intuition.
 
-- [Deep Learning for Computer Vision](https://www.youtube.com/playlist?list=PL5-TkQAfAZFbzxjBHtzdVCWE0Zbhomg7r)
+- [Deep Learning for Computer Vision - Highly Recommended](https://www.youtube.com/playlist?list=PL5-TkQAfAZFbzxjBHtzdVCWE0Zbhomg7r)
 - [Math for Deep Learning - Andreas Geiger (MaDL)](https://www.youtube.com/playlist?list=PL05umP7R6ij0bo4UtMdzEJ6TiLOqj4ZCm)
 - [DL Stanford | Spring 2017](https://www.youtube.com/playlist?list=PLC1qU-LWwrF64f4QKQT-Vg5Wr4qEE1Zxk)
 - For NLP: [Stanford CS224n](https://web.stanford.edu/class/cs224n/)
@@ -43,39 +43,16 @@ Switch between videos for different topics that give good intuition.
 1. **Derivatives**:  
    - Basic rules (sum, product, chain), trigonometric functions (\(\sin, \cos\)), and common functions (\(e^x, \text{sigmoid}, \ln\)).  
    - Multi-variate functions: Partial derivatives with respect to specific variables.
-
 2. **Jacobians**:  
    - Understanding and calculating values within a Jacobian matrix.
-
 3. **Composed Functions**:  
    - Derivatives of composed functions and computation graphs.
-
 4. **Practice Resources**:  
    - **Khan Academy** and **YouTube** videos for derivative practice.  
    - eg: [Math for Deep Learning - Andreas Geiger (MaDL)](https://www.youtube.com/playlist?list=PL05umP7R6ij0bo4UtMdzEJ6TiLOqj4ZCm)
 
----
-
-### How to tackle the first Quiz?
-
-1. **The Matrix Calculus You Need For Deep Learning**:  
-   - [Paper](https://arxiv.org).  
-   - [YouTube Part 1](https://www.youtube.com).  
-   - [YouTube Part 2](https://www.youtube.com).
-
-2. **Additional Recommendations**:  
-   - Matrix calculus summary.  
-   - Matrix Differentiation.  
-   - Dive into Deep Learning: Appendix - Mathematics for Deep Learning.  
-   - The Matrix Cookbook.
-
-3. **Optional Review**:  
-   - **Linear Algebra** and **Probability** from the Deep Learning textbook.
-
----
-
 ### Tips  
-- **First Exam & Assignments**: Focus on revising **Calculus**.  
+- **First Quiz & Assignments**: Focus on revising **Calculus**.  
 - **PyTorch**: Used in the 2nd half of the class; you can pick it up as you go.  
 - **Guidance**: Following this preparation was sufficient for **Quiz 1**. 
 
