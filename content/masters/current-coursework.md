@@ -9,6 +9,9 @@ updated: 1723495173894
 ---
 
 **Specialization**: Interactive Intelligence
+✅ Core Requirements: Completed
+⏳ Free Electives: Ongoing
+Remaining: 4 courses left.
 
 ### ✅ Core Courses (9 hours)
 
