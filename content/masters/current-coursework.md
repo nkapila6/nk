@@ -49,3 +49,4 @@ Free electives may be any courses offered through the OMSCS program. You can fin
 
 - ✅ ~~CS 8903 Research Work~~
 - ⏳ [CSE 6250 Big Data for Health](https://www.sunlab.org/teaching/cse6250/spring2023/schedule.html)
+- ⏳ [CS 7650 Natural Language Processing](https://omscs.gatech.edu/cs-7650-natural-language-processing)
