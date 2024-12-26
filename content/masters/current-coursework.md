@@ -12,6 +12,7 @@ updated: 1723495173894
 ✅ Core Requirements: Completed
 ⏳ Free Electives: Ongoing
 Remaining: 4 courses left.
+last update: Dec 2024.
 
 ### ✅ Core Courses (9 hours)
 
