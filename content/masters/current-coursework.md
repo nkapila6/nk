@@ -8,11 +8,11 @@ date: 1674158400000
 updated: 1723495173894
 ---
 
-**Specialization**: Interactive Intelligence
-✅ Core Requirements: Completed
-⏳ Free Electives: Ongoing
-Remaining: 4 courses left.
-last update: Dec 2024.
+**Specialization**: Interactive Intelligence <br>
+✅ Core Requirements: Completed <br>
+⏳ Free Electives: Ongoing <br>
+Remaining: 4 courses left. <br>
+last update: Dec 2024. <br>
 
 ### ✅ Core Courses (9 hours)
 
