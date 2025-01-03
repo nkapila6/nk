@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "How Deep Is Your Love: A Blueprint for CS7643 Deep Learning"
+title: "How Deep Is Your Model: Guide to CS7643 Deep Learning"
 tags:
   - deep-learning
   - omscs
@@ -14,7 +14,7 @@ A ✨Deep Review✨ on Georgia Tech's [Deep Learning](https://omscs.gatech.edu/c
 
 <center><iframe width="500" height="300" src="https://www.youtube.com/embed/EgqUJOudrcM" title="Calvin Harris &amp; Disciples - How Deep Is Your Love" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></center>
 
-> [!WARNING] How Deep Is Your Love?
+> [!WARNING] How deep is your love for deep learning?
 > How deep is your model, can it go any deeper?
 
 Now that you have completed the 7641 Machine Learning class (assuming you're not naughty and have not skipped it), you can focus solely on neural network architectures and leverage their representational power to tackle much more complex problems.
