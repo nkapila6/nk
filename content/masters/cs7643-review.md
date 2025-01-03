@@ -159,7 +159,7 @@ For PyTorch, there is a tutorial in the lectures. I did not find it until the en
 
 Once you start using PyTorch you will appreciate how it really does everything for you --> building out the DAG for autodiff, all activation functions coded, etc. 
 
-### My script for experimentation
+### My script for experiment logging
 I built out a MLFlow wrapper that wraps onto the PyTorch Solver.py for this assignment. This will help you track and store either locally or on Databricks your experiments.
 
 **Fun fact**: my Databricks account got suspended because I was logging the whole Solver object which was around 1.2 gigs, haha. Definitely recommend you use it locally (or colab/lightning) instead.
@@ -264,7 +264,8 @@ You can now finally endorse this meme and have a Twitter war with people making 
 | Quizzes           | 93.08 / 131.00  |
 | Final Project     | 55.00 / 62.00   |
 | Ed Endorsed Posts | 1.00 / 1.00     |
-| Overall           | 92.10           |
+| Overall           | 92.10 %         |
+
 Try to do well on all the assignments and the final project, that should account for any problems you may face in the quizzes.
 
 The `Ed Endorsed Posts` was just given to 3 people 🤯 in the class for being "very helpful" I'm assuming. So, if you're active on Ed and sitting on the borderline of 88, that 1 point could raise your grade to an A.
