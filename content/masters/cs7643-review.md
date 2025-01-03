@@ -272,7 +272,7 @@ The `Ed Endorsed Posts` was just given to 3 people 🤯 in the class for being "
 I did help out on Ed but in my honest opinion, it was mostly me being on Ed when I had nothing better to do with my time. I was wasting my time with [bakchodi](https://en.wiktionary.org/wiki/bakchodi) on Ed/Discord. At least I got rewarded, hahahaha.
 
 ## Other interesting text to review
-- [My dear friend `yxlow` always has good stuff to talk about.](https://lowyx.com/posts/gt-dl/)
+- [My dear friend ` Inspector Yxlow` always has good stuff to talk about.](https://lowyx.com/posts/gt-dl/)
 	- [His Deep Learning Notes](https://lowyx.com/posts/gt-dl-notes/)
 - [There exists a Google Doc written by the `OG Murilo` that has some great resources that even I did not know about.](https://docs.google.com/document/d/16Lu5oMfG6MInuw773ppvA27ZAoQYKtldp4rphK2l_J8/edit?tab=t.0#heading=h.bhv4zgifw7d)
 
