@@ -1,17 +1,22 @@
 ---
 layout: post
-title: 
+title: “How Deep Is Your Love: A Blueprint for CS7643 Deep Learning”
 tags:
   - deep-learning
   - omscs
   - course-reviews
-  - cs7643
-  - preparation-work
+  - "#cs7643"
+  - "#preparation-work"
 date: 2024-12-26
 ---
 A ✨Deep Review✨ on Georgia Tech's [Deep Learning](https://omscs.gatech.edu/cs-7643-deep-learning) course.
-Now that you have completed the 7641 Machine Learning class, you can focus solely on neural networks and leverage their power to tackle complex problems and unlock their full potential.
 
+<center><iframe width="500" height="300" src="https://www.youtube.com/embed/EgqUJOudrcM" title="Calvin Harris &amp; Disciples - How Deep Is Your Love" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></center>
+
+> [!WARNING] How Deep Is Your Love?
+> How deep is your model, can it go deeper?
+
+Now that you have completed the 7641 Machine Learning class (assuming you're not not naughty and have not skipped it), you can focus solely on neural network architectures and leverage their representational power to tackle much more complex problems.
 ## **Important note**
 
 - I took this class in Fall of 2024, the requirements of specific assignments could have changed for the upcoming semesters.
