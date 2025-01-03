@@ -1,6 +1,6 @@
 ---
 layout: post
-title: “How Deep Is Your Love: A Blueprint for CS7643 Deep Learning”
+title: "How Deep Is Your Love: A Blueprint for CS7643 Deep Learning"
 tags:
   - deep-learning
   - omscs
@@ -8,15 +8,16 @@ tags:
   - "#cs7643"
   - "#preparation-work"
 date: 2024-12-26
+updated: 2024-01-03
 ---
 A ✨Deep Review✨ on Georgia Tech's [Deep Learning](https://omscs.gatech.edu/cs-7643-deep-learning) course.
 
 <center><iframe width="500" height="300" src="https://www.youtube.com/embed/EgqUJOudrcM" title="Calvin Harris &amp; Disciples - How Deep Is Your Love" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></center>
 
 > [!WARNING] How Deep Is Your Love?
-> How deep is your model, can it go deeper?
+> How deep is your model, can it go any deeper?
 
-Now that you have completed the 7641 Machine Learning class (assuming you're not not naughty and have not skipped it), you can focus solely on neural network architectures and leverage their representational power to tackle much more complex problems.
+Now that you have completed the 7641 Machine Learning class (assuming you're not naughty and have not skipped it), you can focus solely on neural network architectures and leverage their representational power to tackle much more complex problems.
 ## **Important note**
 
 - I took this class in Fall of 2024, the requirements of specific assignments could have changed for the upcoming semesters.
@@ -43,6 +44,7 @@ These are some of the most asked questions I can remember when being asked about
 		- [Elegant Math Behind Deep Learning](https://www.youtube.com/watch?v=URtF_UHYBSo&t=674s&pp=ygUebWF0aCBmb3IgZGVlcCBsZWFybmluZyBoYXJ2YXJk)
 
 <center><iframe width="500" height="300" src="https://www.youtube.com/embed/P9dpTTpjymE" title="I Will Derive!" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></center>
+
 > [!danger] Can You Derive?
 > This was me after I had binged these many videos and practiced a lot of problems that led to a 25/26 on Quiz 1. Yes, I'm shamelessly bragging.
 
@@ -63,14 +65,15 @@ The Georgia Tech Lectures by Dr Kira cover the topics well, you can view them on
 It would be best to use Dr Justin Johnson's [Deep Learning for Computer Vision](https://www.youtube.com/playlist?list=PL5-TkQAfAZFbzxjBHtzdVCWE0Zbhomg7r) lectures which feel much more lively and are easy to digest due to their conversational style. I often had to view the videos in the playlist and then use that context to easily understand what the Georgia Tech DL lecture was attributing to.
 
 ### Meta Lectures
-Skip them.. I really didn't find most of them helpful. Resources on YouTube taught it much better.
+I really didn't find most of them helpful. They were very abstract and lacked depth in content. Resources on YouTube taught it much better.
   
 ## The Quizzes - A Grade Deflation Tool
 Before I entered this course, I heard a lot on how the Quizzes are "mini"-exams as some people would call it.
 
 <center><iframe width="500" height="300" src="https://www.youtube.com/embed/Fexz4MGLphw" title="EL CHOMBO X MAFFIO X SHELOW SHAQ feat. ANDYS VAL - CHACARRON 3.0 (Official Music Video)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></center>
+
 > [!warning] Warning
->  Here's what the quizzes will feel like even if you study hard. Enjoy the upgraded Chacarron from the ML review.
+>  Here's what the quizzes will feel like even if you study hard. Enjoy the new & updated Chacarron from the ML review.
 
 My experience has been similar for the Quizzes. While the percentage is small, the syllabus covers many topics and it feels like an excuse as a way to force you to review the course-material aggressively and not just complete the assignments and call it a day.
 
@@ -150,6 +153,7 @@ This assignment covers the following tasks in brief:
 - Implement the same CNN using PyTorch
 - Use PyTorch to build out your own CNN implementation and compete with other students on a leaderboard.
 - Experiment with a different loss function (CB & Focal Loss) and report your findings.
+
 ### Pytorch
 For PyTorch, there is a tutorial in the lectures. I did not find it until the end of the course as it is under 'Facebook Resources'. It basically covers the content of this repo: [CS7643 Deep Learing | Fall 2020 at Georgia Tech (Prof. Zsolt Kira)](https://github.com/pytorch/workshops/blob/master/CS7643/readme.md).
 
@@ -160,20 +164,22 @@ I built out a MLFlow wrapper that wraps onto the PyTorch Solver.py for this assi
 
 **Fun fact**: my Databricks account got suspended because I was logging the whole Solver object which was around 1.2 gigs, haha. Definitely recommend you use it locally (or colab/lightning) instead.
 
-![[cs7643-review-1.png]]
+<center><img src='https://raw.githubusercontent.com/nkapila6/nk/refs/heads/v4/content/masters/resources/cs7643/mlflow-charts.png' /></center>
+
 > [!INFO] Info
 > This really helped me save time and I could reference it directly in my report. You can see how it looks in the SS with the hyperparams hidden. (not gonna help you ofc :))
 
 You can view the code [here](https://gist.github.com/nkapila6/23eb57356e3557350b34490332cca256). Please ⭐ if it helps you.
 
-### Interesting text
+### Interesting paper
 In ML, we learnt all about the inherent biases in our algorithms. Especially in A2, where we saw how optimization algorithms tread the problem landscapes very differently. 
 
 Similarly, in this assignment, one of the paper choices which I picked to review was quite interesting. The authors explored how like us humans have biases in looking at images, similarly CNNs exhibit a bias too. And it does not end here, they further talk about training the model to change its bias??! Qualitative analysis has always been very fascinating 😄
 
 <center>
 <iframe width="500" height="300" src="https://www.youtube.com/embed/1cq-jXyi6ek" title="Robert Geirhos: ImageNet-trained CNNs are biased towards texture (ICLR 2019 talk)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></center>
-> [!WARNING] Warning on this list
+
+> [!WARNING] Qualitative analysis breaking minds everytime.
 > Get ready to have your mind blown --insert [gif](https://giphy.com/gifs/timanderic-tim-and-eric-wareheim-lXu72d4iKwqek) here--
 
 ## Assignment 3 - Interpreting CNNs
@@ -195,10 +201,12 @@ This assignment covers the following tasks in brief:
 - Style transfer: preserve an input images structural content but mix-in style pattern of another image.
 
 <center><img src='https://raw.githubusercontent.com/nkapila6/nk/refs/heads/v4/content/masters/resources/cs7643/style-transfer.png' /></center>
+
 > [!INFO] Style transfer
 > A stylized style-transfer image of Burj Khalifa.
 
 <center><img width=300 height=300 src='https://raw.githubusercontent.com/nkapila6/nk/refs/heads/v4/content/masters/resources/cs7643/grad-ascent-gorilla.png' /></center>
+
 > [!INFO] Class maximization using Gradient Ascent
 > A synthetic Gorilla image generated via gradient ascent on a SqueezeNet model pre-trained on ImageNet which highlights features that the neural network associates with a gorilla (our chosen class).
 ## Assignment 4 - Sequences
@@ -266,7 +274,7 @@ I did help out on Ed but in my honest opinion, it was mostly me being on Ed when
 ## Other interesting text to review
 - [My dear friend `yxlow` always has good stuff to talk about.](https://lowyx.com/posts/gt-dl/)
 	- [His Deep Learning Notes](https://lowyx.com/posts/gt-dl-notes/)
-- [There exists a Google Doc written by the OG Murilo that has some great resources that even I did not know about.](https://docs.google.com/document/d/16Lu5oMfG6MInuw773ppvA27ZAoQYKtldp4rphK2l_J8/edit?tab=t.0#heading=h.bhv4zgifw7d)
+- [There exists a Google Doc written by the `OG Murilo` that has some great resources that even I did not know about.](https://docs.google.com/document/d/16Lu5oMfG6MInuw773ppvA27ZAoQYKtldp4rphK2l_J8/edit?tab=t.0#heading=h.bhv4zgifw7d)
 
 ## Comments
 Have some feedback or found any mistakes? Most of you would already know where to find me. 
