@@ -165,3 +165,6 @@ The goal isn't just finding the best hyperparameters but understanding how diffe
 Don't forget 😉:
 <center><img src='https://i.imgur.com/mwmHdIy.png'></center>
 
+# Changelog
+- [14.03.2024] Init
+- [15.03.2025] Grammar fixes, some more context in the last section.
