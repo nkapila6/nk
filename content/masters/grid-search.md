@@ -40,25 +40,25 @@ Taking the real-life example, you could find the right proportions of coffee, su
 # The supervised learning setup
 I'd like to start this section by quoting the author of the Machine Learning book whom I consider my best friend, Dr Tom Mitchell.
 
-> Supervised learning is a search for the best hypothesis h(x) within a hypothesis space "H" that best approximate the target function c(x), such that h(x) == c(x)
+> Supervised learning is a search for the best hypothesis $h(x)$ within a hypothesis space $H$ that best approximate the target function $c(x)$, such that $h(x) == c(x)$
 > 
 > The process involves identifying a function h(x) that best approximates c(x) and can generalize well from the provided training data to unseen instances.
 
 People get thrown off by the words like "hypothesis", "target function", etc. I was too, it took me a lot of time before I understood this definition in its entirety. But don't be confused, the definition above says the same thing what you read in the previous definition.
 
-## Another example? It's the last one I promise.
+### Another example? It's the last one I promise.
 To go further, I shall explain the above definition with another example.
 
 Imagine you're trying to teach a baby to identify red balls. 
 
 To put this into the problem statement of the definition:
-- Your target concept "c(x)" is "red and round objects". 
-- To teach this target function "c(x)" to the baby, you could have 3 different options (the hypothesis space) $H$, $H = [h_1, h_2, h_3]$. 
+- Your target concept $c(x)$ is "red and round objects". 
+- To teach this target function $c(x)$ to the baby, you could have 3 different options (the hypothesis space) $H$, $H = [h_1, h_2, h_3]$. 
 	- $h_1$ = "anything that is red"
 	- $h_2$ = "anything that is round"
 	- $h_3$ = "objects that are both red and round"
 
-We try to teach the baby with 3 different candidate concepts from our set of concepts $H$. We can see that $h_1$ would correctly identify red balls but would identify things like red apples or red objects like books that are not balls. Similarly, $h_2$ would incorrectly include blue balls, green balls, any round object. Only $h_3$ correctly captures the target concept "c(x)".
+We try to teach the baby with 3 different candidate concepts from our set of concepts $H$. We can see that $h_1$ would correctly identify red balls but would identify things like red apples or red objects like books that are not balls. Similarly, $h_2$ would incorrectly include blue balls, green balls, any round object. Only $h_3$ correctly captures the target concept $c(x)$.
 
 ## Babies? Balls? How does this scale to ML?
 Similar to the baby learning a concept of red balls, when you're trying to improve the baby's mental model on a classification task. In machine learning, our hypothesis space $H$ consists of all possible models we could select.
@@ -84,11 +84,11 @@ Beyond running times and compute costs, grid search has several other limitation
 ## Validation Performance vs True Generalization
 In the second line of Dr Mitchell's quote, there is a key thing that was mentioned. 
 
-> The process involves identifying a function h(x) that best approximates c(x) and can generalize well from the provided training data to unseen instances.
+> The process involves identifying a function $h(x)$ that best approximates $c(x)$ and can generalize well from the provided training data to unseen instances.
 
 The keyword here is "generalization". Grid Search evaluates different models and model configurations but this optimizes on the accuracy of your validation set and does not consider the train.
 
-## Problem with validation set inductive bias
+### GridSearch's Inductive Bias: Optimization on Validation Set
 When performing hyperparameter optimization, one may argue/assume that selecting models with best validation performance will lead to good generalization. This reasoning stems from the fact that our data is i.i.d. (independent and identically distributed).
 
 Even though this i.i.d. assumption holds in theory, the reality is more nuanced. GridSearch evaluates numerous hyperparameters on the same validation set which creates a risk of selecting configurations that happen to work well on our specific validation data. 
@@ -102,7 +102,7 @@ Examples of Grid Search Limitations:
 	- [Tuning the hyperparameter with gridsearch results in overfitting](https://stackoverflow.com/questions/57537596/tuning-the-hyperparameter-with-gridsearch-results-in-overfitting)
 	- [hyper parameter optimization grid search issues](https://stats.stackexchange.com/questions/208449/hyper-parameter-optimization-grid-search-issues)
 
-## Loss of nuance and information
+## Loss of Nuance and Information
 With every abstraction in this world, we lose granular information.
 
 GridSearch is one such abstraction. Validation or model complexity curves provide many more advantage because they show the relationship between different hyperparameters values and model performance for both training and validation sets.
@@ -140,11 +140,16 @@ There are many ways:
 - **Bayesian Search**: Uses probabilistic models to intelligently select hyperparameter configurations. I have used this through the Optuna library and it does a much better job!
 - **Having a Prior / Knowledge-Based Initialization**: Read below.
 
-I will just link a blogpost by some friends here: [Tutorial on Hyperparameter Tuning using Scikit Learn](https://sites.gatech.edu/omscs7641/2024/02/16/tutorial-on-hyperparameter-tuning-using-scikit-learn/).
+I will link a few blogposts below that touch on the first 2 parts.
+- [Tutorial on Hyperparameter Tuning using Scikit Learn](https://sites.gatech.edu/omscs7641/2024/02/16/tutorial-on-hyperparameter-tuning-using-scikit-learn/).
+- [Comparing randomized search and grid search for hyperparameter estimation](https://scikit-learn.org/stable/auto_examples/model_selection/plot_randomized_search.html).
 
-The blog post already touches on the first two. I will talk about the last one. Having a Prior is very similar to Bayesian Search (in a way), it just means that you have prior knowledge of how the algorithm works to make informed decisions. 
+I will talk about the last one. Having a Prior is very similar to Bayesian Search (in a way), it just means that you have prior knowledge of how the algorithm works to make informed decisions. 
 
-If you're implementing a research paper, you can "hack" your way through and just pick the best hyperparam from the paper. It's a way to narrow down your search space so that you can justify the need for a GridSearch (as stated in the previous section).
+Having a mental model of the algorithms is crucial for efficient hyperparameter tuning. Understanding how different algorithms respond to hyperparameters allows you to make educated guesses rather than blind searches. For neural networks, it almost always narrows down to 2-3 key factors like learning rates or regularization strength, and knowing how these interact with model complexity can significantly speed up your optimization process
+
+
+If you're implementing a research paper, you can "hack" your way through and just pick the best hyperparam from the paper. These are all just ways to narrow down your search space so that you can justify the need for a GridSearch (as stated in the previous section).
 
 The following paper from one of the original authors of cross-attention gives good intuition: [Practical recommendations for gradient-based training of deep architectures by Yoshua Bengio](https://arxiv.org/abs/1206.5533)
 
