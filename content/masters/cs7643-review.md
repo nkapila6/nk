@@ -8,7 +8,7 @@ tags:
   - "#cs7643"
   - "#preparation-work"
 date: 2024-12-26
-updated: 2024-01-03
+updated: 2025-03-15
 ---
 A ✨Deep Review✨ on Georgia Tech's [Deep Learning](https://omscs.gatech.edu/cs-7643-deep-learning) course.
 
@@ -182,7 +182,9 @@ Similarly, in this assignment, one of the paper choices which I picked to review
 > [!WARNING] Qualitative analysis breaking minds everytime.
 > Get ready to have your mind blown --insert [gif](https://giphy.com/gifs/timanderic-tim-and-eric-wareheim-lXu72d4iKwqek) here--
 
-## Assignment 3 - Interpreting CNNs
+## Assignment 3 - Interpreting CNNs (Removed from Spring 2025 onwards)
+> [!INFO] Info
+> This is an old assignment and is now removed starting from Spring 2025.
 1. **Library to use**: PyTorch, Captum, Matplotlib
 2. **Resources | Do Not Miss**:
 	- [YT: UMich Lecture 14: Visualizing and Understanding](https://youtu.be/G1hGwHVykDU?list=PL5-TkQAfAZFbzxjBHtzdVCWE0Zbhomg7r)
@@ -209,7 +211,10 @@ This assignment covers the following tasks in brief:
 
 > [!INFO] Class maximization using Gradient Ascent
 > A synthetic Gorilla image generated via gradient ascent on a SqueezeNet model pre-trained on ImageNet which highlights features that the neural network associates with a gorilla (our chosen class).
-## Assignment 4 - Sequences
+## Assignment 3 - Sequences (Previously Assignment 4)
+> [!INFO] Info
+> This was previously A4. From Spring 2025, this is now A3.
+
 1. **Library to use**: PyTorch, Matplotlib
 2. **Resources | Do Not Miss**:
 	- UMich
@@ -231,6 +236,18 @@ We start by implementing RNNs, noting it's drawbacks and move to LSTMs, augment 
 Initially, the compression of the input to a latent vector did not make much sense to me. It only started to make sense to me when I saw denoising autoencoders. It was very fascinating to see that you could denoise MNIST images by encoding the input vector/image into a compressed latent space and then reconstructing a clean version thanks to optimizing through backprop.
 
 This idea of latent space is carried forward to Attention wherein the compressed latent vector of our token (here the input is not an image but text which is represented as tokens) is moved (in a linear algebra fashion - basically a linear transformation which is again just a matmul 😊) to the correct position so they can contextually relate to each other. Look at the last video link in the resources above.
+
+## Assignment 4
+> [!INFO] Info
+> This is a new assignment on Generative Modeling added in Spring 2025.
+
+In this assignment, you implement various generative models, namely:
+	- Variational Autoencoders (VAEs)
+	- Generative Adverserial Networks (GANs)
+	- Denoising Diffusion Probabilistic Models (DDPMs)
+
+I don't have any further information as I took this class in Fall 2024. However, it's a bit funny and coincidental that I was writing my own GAN on FashionMNIST - 2 weeks prior to release of this assignment in Spring 2025.
+
 
 ## Group Project
 Pick any project you like, there's no end to how deep you can go or how ambitious you'd like to be.
@@ -285,3 +302,4 @@ If not, you can e-mail me by clicking [here](mailto:info@nkapila.me).
 ## Changelog
 - [26.12.2024] Init
 - [03.01.2025] First draft completed
+- [15.03.2025] Added new Spring 2025 assignment.
