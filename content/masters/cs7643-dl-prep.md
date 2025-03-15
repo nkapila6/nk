@@ -8,8 +8,7 @@ tags:
   - "#preparation-work"
 categories:
   - course-prep
-date: 1713940542112
-updated: 1723540860097
+date: 2024-04-24
 ---
 ## Videos
 
