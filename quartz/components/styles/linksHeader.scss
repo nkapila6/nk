@@ -1,3 +1,4 @@
+@use "sass:map";
 @use "../../styles/variables.scss" as *;
 
 header {
@@ -28,7 +29,8 @@ header {
   }
 }
 
-@media (max-width: $mobileBreakpoint) {
+// @media (max-width: $mobileBreakpoint) {
+@media (max-width: map.get($breakpoints, mobile)) {
   #links-header > * {
     width: calc(33.33% - 0.67em); /* 33.33% width with some gap */
   }

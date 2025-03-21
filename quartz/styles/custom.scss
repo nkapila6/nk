@@ -1,5 +1,9 @@
+@use "sass:map";
 @use "./base.scss";
 @use "./variables.scss" as *;
+
+// Define the missing variable or use an existing one
+$fullPageWidth: map.get($breakpoints, desktop);
 
 $red: #AF3029;
 $orange: #BC5215;
