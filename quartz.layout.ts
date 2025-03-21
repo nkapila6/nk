@@ -6,6 +6,7 @@ export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
   header: [Component.LinksHeader()],
   afterBody: [
+    Component.Redirect(),
     Component.Comments({
       provider: 'giscus',
       options: {
@@ -23,7 +24,6 @@ export const sharedPageComponents: SharedLayout = {
   footer: Component.Footer({
     links: {
       // GitHub: "https://github.com/nkapila6",
-      // "Discord Community": "https://discord.gg/cRFFHYye7t",
     },
   }),
 }
