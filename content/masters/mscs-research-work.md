@@ -6,8 +6,8 @@ tags:
   - omscs
 categories:
   - projects
-date: 1722407473370
-updated: 1723540865990
+date: 2024-07-31
+updated: 2024-07-31
 ---
 Training LSTMs and making user inferences based on data was part of my research work in the Summer of 2024.
 

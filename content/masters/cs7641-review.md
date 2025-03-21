@@ -10,8 +10,8 @@ tags:
   - "#preparation-work"
 aliases:
   - /2024/04/19/e18ee9b8f39b4dee816618e0fac28df5
+lastmod: 2024-04-20
 date: 2024-04-20
-updated: 2024-08-18
 ---
 Tips-n-tricks blog post to navigate OMSCS’s CS7641 Machine Learning (ML) course.
 

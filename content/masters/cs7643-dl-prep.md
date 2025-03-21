@@ -6,9 +6,8 @@ tags:
   - omscs
   - "#cs7643"
   - "#preparation-work"
-categories:
-  - course-prep
 date: 2024-04-24
+updated: 2024-04-24
 ---
 ## Videos
 

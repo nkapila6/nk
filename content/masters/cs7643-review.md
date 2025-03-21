@@ -8,7 +8,7 @@ tags:
   - "#cs7643"
   - "#preparation-work"
 date: 2024-12-26
-updated: 2025-03-15
+updated: 2024-12-26
 ---
 A ✨Deep Review✨ on Georgia Tech's [Deep Learning](https://omscs.gatech.edu/cs-7643-deep-learning) course.
 
