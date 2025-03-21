@@ -6,12 +6,14 @@ tags:
   - machine-learning
   - deep-learning
 date: 2025-03-14
+updated: 2025-03-14
 ---
 
 # Why did I write this?
 Ever since I took the Machine Learning (ML) class in Spring 2024, I've been helping students in Discord servers for subsequent semesters while also maintaining documentation and libraries for the second assignment of the class. After supporting students for 3-4 semesters, I've identified common pitfalls or misunderstandings that could save them significant time and effort. This is the first article in a series about common misunderstanding that ML students make, which tend to propagate into further advance classes such as Deep Learning.
 
 Here's a TYPICAL example I encounter VERY often.
+
 ![](https://i.imgur.com/QWfF2Mu.png)
 
 Before we understand why Grid Search isn't the right way to go, you need to understand 2 things:
@@ -75,8 +77,8 @@ This exponential growth in the hypothesis space is precisely what makes exhausti
 - Loooong experiment times
 - Lots of computation required to perform these experiments. 
 	- You can see the first picture where the person ran the search for 735 minutes (~12 hours).
-	- I have seen worst, days even. Here's an example: [>9 hour grid search on Support Vector Machines][https://stackoverflow.com/questions/72101295/python-gridsearchcv-taking-too-long-to-finish-running]
-	- Asking the right questions: [Is GridSearchCV useful?][https://www.reddit.com/r/MLQuestions/comments/l5asb2/is_gridsearch_cv_useful/]
+	- I have seen worst, days even. Here's an example: [>9 hour grid search on Support Vector Machines](https://stackoverflow.com/questions/72101295/python-gridsearchcv-taking-too-long-to-finish-running)
+	- Asking the right questions: [Is GridSearchCV useful?](https://www.reddit.com/r/MLQuestions/comments/l5asb2/is_gridsearch_cv_useful/)
 
 # Beyond Compute and Time: Other Considerations
 Beyond running times and compute costs, grid search has several other limitations that practitioners should consider when selecting hyperparameter optimization strategies. I will provide 2 such examples, one in a supervised setting and an unsupervised one.
@@ -98,9 +100,9 @@ This inductive bias of GridSearch to select the configuration with the highest v
 Hence, it is important to monitor both training and validation set performance when selecting our hyperparameters. We see this in more detail in the next section with an example.
 
 Examples of Grid Search Limitations:
-	- [GridSearchCV not giving the most optimal settings?](https://stackoverflow.com/questions/72507560/gridsearchcv-not-giving-the-most-optimal-settings)
-	- [Tuning the hyperparameter with gridsearch results in overfitting](https://stackoverflow.com/questions/57537596/tuning-the-hyperparameter-with-gridsearch-results-in-overfitting)
-	- [hyper parameter optimization grid search issues](https://stats.stackexchange.com/questions/208449/hyper-parameter-optimization-grid-search-issues)
+- [GridSearchCV not giving the most optimal settings?](https://stackoverflow.com/questions/72507560/gridsearchcv-not-giving-the-most-optimal-settings)
+- [Tuning the hyperparameter with gridsearch results in overfitting](https://stackoverflow.com/questions/57537596/tuning-the-hyperparameter-with-gridsearch-results-in-overfitting)
+- [hyper parameter optimization grid search issues](https://stats.stackexchange.com/questions/208449/hyper-parameter-optimization-grid-search-issues)
 
 ## Loss of Nuance and Information
 With every abstraction in this world, we lose granular information.
@@ -168,3 +170,4 @@ Don't forget 😉:
 # Changelog
 - [14.03.2024] Init
 - [15.03.2025] Grammar fixes, some more context in the last section.
+- [21.03.2025] Moved to new section, fixed markdown formatting.
