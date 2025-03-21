@@ -13,14 +13,15 @@ export default ((opts?: Options) => {
     const links = opts?.links ?? []
     return (
       <footer class={`${displayClass ?? ""}`}>
-        <ul>
+        <a href="https://github/nkapila6">Nikhil Kapila</a> © 2025
+        {/* <ul>
           <li>
             <em>
-              <a href="https://github/nkapila6">Nikhil Kapila</a> © 2023
+              <a href="https://github/nkapila6">Nikhil Kapila</a> © 2025
             </em>
           </li>
         </ul>
-        <ul style="margin-top: 0.5em"></ul>
+        <ul style="margin-top: 0.5em"></ul> */}
         {/* <p>
           {i18n(cfg.locale).components.footer.createdWith}{" "}
           <a href="https://quartz.jzhao.xyz/">Quartz v{version}</a> © {year}
