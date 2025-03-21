@@ -22,9 +22,9 @@ Below are some locations you could explore.
 - **Life Struggles Never End**: [[life]]
 
 # Contact
-Feel free to drop me an email at [info@nkapila.me](mailto:info@nkapila.me)
+Feel free to drop me an email at [nkapila6@pm.me](mailto:nkapila6@pm.me)
 
 ---
 
-> [!info]- Attribution
+> [!info] Attribution
 > This website was built using [Quartz](https://github.com/jackyzha0/quartz) and the notes are written using [Obsidian](https://obsidian.md/).
