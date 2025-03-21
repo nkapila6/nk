@@ -10,8 +10,9 @@ function Redirect({ fileData }: QuartzComponentProps) {
   return (
     <script dangerouslySetInnerHTML={{
       __html: `
-        // Redirect when the page loads
-        window.location.href = "${redirectUrl}";
+        // open in new tab
+        // window.location.href = "${redirectUrl}";
+        window.open("${redirectUrl}", "_blank");
       `
     }} />
   )
