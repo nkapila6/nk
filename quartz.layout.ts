@@ -50,7 +50,15 @@ export const defaultContentPageLayout: PageLayout = {
 //  })),
     Component.DesktopOnly(Component.RecentNotes({
       title: "Recently Created",
-      limit: 5
+      limit: 5,
+      filter: (page) => {
+        // skipping pages with custom md frontmatter
+        if (page.frontmatter?.exclude === true) {
+          return false;
+        }
+        // send all others
+        return page.slug !== "index" && !page.frontmatter?.draft;
+      }
     })),
   ],
   right: [
@@ -71,7 +79,15 @@ export const defaultListPageLayout: PageLayout = {
     Component.Darkmode(),
     Component.DesktopOnly(Component.RecentNotes({
       title: "Recently Created",
-      limit: 5
+      limit: 5,
+      filter: (page) => {
+        // skipping pages with custom md frontmatter
+        if (page.frontmatter?.exclude === true) {
+          return false;
+        }
+        // send all others
+        return page.slug !== "index" && !page.frontmatter?.draft;
+      }
     })),
   ],
   right: [],
