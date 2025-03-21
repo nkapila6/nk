@@ -1,6 +1,8 @@
 ---
 title: Posts
 date: 1
+comments: false
+exclude: true
 ---
 
-Still working on a couple, check in soon 🥳
+Some post of adventures in life and uni. More coming, check in soon 🥳

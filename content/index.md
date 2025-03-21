@@ -1,6 +1,9 @@
 ---
 title: Welcome, let's backpropagate together!
-date: 1
+comments: false
+exclude: true
+date: 2023-12-11
+updated: 2023-12-11
 ---
 Hi there 👋, I'm Nikhil.
 
