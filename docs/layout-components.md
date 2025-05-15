@@ -60,3 +60,34 @@ The `DesktopOnly` component is the counterpart to `MobileOnly`. It makes its chi
 ```typescript
 Component.DesktopOnly(Component.TableOfContents())
 ```
+
+## `ConditionalRender` Component
+
+The `ConditionalRender` component is a wrapper that conditionally renders its child component based on a provided condition function. This is useful for creating dynamic layouts where components should only appear under certain conditions.
+
+```typescript
+type ConditionalRenderConfig = {
+  component: QuartzComponent
+  condition: (props: QuartzComponentProps) => boolean
+}
+```
+
+### Example Usage
+
+```typescript
+Component.ConditionalRender({
+  component: Component.Search(),
+  condition: (props) => props.displayClass !== "fullpage",
+})
+```
+
+The example above would only render the Search component when the page is not in fullpage mode.
+
+```typescript
+Component.ConditionalRender({
+  component: Component.Breadcrumbs(),
+  condition: (page) => page.fileData.slug !== "index",
+})
+```
+
+The example above would hide breadcrumbs on the root `index.md` page.
