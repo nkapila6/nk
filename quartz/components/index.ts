@@ -24,6 +24,7 @@ import Breadcrumbs from "./Breadcrumbs"
 import Comments from "./Comments"
 import Links from "./Links"
 import LinksHeader from "./LinksHeader"
+import ConditionalRender from "./ConditionalRender"
 
 export {
   ArticleTitle,
@@ -51,5 +52,6 @@ export {
   NotFound,
   Breadcrumbs,
   Comments,
-  LinksHeader
+  LinksHeader,
+  ConditionalRender
 }
