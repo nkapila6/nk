@@ -28,7 +28,7 @@ Below are some locations you could explore in the blog!
 - **Life Struggles Never End**: [[life]]
 
 # Contact
-If you have any questions, please feel free to drop me an email at [nkapila6@pm.me](mailto:nkapila6@pm.me)
+If you have any questions, please feel free to drop me an email at [blog@nkapila.me](mailto:blog@nkapila.me)
 
 ---
 
