@@ -144,6 +144,7 @@ declare module "vfile" {
         draft: boolean | string
         lang: string
         enableToc: string
+        tocDepth: number
         cssclasses: string[]
         socialImage: string
         comments: boolean | string
