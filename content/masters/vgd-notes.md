@@ -5,7 +5,7 @@ tags:
   - video-game-design
   - omscs
   - cs6457
-tocDepth: 2
+tocDepth: 3
 date: 2025-05-31
 updated: 2025-05-31
 ---
@@ -355,5 +355,310 @@ Evolution of FPS game engines can be seen [here](https://en.wikipedia.org/wiki/F
 
 # 2 Animation
 
-## Early Animation
-in progress
+## 1 Early Animation
+### History from Earliest Days of Animation
+
+#### Prehistoric Cave Art: 
+![](https://i.imgur.com/MTKJ8CS.png)
+
+Speculation suggests that flickering firelight might have illuminated multiple painted legs on animal figures in cave art creating primitive sense of animation.
+
+#### Shadow Play
+![](https://i.imgur.com/GGkuYCG.png)
+
+Evolved from simple shadow project by human actors to more elaborate form combined with puppetry.
+
+#### Puppetry (4000+ years old)
+![](https://i.imgur.com/tL8TysM.png)
+
+Involved manipulating artifacts/puppets with strings, sticks or direct human operation to create animated performances demonstrating early 3D animation.
+
+#### Magic Lanterns (>1600)
+![](https://i.imgur.com/z8JLmj2.png)
+
+Optical projection system that showed sequences of painted glass slides onto a wall. Later versions incorporated mechanical components on the slides, allowing for layered movement and crude animations through levers or dials.
+
+#### Automata
+![](https://i.imgur.com/JshqMdg.png)
+
+Mechanical devices that mimic human beings powered by gears, levers, springs, similar to clockwork. Examples incl music boxes or devices that can write signatures.
+
+#### Phenakistoscope (1833)
+![](https://i.imgur.com/4NqJg6j.png)
+
+An early device resembling pinwheel with slits and images. When spun, looking thru split created illusion of motion by aligning eye with successive images. Demonstrating early concept of "frames" in 2D animation.
+
+#### Zoetrope
+![](https://i.imgur.com/ulefnzo.png)
+
+A refined Phenakistoscope. Eliminated the need for a mirror by placing images inside a rotating cylinder with viewing slits, allowing for continuous animation.
+
+#### Flipbook / Kineograph
+![](https://i.imgur.com/4zjeW9a.png)
+
+Straightforward animation method where sequential imgs on pages are rapidly flipped to create motion.
+
+#### Early Films
+![](https://i.imgur.com/UHGPZR8.png)
+
+Demonstrated capturing and playing back real-world motion. Film cameras achieve this by rapidly advancing film, stopping it, opening a shutter to expose a frame, closing the shutter then quickly advancing to next frame.
+
+The mechanical process creates distinct noises due to rapid acceleration and deceleration of film.
+
+#### Rotoscope by Max Fleischer (1915)
+![](https://i.imgur.com/6a1nojU.png)
+![](https://i.imgur.com/BBewPSk.png)
+
+A technology that projected live-action film footage one frame at a time onto frosted glass, allowing artists to trace over images to create animations. This technique helped achieve smooth, dimensional accurate animations seen in early cartoons like Koko the Clown.
+
+![](https://i.imgur.com/kRqFxxN.png)
+
+![](https://i.imgur.com/oP62LPi.png)
+#### Live-Action reference
+![](https://i.imgur.com/z2gBOmL.png)
+
+Disney transitioned away from rotoscoping to this method where actors were filmed but animators used footage as inspiration for artistic interpretation and exaggeration of movements and facial expressions, providing more control than direct tracing.
+
+#### Disney's 12 Principles of Animation Book (early 1980s)
+![](https://i.imgur.com/4Xb5nBa.png)
+
+A well-regarded set of concepts for animated feature films. Two key principles are "squash and stretch" (exaggerating deformation of objects to convey motion and impact) and "exaggeration" (amplifying movements and expressions for artistic effect)
+
+
+### Early Interactive Animation (Pre-Computer)
+
+#### Interactive Automata / Penny Arcades (Late 1800s, early 1900s) 
+
+![](https://i.imgur.com/piIshIq.png)
+
+Mechanical games, often found in arcades, that used puppet-like interfaces or simple analog circuits. Examples include fighting games, bowling, and baseball machines where user input controlled animated elements.
+
+#### Simulators
+![](https://i.imgur.com/QPyYGjE.png)
+
+Link Trainer (WWII) is an early flight simulator focused on simulating instrument panel readings and user controls providing tactile feedback w/o ext. visual animation.
+
+![](https://i.imgur.com/lqYbYWk.png)
+![](https://i.imgur.com/5b87NYk.png)
+
+Aetna Drivotrainer was a driving sim used in schools which featured projected first-person driving imagery and simulated controls. Notable feature was a config where user i/p could pause or advance film reel, making on-screen animation responsive to user actions, precursor to modern quick-time events.
+
+The system scored student performance by punching holes in a card.
+
+## 2 Interactive Animations in VGs
+
+### Early Video Game Animation
+
+#### Vector Graphics
+![](https://i.imgur.com/UmaUsu9.png)
+
+Used in early cathode ray tubes (CRT) display specifically oscilloscopes which allowed arbitrary aiming of electron beam to draw smooth and crisp lines.
+
+Tennis with Two (1958) made with analog circuits led to debates about whether it qualifies as a computer game.
+
+Spacewar (1962) ran on a PDP-1 computer with a CPU making it a definitive computer game. Featured simple vector-drawn spaceships and a physics simulation.
+
+#### Raster Display Games
+![](https://i.imgur.com/yyD1NPs.png)
+
+Pong used discrete logic instead of a CPU due to high cost of processors at the time. Development was difficult and graphics were limited to drawing lines or axis-aligned polygons.
+
+#### Sprites
+![](https://i.imgur.com/Pw2XrvE.png)
+
+Taito Basketball (1974) was 1st game to use sprites and depict human form on screen.
+![[https://i.imgur.com/pTKywLI.png|{width=50%}]]
+![](https://i.imgur.com/pTKywLI.png|100)
+
+Sprites were a 2D arr of px values copied to diff screen locs for anim. This allowed artists to have more freedom in px art.
+
+Animated sprites were achieved by swapping similar looking sprites rapidly. Early systems had limited mem so sprite poses were few.
+
+Early color displays used ref to a color table instead of storing RGB values per px due to mem limits. Many sprite-based sys had specialized HW for eff. sprite rendering.
+
+#### Text mode anim
+Early PCs designed for txt-based work used extended char sets with line segs and fill patterns.
+
+Creative devs used these chars to draw graphic repns and achieve anim by rapidly swapping char data.
+
+#### Color cycling
+A technique where subset of color palette is continuously shifted creating illusion of movement in static artwork.
+
+e.g. anim of water in Pokemon GBA games
+
+### Dragon's Lair (1983)
+![](https://i.imgur.com/AuBsAeG.png|{width=50%})
+
+Used LaserDisc, analog media format providing HQ vid and audio with digital index for scene jumping.
+
+Allowed for "quick-time events" where where player input dictated progression to diff pre-recorded scenes. Sacrificed interactivity for media quality feat. elaborate cartoon-style anim.
+
+### Rotoscoped games
+Anims created by tracing over live-action footage, offering fluid and realistic char movements.
+
+![](https://i.imgur.com/osOnSxx.png)
+![](https://i.imgur.com/aVFXJBb.png)
+
+
+**Prince of Persia (1989)**: Used Jordan Mechner's bro for char movements and Errol Flynn's "Adventures of Robin Hood" for fighting seqs. Anims were tightly coupled to character movement, improving aesthetics and preventing foot sliding.
+
+![](https://i.imgur.com/vNxAs1k.png)
+
+**Amiga Dragon's Lair (1989)**: A notable port that vectorized the original laser disc's foreground chars and combined them with scanned bgs to fit on floppy disks.
+
+**Another World (1991)**: Eric Chahi created this game by filming himself and rotoscoping the footage to generate anims and art.
+
+### Wireframe 3D in Battlezone (1980)
+![](https://i.imgur.com/jqYwfg7.png)
+
+Used vec-based disps to show wireframe 3D graphics simplifying rendering by avoiding occlusion and hidden surface concerns.
+
+### 2D Sprites with Scaling and Rotation
+![](https://i.imgur.com/xR3jyne.png)
+
+Specialized hardware feats like Super Nintendo's Mode 7 allowed for real-time scaling and rot of 2d bgs and textures creating effects like perspective and foreshortening (Mario Kart) and dynamic boss fights (Bowser in Super Mario World).
+
+Modern games like Terraria (with mods) feat. sprite rotations as feasible gameplay element.
+
+### Ray Casting and Billboards
+![](https://i.imgur.com/ckWAfFM.png)
+
+Wolfenstein 3D/Doom used ray casting for limited 3D indoor envs. Enemies were repn by billboards - 2D textures scaled for dist. Rot of billboards achieved by swapping pre-rendered sprites from diff. perspectives.
+
+![](https://i.imgur.com/yJPO7Gu.png)
+
+Wing Commander applied scaled and rot'ed sprites for spaceships in space combat.
+
+### Transition to True 3D anim
+#### Vertex-based Keyframe anim
+Quake was first game to achieve realtime 3D env with anim chars. Anims used keyframes where each frame stored an arr of ordered vertices applied to a triangle mesh. Anims ran at 10 FPS leading to clunky char movement even at high FPS. 
+
+![](https://i.imgur.com/i1im3jH.png)
+
+Method had significant mem consumptions due to storing every vertex's pos for each keyframe making it unscalable for complex models.
+
+![](https://i.imgur.com/cLFib7F.png)
+
+![](https://i.imgur.com/Z63sJni.png)
+
+#### Interpolated Keyframe anim
+![](https://i.imgur.com/4pLL0zW.png)
+
+Alone in the Dark (1992) was one of the first games to use interpolated keyframe anim resulting in smoother movement.
+
+
+![](https://i.imgur.com/GZpE6J6.png)
+
+Quake 2 maintained vertex-based keyframe storage but introduced linear interpolation between 2 keyframes based on the `deltaTime` to achieve smoother animation even at lower FPS.
+
+![](https://i.imgur.com/nXoaLRG.png)
+
+Obtain current frame and next frame. Linear interpolate (lerp) the two.
+### Computer-Assisted Anim
+#### Procedural anim
+![](https://i.imgur.com/VWAXod5.png)
+
+Procedural anim generated anim using algos suitable for cyclic, repeating movements like clocks or machinery.
+
+#### Phy-based anim
+![](https://i.imgur.com/OYoMZ6g.png)
+![](https://i.imgur.com/sw9i2Rh.png)
+
+Phy-based anims integrated phys-sim for realistic char or obj movement.
+
+#### Motion capture (Mocap)
+![](https://i.imgur.com/CevXzpu.png)
+
+Mocap captures real-world perf to drive 3D models. It's an evo of rotoscoping providing full 3D data. Used for facial expressions and full-body capture in games like Naughty Dog's "The Last of US" and "Uncharted".
+
+![](https://i.imgur.com/XeDd6Y9.png)
+
+
+4D Boxing (1991) was early example using rotoscoping from multiple perspectives known for fluid anims and good ctrl. One of the first mo-cap games.
+### Skeletal anim
+![](https://i.imgur.com/g26Y8wf.png)
+
+Decouples char movement from individual mesh verticies. Abstract skeleton deforms arbitrary complexity mesh.
+
+Much more mem-eff than vertex based aim because only skeleton's keyframe are stored not every vertex for each frame.
+
+Keyframe interpolation is applied to skeleton's pose and mesh is deformed based on interpolated pose.
+
+Skeleton is a tree structure starting from root bone (hip) with 3 or 6 DOF. Other bones have 1, 2, or 3 DOF.
+
+Vertex weighting allows each vertex of mesh to be assigned a weighted list of bones to influence its position. This allows for smooth deformation esp at joints. Rigging is process of creating and aligning skeleton mesh and assigning bone weights.
+
+![](https://i.imgur.com/W4MTb3Z.png)
+
+**Advantages**: Huge mem savings, good for anim blending, improved anim portability and reuse.
+
+**Disadvantages**: implementation difficulty, computational overhead, and challenges with realistic mesh deformations which might require phys or advanced algos.
+
+Half-Life (1998) was one of the first games to use skeletal anim, enabling complex char and cutscenes.
+
+Squash and stretching can be achieved in skeletons by manipulating skeleton dims to create cartoony, expressive movements, eg: Jak and Daxter games. One of my old PS2 games 😎
+
+![](https://i.imgur.com/DBzQE2c.png)
+
+### Advanced Anim Techniques
+#### Root Motion
+![](https://i.imgur.com/QBt6xBn.png)
+
+embeds char translation within anim of root bone. Game engines interprets this motion to move associated GameObj ensuring precise foot placement and matching char movement to anim's inherent speed variations.
+
+**Benefits**: Realistic footfall, natural accel/decel, better interaction w env phys and empowers artists more control over char movement
+
+**Control**: Can be selectively applied to allow phys to handle vertical motion.
+
+#### Animation Blending
+![](https://i.imgur.com/kT36lvI.png)
+
+Interpolating bw multiple distinct anim based on i/p params. This creates a continuous range of movements from a limited set of core anims.
+
+**Benefits**: Reduces authoring effort, storage reqs and provides cont space of anim.
+
+**Challenges**: "Bunny hop" effect occurs if blended anims are dissimilar or misaligned, e.g. feet hitting at diff points in resp cycles.
+
+**Anim masks/layers**: Allow blending specific pts of a char while other pts use diff anims avoiding undesirable blending artifacts.
+
+#### Match targets
+![](https://i.imgur.com/ZA3WlOa.png)
+
+A util method in Unity for lerp of anim transforms to align char's body pt with specific world coord. Used for precise interactions like ledge grabbing or opening doors, often involving a time-based correction.
+
+#### Inverse Kinematics (IK)
+![](https://i.imgur.com/zOvRBVf.png)
+
+Forward Kinematics (FK) is a traditional scene graph approach where parent transforms dictate child transform down the hierarchy.
+
+IK calculates reqd rots/translations of parent joints to achieve desired pos for child/leaf joint.
+
+**Challenges**: Non-trivial to calc, can be impossible or ambiguous.
+
+**Applications**: Correcting anims, picking up objs, char head looking at targs, assisting in anim authoring.
+
+![](https://i.imgur.com/8cczptk.png)
+
+Unity's IK allows setting pos and rot goals for extremities (feet, hands, head) with adj weights to blend with existing anims.
+
+Early examples were Terra Nova and Trespasser.
+
+**Tresspasser**
+![](https://i.imgur.com/1k83XS8.png)
+
+**Terra Nova**
+![](https://i.imgur.com/9tgZk8w.png)
+
+#### Anim retargeting / muscle spaces
+Allows reusing anims from one humanoid skeleton on a diff rigged model even if dims mismatch.
+
+Unity's "muscle space" defines norm joint movements and joint limits for each skeleton enabling mapping anims b/w diff humanoid chars.
+
+May require manual corrections for interpenetration or awkward movements if skeletons are very dissimilar.
+
+#### Quaterunions for rot interpolation
+Used in game engines to repn rots because they avoid "gimbal lock" (problem with Euler angles where certain rots can lead to loss of DOF) allowing for reliable lerp and smoother blending of rots.
+
+![](https://i.imgur.com/fxwH5g5.png)
+
+
