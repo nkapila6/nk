@@ -661,4 +661,178 @@ Used in game engines to repn rots because they avoid "gimbal lock" (problem with
 
 ![](https://i.imgur.com/fxwH5g5.png)
 
+# 3 Physics Engines
+## What is a Physics Engine?
+A physics engine is a service that provides physics sim calculations for a virtual env.
 
+There are 2 types:
+- **High Precision Offline Engines**: Used for scientific preds such as design structs and automobiles.
+- **Real-Time Physics Engines**: Used for interactive simulation with emphasis on video games.
+
+Many different available physics libraries and have similar rigid body physics capabilities.
+
+![](https://i.imgur.com/yjO5D0Q.png)
+
+- **Popular Engines:**
+    - **Havoc:** A commercial engine used in _Half-Life 2_.
+    - **Newton Open Dynamics Engine (ODE):** An open-source engine.
+    - **Nvidia PhysX:** Integrated into Unity. It evolved from NovodeX, which was acquired by Aegia and later by Nvidia.
+        
+- **Influential Games:**
+    - _**BeamNG.drive**_: A car game demonstrating cutting-edge, deformable phy objs.
+    - _**Bridge Builder**_ **(early 2000s):** A 2D game where players build bridges to get a train across a river, managing resources. _Poly Bridge_ is a popular recent version.
+    - _**Trials**_ **series:** A motorcycle game based on controlling a driver's weight, throttle, and brakes to navigate obstacles.
+    - _**Trespasser**_: One of the earliest games with a powerful phys engine, first to use ragdoll phys.
+    - _**Half-Life 2**_: Known for its gravity gun and influential physics simulation.
+## Components of a Physics Engine
+A physics engine is composed of several key elements:
+- **Bodies:** The objs in the sim, usually rigid bodies.
+- **Connectors (Joints):** Ways of attaching bodies together.
+- **Forces:** Mechanisms for acting upon and moving bodies.
+- **Constraints:** Rules that limit motion. sometimes conceptually merged with connectors.
+- **Collision Detection:** A service that can be used to detect geometric intersections, sometimes independently of the full physics sim.
+
+## Body States and Control
+![](https://i.imgur.com/dqNkymw.png)
+
+- **Dynamic:** Objects affected by forces like gravity and collisions; they can move around.
+- **Static:** Objects that cannot move, like the ground or walls. They are treated as having infinite mass and improve simulation efficiency.
+- **Kinematic:** Objects controlled programmatically by a programmer or animation system. They can interact with and push dynamic objects
+- **Sleep/Awake**: To save resources, obj stopped moving can be put to sleep. Wakes up when it rejoins sim if another obj touches it.
+- **Layers/Groups**: Objs can be assigned to diff layers that may or may not interact with each other. Crucial to opt perf for gameplay.
+
+### Properties of bodies
+- Core props are pos, orientation, velocity,  angular velocity.
+- Mass determines how objs react in collisions.
+- Friction affects how object slides against each other. High friction can cause an object to topple or roll down a slope instead of sliding.
+- Restitution (bounciness): determines how bouncy an obj is on collision.
+
+## Collision Geometry
+Collision hulls reduce complexity of collision calc. The actual act of detecting collision is dependent on the complexity of the shapes involved.
+
+- Determining a collision with spheres is simple and faster.
+- Complex visual models often repn by simpler shapes for phys calcs. E.g. car as box and human char as a capsule.
+- **Compound collider**: A complex shape can be approximated by joining several simple convex shapes together. In Unity, this is done by parenting multiple colliders to a single parent obj with a rigid body. Easy to make in Unity!
+![](https://i.imgur.com/6luQZz3.png)
+
+- **Convex Hulls**: A convex hull is a complex, concave shape wrapped in a simpler calculated convex shape.
+- **Hierarchical Hulls**: A hierarchical hull is a complex obj broken into hierarchy of bounding boxes. 
+
+![](https://i.imgur.com/1UcGAMG.png)
+
+Worst case is you have to work all the way down to the leaf of the hierarchy. But we're more concerned about the average. Tests are performed with largest outermost box proceeding to smaller detailed boxes only if collision is detected at a higher level. This is efficient on average because most checks fail at outermost lvl.
+
+### Skin width
+Dilation or expansion of the geometry. Like a skin on top of the true geometry which allows you to expand their geometry. Collisions are detected when the skins touch before actual geometries do, this allows corrective forces to be applied gradually and proportionally to depth of skin interpenetration. Smooths out interactions and eliminates jitter.
+![](https://i.imgur.com/ieSxh3w.png)
+
+## Strategies of collision detection
+
+### Discrete collision detection
+![](https://i.imgur.com/1Vscu3U.png)
+
+We have a projectile represented by a circle (no gravity effect). The ball has various pos at different time t's, the ball is moving at a certain velocity so the displacement is $d = dt*v$. This displacement $d$ is the same if our $dt$ is the same.
+
+At each of the timestamps, we perform this collision detection (geometry intersection). At t5, we can see a collision is detected and we can invoke a collision resolution to respond to this collision detection.
+
+#### What if we have a skinny wall?
+
+![](https://i.imgur.com/meQI0Gp.png)
+
+After t5, we're on the other side of the wall and it still doesn't intersect. This is called tunneling when our collision detection is only checking for a snapshot of the time, i.e. a fast moving obj can pass completely through a thin object between frames without intersection ever being detected. This is more likely with small objs and thin walls.
+
+There are many resolutions to this.
+ ![](https://i.imgur.com/raZyjiJ.png)
+![](https://i.imgur.com/LTYShxy.png)
+
+**Raycasting**: A ray is cast from obj's prev pos to it's current one to see if it intersects anything in between. This can fail at edges of objs or at seams between objs.
+
+Let's add more raycast to fix it! 
+![](https://i.imgur.com/Y0Q1v64.png)
+
+While this will allow us to catch skinny walls/seams in the wall, this is computationally expensive.
+
+![](https://i.imgur.com/S4DMoOm.png)
+But what if your object is too small? It fails again!
+
+![](https://i.imgur.com/w8MH9Pp.png)
+
+**Speculative collision detection**: Objs are given a dynamic skin width that expands based on velocity. Large geometry is more likely to be detected but can fail under high accel.
+
+![](https://i.imgur.com/UKXATve.png)
+
+**Rotating and translating colliders**: Fast rotations make all prev techniques tricky. Unity (PhysX) fix this by setting a maxAngularVelocity, i.e. speed limit on rotation.
+
+Raycasting is difficult. The way to solve this is, you don't rotate the axe but you make a disc with motion blur and detect collisions. But if accurate axe is required, then this maximum setting is at play to slow down the rotation.
+
+![](https://i.imgur.com/ZfRNmMK.png)
+
+**Dynamic sub-stepping**: engine increases sim freq for objs close to a potential collision, effective but adds overhead. Most effective method for high acc. 
+
+## Collision Dynamics
+How we will resolve our collision? When 2 objs collide with each other, I want something to happen. How will this resolution process occur?
+
+### Penalty Force Method
+One of the early approaches driven by resource reqs, was used in the game *Trespasser*. 
+
+When objects interpenetrate, a force is applied at a single deepest point of penetration. Used by the *Trespasser* game.
+
+Can be unstable and cause objs to oscillate, jitter and slide around as if on air, making stable stacking nearly impossible.
+
+
+Some improvements on penalty force methods:
+- Relax contact criteria via skin width
+- Consider all collision contacts
+- Find a soln that addresses all constraints introduced by collision contacts.
+
+### Modern constraint-based methods
+
+#### Skin width
+![](https://i.imgur.com/ic7Enad.png)
+
+**Skin width**: This method uses a skin or expanded geometry around colliders. Collisions are detected when the skins touch, allowing corrective forces to be applied before actual geometries interpenetrate.
+
+![](https://i.imgur.com/m7hRpM3.png)
+
+If the actual geometries intersect (e.g., due to a switch from animation to physics control), the engine applies a massive corrective force, which can cause objects to launch into the air unexpectedly.
+
+Sometimes this doesn't work properly, for e.g. when objects are stacked, in game objs exploding causing frame rates to drop, etc. Leads to inner geometric intersection which leads to extreme corrective force applied.  
+
+**Proportional force**: The corrective force scaled based on how deeply skins have penetrated, smooths out interactions and eliminates jitter.
+
+**Sequential impulse**: Instead of solving all contact points simultaneously, engine iterates through each contact point and applies a sequential corrective impulse.
+
+## Physics Constraint Solver
+RT solutions are usually iterative and based on linear-complementary problem with Jacobian constraints.
+
+![](https://i.imgur.com/34nYyv4.png)
+
+## Adv Phys Concepts
+
+### Forces & Connectors
+
+**Forces**: Can be applied as a continuous `Constant Force` (like gravity) or an instantaneous `Impulse` (like a character jumping). Forces are typically applied to an object's center of mass.
+
+**Connectors**: Attach bodies together and restrict their motion. Examples include hinge and ball-and-socket joints.
+
+![](https://i.imgur.com/3LwI3Ls.png)
+
+**Soft vs. Hard Constraints:** Hard constraints must be perfectly met, which can cause objects to get stuck. Soft constraints allow for some flexibility, leading to more stable and playable behavior.
+
+![](https://i.imgur.com/6AqLUTb.png)
+
+### Ragdoll Physics
+![](https://i.imgur.com/IE6cbwJ.png)
+
+A char's body is approximated by a collection of primitive rigid bodies linked by joints.
+
+These physics objects are not rendered; instead, they drive the pose of the character's animation skeleton.
+
+Typically, a char is controlled by animation (kinematic control) until an event like an explosion occurs. At that point, physics takes over, and the character collapses realistically.
+
+Blending physics simulation with animation is complex and can be a source of bugs.
+
+### Fully phys chars
+Having characters that are 100% physically simulated is an immense AI and robotics challenge, as a bipedal form is inherently unstable.
+
+Adv techniques blend animation with physics to create more realistic and responsive movement, such as reacting to being pushed or having a kick stopped by an obstacle.
