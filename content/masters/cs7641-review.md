@@ -12,6 +12,7 @@ aliases:
   - /2024/04/19/e18ee9b8f39b4dee816618e0fac28df5
 lastmod: 2024-04-20
 date: 2024-04-20
+updated: 2025-06-21
 ---
 Tips-n-tricks blog post to navigate OMSCS’s CS7641 Machine Learning (ML) course.
 
@@ -207,9 +208,18 @@ I could literally skip finals and still score an A in the class, this shows the 
 In finals, I score a 32.5/57 which dropped my overall to 88.70 % leading to an A. The finals did not go so well since the questions were tricky and confusing but mostly from the lectures. Just do the lectures + George’s [notes](https://teapowered.dev/assets/ml-notes.pdf) and you should be fine.
 
 ## Summer scaling
+
+### Summer 2024
 For the summer cohort of 2024, the course was scaled and some additions were made as below.
 - A new hypothesis quiz was added to assist with better report writing at the start of the semester.
 - Potentially, for summer only since timelines are short, Assignment 4 on Reinforcement Learning was dropped.
+
+### Summer 2025
+The course never fails to surprise!
+
+In summer of 2025, the course evolved yet again (yes, like Pokemons):
+- 3 unit quizzes added
+- A2 RO removed instead of A4.
 
 ## Other interesting text to review:
 
@@ -228,3 +238,4 @@ For the summer cohort of 2024, the course was scaled and some additions were mad
 - [18.08.2024] Added new [mlrose-ky library](https://github.com/knakamura13/mlrose-ky) for assignment 2.
 - [30.08.2024] Added A1 to-do list.
 - [15.10.2024] Updated A2 with new docs and added [pyperch library](https://github.com/jlm429/pyperch)
+- [21.06.2025] Summer 2025 scaling
