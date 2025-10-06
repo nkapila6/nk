@@ -10,6 +10,7 @@ date: 2025-05-31
 updated: 2025-05-31
 ---
 > [!info] Information
+> These notes are incomplete and will not be updated. It was really tough to keep up to date with the lectures and the assignments in the summer semester!
 > I'm making these notes for the [Video Game Design](https://omscs.gatech.edu/cs-6457-video-game-design) class at Georgia Tech. These are being updated regularly on a daily basis so please bear with me.
 
 Feel free to make a [PR](https://github.com/nkapila6/nk/pulls) to fix any issues. Do ⭐ the repo if this helped!
