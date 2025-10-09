@@ -27,6 +27,11 @@ Below are some locations you could explore in the blog!
 	- [Deep Learning](tags/deep-learning)
 - **Life Struggles Never End**: [[life]]
 
+## Buy Me A Coffee
+If the knowledge shared or the software I've built has been helpful to you. Please do buy me a coffee, would really appreciate it! 😄
+
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/X8X51MK4A1)
+
 # Contact
 If you have any questions, please feel free to drop me an email at [blog@nkapila.me](mailto:blog@nkapila.me)
 
