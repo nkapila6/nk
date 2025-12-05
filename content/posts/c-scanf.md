@@ -7,24 +7,26 @@ tags:
   - "#cs6200"
 aliases:
 date: 2025-06-21
+draft: true
 ---
+
 # A beginners' guide away from scanf()
 
-Forked from The Wayback Machine - https://web.archive.org/web/20250417094758/https://sekrit.de/webdocs/c/beginners-guide-away-from-scanf.html
+Forked from The Wayback Machine - <https://web.archive.org/web/20250417094758/https://sekrit.de/webdocs/c/beginners-guide-away-from-scanf.html>
 
 This document is for you if you started to learn programmming in `C`. Chances are you follow a course and the method to read some input you were taught is to use the `scanf()` function.
 
 ## 0\. What's wrong with scanf()?
 
-Nothing. And, chances are, everything for your usecase. This document attempts to make you understand *why*. So here's the very first rule about `scanf()`:
+Nothing. And, chances are, everything for your usecase. This document attempts to make you understand _why_. So here's the very first rule about `scanf()`:
 
 > **Rule 0:** Don't use `scanf()`. (Unless, you know **exactly** what you do.)
 
-But before presenting some alternatives for common usecases, let's elaborate a bit on the *knowing what you do* part.
+But before presenting some alternatives for common usecases, let's elaborate a bit on the _knowing what you do_ part.
 
 ## 1\. I want to read a number from the user
 
-Here is a *classic* example of `scanf()` use (and, misuse) in a beginner's program:
+Here is a _classic_ example of `scanf()` use (and, misuse) in a beginner's program:
 
 ```C
 #include <stdio.h>
@@ -56,17 +58,17 @@ You entered 38.
 
 Oops. Where does the value `38` come from?
 
-The answer is: This could be any value, or the program could just crash. A crashing program in just two lines of code is *quite easy* to create in `C`. `scanf()` is asked to convert a number, and the input doesn't contain any numbers, so `scanf()` converts nothing. As a consequence, the variable `a` is *never written to* and using the value of an *uninitialized variable* in `C` is *undefined behavior*.
+The answer is: This could be any value, or the program could just crash. A crashing program in just two lines of code is _quite easy_ to create in `C`. `scanf()` is asked to convert a number, and the input doesn't contain any numbers, so `scanf()` converts nothing. As a consequence, the variable `a` is _never written to_ and using the value of an _uninitialized variable_ in `C` is _undefined behavior_.
 
 > [!WARNING] Undefined behavior in C
-> 
+>
 > C is a very low-level language and one consequence of that is the following:
-> 
-> *Nothing will ever stop you from doing something completely wrong*.
-> 
-> Many languages, especially those for some *managed environment* like `Java` or `C#` actually stop you when you do things that are not allowed, say, access an array element that does not exist. `C` doesn't. As long as your program is *syntactically* correct, the compiler won't complain. If you do something forbidden in your program, `C` just calls the behavior of your program **undefined**. This formally allows anything to happen when running the program. Often, the result will be a crash or just output of "garbage" values, as seen above. But if you're really unlucky, your program will seem to *work just fine* until it gets some slightly different input, and by that time, you will have a really hard time to spot where exactly your program is *undefined*. Therefore **avoid undefined behavior by all means!**.
-> 
-> On a side note, *undefined behavior* can also cause security holes. This has happened *a lot* in practice.
+>
+> _Nothing will ever stop you from doing something completely wrong_.
+>
+> Many languages, especially those for some _managed environment_ like `Java` or `C#` actually stop you when you do things that are not allowed, say, access an array element that does not exist. `C` doesn't. As long as your program is _syntactically_ correct, the compiler won't complain. If you do something forbidden in your program, `C` just calls the behavior of your program **undefined**. This formally allows anything to happen when running the program. Often, the result will be a crash or just output of "garbage" values, as seen above. But if you're really unlucky, your program will seem to _work just fine_ until it gets some slightly different input, and by that time, you will have a really hard time to spot where exactly your program is _undefined_. Therefore **avoid undefined behavior by all means!**.
+>
+> On a side note, _undefined behavior_ can also cause security holes. This has happened _a lot_ in practice.
 
 Now that we know the program is broken, let's fix it. Because `scanf()` returns how many items were converted successfully, the next obvious idea is just to retry the "number input" in case the user entered something else:
 
@@ -105,15 +107,15 @@ enter a number: enter a number: enter a number: enter a number: enter a
 number: enter a number: enter a number: ^C
 ```
 
-**stooooop**! Ok, we managed to interrupt this madness with `Ctrl+C` but *why* did that happen?
+**stooooop**! Ok, we managed to interrupt this madness with `Ctrl+C` but _why_ did that happen?
 
 Here's a rule:
 
-> [!INFO] **Rule 1:**`scanf()` is not for *reading* input, it's for *parsing* input.
+> [!INFO] **Rule 1:**`scanf()` is not for _reading_ input, it's for _parsing_ input.
 
-The first argument to `scanf()` is a format string, describing what `scanf()` should parse. The important thing is: `scanf()` never reads anything it cannot parse. In our example, we tell `scanf()` to parse a number, using the `%d` conversion. Sure enough, `abc` is not a number, and *as a consequence, `abc` is not even read*. The next call to `scanf()` will again find our unread input and, again, can't parse it.
+The first argument to `scanf()` is a format string, describing what `scanf()` should parse. The important thing is: `scanf()` never reads anything it cannot parse. In our example, we tell `scanf()` to parse a number, using the `%d` conversion. Sure enough, `abc` is not a number, and _as a consequence, `abc` is not even read_. The next call to `scanf()` will again find our unread input and, again, can't parse it.
 
-Chances are you find *some* examples saying "let's just flush the input before the next call to `scanf()` ":
+Chances are you find _some_ examples saying "let's just flush the input before the next call to `scanf()` ":
 
 ```C
 fflush(stdin); // <- never do that!
@@ -121,13 +123,13 @@ fflush(stdin); // <- never do that!
 
 **Forget about this idea immediately, please.**
 
-You'd expect this to clear all unread input, and indeed, some systems will do just that. But *according to `C`*, flushing an *input stream* is **undefined behavior**, and this should now ring a bell. And yes, there *are* a lot of systems that won't clear the input when you attempt to flush `stdin`.
+You'd expect this to clear all unread input, and indeed, some systems will do just that. But _according to `C`_, flushing an _input stream_ is **undefined behavior**, and this should now ring a bell. And yes, there _are_ a lot of systems that won't clear the input when you attempt to flush `stdin`.
 
-So, the only way to clear unread input is *by reading it*. Of course, we can make `scanf()` read it, using a format string that parses any string. Sounds easy.
+So, the only way to clear unread input is _by reading it_. Of course, we can make `scanf()` read it, using a format string that parses any string. Sounds easy.
 
 ## 2\. I want to read a string from the user
 
-Let's consider another *classic* example of a beginner's program, trying to read a string from the user:
+Let's consider another _classic_ example of a beginner's program, trying to read a string from the user:
 
 ```C
 #include <stdio.h>
@@ -155,19 +157,19 @@ Segmentation fault
 $
 ```
 
-Well, now we have a *buffer overflow*. You might get `Segmentation fault` on a Linux system, any other kind of crash, maybe even a "correctly" working program, because, once again, the program has **undefined behavior**.
+Well, now we have a _buffer overflow_. You might get `Segmentation fault` on a Linux system, any other kind of crash, maybe even a "correctly" working program, because, once again, the program has **undefined behavior**.
 
 The problem here is: `%s` matches any string, of any length, and `scanf()` has no idea when to stop reading. It reads as long as it can parse the input according to the format string, so it writes a lot more data to our `name` variable than the 12 characters we declared for it.
 
 > [!WARNING] Buffer overflows in C
-> 
-> A *buffer overflow* is a specific kind of *undefined behavior* resulting from a program that tries to write more data to an (array) variable than this variable can hold. Although this is *undefined*, in practice it will result in overwriting some *other* data (that happens to be placed after the overflowed buffer in memory) and this can easily crash the program.
-> 
-> One particularly dangerous result of a buffer overflow is overwriting the *return address* of a function. The return address is used when a function exits, to jump back to the calling function. Being able to overwrite this address ultimately means that a person with enough knowledge about the system can cause the running program to execute **any other code** supplied as input. This problem has led to many security vulnerabilities; imagine you can make for example a webserver written in `C` execute your own code by submitting a specially tailored request...
+>
+> A _buffer overflow_ is a specific kind of _undefined behavior_ resulting from a program that tries to write more data to an (array) variable than this variable can hold. Although this is _undefined_, in practice it will result in overwriting some _other_ data (that happens to be placed after the overflowed buffer in memory) and this can easily crash the program.
+>
+> One particularly dangerous result of a buffer overflow is overwriting the _return address_ of a function. The return address is used when a function exits, to jump back to the calling function. Being able to overwrite this address ultimately means that a person with enough knowledge about the system can cause the running program to execute **any other code** supplied as input. This problem has led to many security vulnerabilities; imagine you can make for example a webserver written in `C` execute your own code by submitting a specially tailored request...
 
 So, here's the next rule:
 
-> [!INFO] **Rule 2:**`scanf()` can be *dangerous* when used carelessly. Always use field widths with conversions that parse to a string (like `%s`).
+> [!INFO] **Rule 2:**`scanf()` can be _dangerous_ when used carelessly. Always use field widths with conversions that parse to a string (like `%s`).
 
 The field width is a number preceeding the conversion specifier. It causes `scanf()` to consider a maximum number of characters from the input when parsing for this conversion. Let's demonstrate it in a fixed program:
 
@@ -183,7 +185,6 @@ int main(void)
 }
 ```
 
-
 We also increased the buffer size, because there might be really long names.
 
 There's an **important thing to notice**: Although our `name` has room for 40 characters, we instruct `scanf()` not to read more than 39. This is because a string in `C` always needs a `0` byte appended to mark the end. When `scanf()` is finished parsing into a string, it appends this byte automatically, and there must be space left for it.
@@ -196,21 +197,21 @@ What's your name? Martin Brown
 Hello Martin!
 ```
 
-Well, that's... outspoken. What happens here? Reading some `scanf()` manual, we would find that `%s` parses a *word*, not a *string*, for example I found the following wording:
+Well, that's... outspoken. What happens here? Reading some `scanf()` manual, we would find that `%s` parses a _word_, not a _string_, for example I found the following wording:
 
-**s**: *Matches a sequence of non-white-space characters*
+**s**: _Matches a sequence of non-white-space characters_
 
-A *white-space* in `C` is one of *space*, *tab* (`\t`) or *newline* (`\n`).
+A _white-space_ in `C` is one of _space_, _tab_ (`\t`) or _newline_ (`\n`).
 
 > [!INFO] **Rule 3:** Although `scanf()` format strings can look quite similar to `printf()` format strings, they often have slightly different semantics. (Make sure to **read the fine manual**)
 
-The general problem with parsing "a string" from an input stream is: *Where does this string end?* With `%s`, the answer is *at the next white-space*. If you want something different, you can use `%[`:
+The general problem with parsing "a string" from an input stream is: _Where does this string end?_ With `%s`, the answer is _at the next white-space_. If you want something different, you can use `%[`:
 
 - `%[a-z]`: parse as long as the input characters are in the range `a` - `z`.
 - `%[ny]`: parse as long as the input characters are `y` or `n`.
-- `%[^.]`: The `^` *negates* the list, so this means parse as long as there is no `.` in the input.
+- `%[^.]`: The `^` _negates_ the list, so this means parse as long as there is no `.` in the input.
 
-We could change the program, so anything until a *newline* will be parsed into our string:
+We could change the program, so anything until a _newline_ will be parsed into our string:
 
 ```C
 #include <stdio.h>
@@ -224,21 +225,21 @@ int main(void)
 }
 ```
 
-It might get a bit frustrating, but this is again a program with possible *undefined behavior*, see what happens when we just press `Enter`:
+It might get a bit frustrating, but this is again a program with possible _undefined behavior_, see what happens when we just press `Enter`:
 
 ```shell
 $ ./example5
-What's your name? 
+What's your name?
 Hello ÿ¦e!
 ```
 
 Here's another sentence from a `scanf()` manual, from the section describing the `[` conversion:
 
-*The usual skip of leading white space is suppressed.*
+_The usual skip of leading white space is suppressed._
 
-With many conversions, `scanf()` automatically skips *whitespace* characters in the input, but with some, it doesn't. Here, our *newline* from just pressing enter isn't skipped, and it doesn't match for our conversion that explicitly excludes *newlines*. The result is: `scanf()` doesn't parse anything, our `name` remains *uninitialized*.
+With many conversions, `scanf()` automatically skips _whitespace_ characters in the input, but with some, it doesn't. Here, our _newline_ from just pressing enter isn't skipped, and it doesn't match for our conversion that explicitly excludes _newlines_. The result is: `scanf()` doesn't parse anything, our `name` remains _uninitialized_.
 
-One way around this is to *tell* `scanf()` to skip whitespace: If the format string contains any whitespace, it matches any number of whitespace characters in the input, including no whitespace at all. Let's use this to skip whitespace the user might enter before entering his name:
+One way around this is to _tell_ `scanf()` to skip whitespace: If the format string contains any whitespace, it matches any number of whitespace characters in the input, including no whitespace at all. Let's use this to skip whitespace the user might enter before entering his name:
 
 ```C
 #include <stdio.h>
@@ -253,15 +254,15 @@ int main(void)
 }
 ```
 
-Yes, this program works and doesn't have any *undefined behavior* \*), but I guess you don't like very much that nothing at all happens when you just press enter, because `scanf()` is skipping it and continues to wait for input that can be matched.
+Yes, this program works and doesn't have any _undefined behavior_ \*), but I guess you don't like very much that nothing at all happens when you just press enter, because `scanf()` is skipping it and continues to wait for input that can be matched.
 
-\*) actually, this isn't even entirely true. This program *still* has *undefined behavior* for empty input. You could force this on a Linux console hitting `Ctrl+D` for example. So, it's again an example for *code you should not write*.
+\*) actually, this isn't even entirely true. This program _still_ has _undefined behavior_ for empty input. You could force this on a Linux console hitting `Ctrl+D` for example. So, it's again an example for _code you should not write_.
 
 ## 3\. Ok, I just want to read some input from the user
 
-There are several functions in `C` for *reading* input. Let's have a look at one that's probably most useful to you: `fgets()`.
+There are several functions in `C` for _reading_ input. Let's have a look at one that's probably most useful to you: `fgets()`.
 
-`fgets()` does a simple thing, it reads up to a given maximum number of characters, but stops at a newline, which is read as well. In other words: *It reads a line of input.*
+`fgets()` does a simple thing, it reads up to a given maximum number of characters, but stops at a newline, which is read as well. In other words: _It reads a line of input._
 
 This is the function signature:
 
@@ -299,7 +300,7 @@ Hello Bob
 !
 ```
 
-Of course, this is because `fgets()` also reads the *newline* character itself. But the fix is simple as well: We use `strcspn()` to get the index of the *newline* character if there is one and overwrite it with `0`. `strcspn()` is declared in `string.h`, so we need a new `#include`:
+Of course, this is because `fgets()` also reads the _newline_ character itself. But the fix is simple as well: We use `strcspn()` to get the index of the _newline_ character if there is one and overwrite it with `0`. `strcspn()` is declared in `string.h`, so we need a new `#include`:
 
 ```C
 #include <stdio.h>
@@ -327,7 +328,7 @@ Hello Bob Belcher!
 
 ## 4\. How would I get numbers without scanf()?
 
-There are many functions for converting a string to a number in `C`. A function that's used quite often is `atoi()`, the name means *anything to integer*. It returns 0 if it can't convert the string. Let's try to rewrite the broken *example 2* using `fgets()` and `atoi()`. `atoi()` is declared in `stdlib.h`.
+There are many functions for converting a string to a number in `C`. A function that's used quite often is `atoi()`, the name means _anything to integer_. It returns 0 if it can't convert the string. Let's try to rewrite the broken _example 2_ using `fgets()` and `atoi()`. `atoi()` is declared in `stdlib.h`.
 
 ```C
 #include <stdio.h>
@@ -450,9 +451,9 @@ This looks really good, doesn't it? If you want to know more, I suggest you read
 
 Yes, you can. Here's a last rule:
 
-> [!INFO] **Rule 4:**`scanf()` is a *very powerful* function. (and with great power comes great responsibility...)
+> [!INFO] **Rule 4:**`scanf()` is a _very powerful_ function. (and with great power comes great responsibility...)
 
-A lot of parsing work can be done with `scanf()` in a very *concise* way, which can be very nice, but it also has many pitfalls and there are tasks (such as reading a line of input) that are much simpler to accomplish with a simpler function. Make sure you **understand the rules** presented here, and if in doubt, read the `scanf()` manual **precisely**.
+A lot of parsing work can be done with `scanf()` in a very _concise_ way, which can be very nice, but it also has many pitfalls and there are tasks (such as reading a line of input) that are much simpler to accomplish with a simpler function. Make sure you **understand the rules** presented here, and if in doubt, read the `scanf()` manual **precisely**.
 
 That being said, here's an example how to read a number with retries using `scanf()`:
 
@@ -484,7 +485,7 @@ int main(void)
 
 It's not as nice as the version using `strtol()` above, because there is no way to tell `scanf()` **not** to skip whitespace for `%d` -- so if you just hit `Enter`, it will still wait for your input -- but it works and it's a really short program.
 
-For the sake of completeness, if you *really* ***really*** want to get a line of input using `scanf()`, of course this can be done safely as well
+For the sake of completeness, if you _really_ **_really_** want to get a line of input using `scanf()`, of course this can be done safely as well
 
 ```c
 #include <stdio.h>
@@ -501,3 +502,4 @@ int main(void)
 ```
 
 Note that this final example of course leaves input unread, even from the same line, if there were more than 39 characters until the newline. If this is a concern, you'd have to find another way -- or just use `fgets()`, making the check easier, because it gives you the newline if there was one.
+
