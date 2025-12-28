@@ -7,9 +7,10 @@ updated: 2023-12-11
 ---
 Hi there 👋, I'm Nikhil.
 
-In my day-job, I work as lighting engineer with expertise in lighting components and controls. All fields (even lighting) are converging towards Tech and I hope to contribute in the near future to bridge this gap.
+I have an MS in CS from `Georgia Tech` with a specialization in Artificial Intelligence. I'm currently working as a Lead AI/ML Engineer. I used to work in the lighting industry and have lots of experience in lighting components and controls at all levels of the stack. 
 
-While I try to enjoy my time in lighting, I also pursue a part-time MS degree through Georgia Tech's [[current-coursework]]. My time in the program has gotten me deeply intrigued into mathematics, machine (& deep) learning and all things Bayesian. In my free time, I try to update my *inductive priors* on these topics as much as possible. 🙃
+My time at `Georgia Tech` has gotten me deeply intrigued into mathematics, machine learning and all things Bayesian. In my free time, I try to update my *inductive priors* on these topics as much as possible. 🙃
+I further want to look more into embedded devices and see how edge level AI inference would work!
 
 # Backpropagating? What are you talking about?
 In machine learning, [backpropagation](https://en.wikipedia.org/wiki/Backpropagation) is a technique to update the weights of a neural network. In the same way, this site aims to be an archive of posts and notes that help you update the weights of your brains' neurons!
