@@ -1,5 +1,5 @@
 ---
-title: Current Coursework in OMSCS
+title: Current Coursework in OMSCS (completed)
 tags:
   - omscs
 categories:
@@ -9,13 +9,15 @@ updated: 2023-05-15
 comments: false
 ---
 
+# I AM MASTA OF KOMPOOOTAR
+
 **Specialization**: Interactive Intelligence <br>
 ✅ Core Requirements: Completed <br>
-⏳ Free Electives: Ongoing <br>
-Remaining: 2 courses left. <br>
+✅ Free Electives: Completed <br>
+Remaining: None. <br>
 Join date: Jan 2023. <br>
-Last update: May 2025. <br>
-Expected grad date: Dec 2025. <br>
+Last update: 1 Jan 2026. <br>
+Graduation date: 13 Dec 2025. <br>
 
 Sequence given in number in brackets `[]`
 
@@ -55,4 +57,5 @@ Free electives may be any courses offered through the OMSCS program. You can fin
 - ✅ [5] Summer 2024: ~~CS 8903 Research Work~~
 - ✅ [7] Spring 2025: ~~[CS 7650 Natural Language Processing](https://omscs.gatech.edu/cs-7650-natural-language-processing)~~
 - ✅ [8] Spring 2025: ~~[CSE 6250 Big Data for Health](https://www.sunlab.org/teaching/cse6250/spring2023/schedule.html)~~
-- ⏳ [9] Summer 2025: [CS 6457 Video Game Design](https://omscs.gatech.edu/cs-6457-video-game-design)
+- ✅ [9] Summer 2025: ~~[CS 6457 Video Game Design](https://omscs.gatech.edu/cs-6457-video-game-design)~~
+- ✅ [10] Fall 2025: ~~[CS 6200 Graduate Intro to Operating Systems](https://omscs.gatech.edu/cs-6200-introduction-operating-systems)~~
