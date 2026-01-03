@@ -6,8 +6,8 @@ tags:
   - omscs
   - "#cs7641"
 aliases:
-date: 2025-01-03
-updated: 2025-01-03
+date: 2026-01-03
+updated: 2026-01-03
 ---
 
 Scattered thoughts about a few supervised learning algorithms and their restrictiona nd preference biases – it’s just to help me organize my thoughts for the CS7641 midterm.
