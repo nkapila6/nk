@@ -12,6 +12,8 @@ I have an MS in CS from `Georgia Tech` with a specialization in Artificial Intel
 My time at `Georgia Tech` has gotten me deeply intrigued into mathematics, machine learning and all things Bayesian. In my free time, I try to update my *inductive priors* on these topics as much as possible. 🙃
 I further want to look more into embedded devices and see how edge level AI inference would work!
 
+Feel free to connect with me on [LinkedIn](https://linkedin.com/in/nikhilkapila)
+
 # Backpropagating? What are you talking about?
 In machine learning, [backpropagation](https://en.wikipedia.org/wiki/Backpropagation) is a technique to update the weights of a neural network. In the same way, this site aims to be an archive of posts and notes that help you update the weights of your brains' neurons!
 
