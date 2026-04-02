@@ -87,7 +87,7 @@
     "rfdc": "^1.4.1",
     "rimraf": "^6.1.3",
     "satori": "^0.19.2",
-    "serve-handler": "^1.0.0",
+    "serve-handler": "^6.1.7",
     "sharp": "^0.34.3",
     "shiki": "^3.22.0",
     "source-map-support": "^0.5.21",
