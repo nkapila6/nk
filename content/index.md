@@ -7,7 +7,7 @@ updated: 2023-12-11
 ---
 Hi there 👋, I'm Nikhil.
 
-I have an MS in CS from `Georgia Tech` with a specialization in Artificial Intelligence. I'm currently working as a Lead AI/ML Engineer. I used to work in the lighting industry and have lots of experience in lighting components and controls at all levels of the stack. 
+I'm Nikhil. I have an MS in CS from `Georgia Tech` with a specialization in Artificial Intelligence. I'm currently working as a Lead AI/ML Engineer. Been working in the lighting and controls industry, I have a passion towards building automation, control systems, edge level IoT hardware and how AI models can be optimized on this hardware.
 
 My time at `Georgia Tech` has gotten me deeply intrigued into mathematics, machine learning and all things Bayesian. In my free time, I try to update my *inductive priors* on these topics as much as possible. 🙃
 I further want to look more into embedded devices and see how edge level AI inference would work!
