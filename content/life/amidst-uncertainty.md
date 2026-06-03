@@ -2,6 +2,7 @@
 layout: post
 title: Amidst uncertainty, upskill continues
 exclude: true
+draft: true
 tags:
   - life
 categories:
