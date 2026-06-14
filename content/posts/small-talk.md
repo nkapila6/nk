@@ -189,7 +189,7 @@ Some takeaways from this hackathon. In no particular order:
 
 1. **Constrained structured output > chained calls.** One LLM call with a tight JSON schema producing cast + script + wardrobe is more reliable than breaking it into steps. I mentioned this above but it's worth repeating.
 
-2. **Modal's scale-to-zero is great for bursty workloads.** We had $250 in Modal credits for the hackathon and as of writing this, we've only burned through ~$30. That's 395 TTS forward passes and 146 LLM forward passes. Not bad. That said, set spending alerts on day one because when you're iterating voice design prompts on GPUs, costs can sneak up on you.
+2. **Modal's scale-to-zero is great for bursty workloads.** We had 250.00 USD in Modal credits for the hackathon and as of writing this, we've only burned through ~30.00 USD. That's 395 TTS forward passes and 146 LLM forward passes. Not bad. That said, set spending alerts on day one because when you're iterating voice design prompts on GPUs, costs can sneak up on you.
 
 3. **Voice consistency without cloning is fragile.** The anchoring hack works but it's brittle. A proper clone endpoint would be the first upgrade if we continue this project.
 
