@@ -15,19 +15,19 @@ description: "Technical write-up on building Small Talk, an AI-to-AI podcast hos
 
 # Small Talk: An AI-to-AI Robot Podcast for the Build Small Hackathon
 
+<center><iframe width="500" height="300" src="https://www.youtube.com/embed/obP4C1eH77I" title="Small Talk Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></center>
+
 ## Important note
 
 - This was built for the [HuggingFace Build Small Hackathon](https://huggingface.co/spaces/build-small-hackathon/field-guide) with a 32B parameter cap on models.
-- Built with [Gaurav Gosain](https://github.com/Gaurav-Gosain). He handled the frontend, three.js, LiveKit integration, and the Go companion binary. I handled the Modal GPU serving infra and the LLM/TTS pipeline.
 - **Code:** [small-talk](https://github.com/Gaurav-Gosain/small-talk) | [llama-modal-serve](https://github.com/nkapila6/llama-modal-serve)
 - **Live:** [HF Space](https://huggingface.co/spaces/build-small-hackathon/small-talk)
 - **HF Blog Write-up:** [Small Talk on the Hugging Face blog](https://huggingface.co/blog/build-small-hackathon/small-talk)
-
-<iframe width="500" height="300" src="https://www.youtube.com/embed/obP4C1eH77I" title="Small Talk Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+- Built with [Gaurav Gosain](https://github.com/Gaurav-Gosain).
 
 ## What is it?
 
-Small Talk is an AI-to-AI podcast where Reachy Mini robots join a live WebRTC call, each with their own personality, voice, and 3D digital twin, and just *talk*. You watch them in a Google Meet-style grid, except everyone on the call is a robot. 🤖
+Small Talk is an AI-to-AI podcast where Reachy Mini robots join a live WebRTC call, each with their own personality, voice, and 3D digital twin, and just _talk_. You watch them in a Google Meet-style grid, except everyone on the call is a robot. 🤖
 
 Give them a topic and they write the script, design their own voices, dress themselves, and go live.
 
@@ -62,9 +62,9 @@ flowchart LR
 
 The whole app is served by `gradio.Server`, a FastAPI host with Gradio's backend where custom routes take priority. The visitor only ever sees a hand-built three.js frontend. There is no default Gradio component anywhere. This earned us the "Off-Brand" badge in the hackathon lol.
 
-## The Modal endpoints (my part)
+## The Modal endpoints
 
-I built and maintained the [llama-modal-serve](https://github.com/nkapila6/llama-modal-serve) repo. Two apps, two files:
+In the [llama-modal-serve](https://github.com/nkapila6/llama-modal-serve) repo. Two apps, two files:
 
 ### `nemotron.py`: the brain
 
@@ -103,7 +103,7 @@ curl https://<your-url>/v1/chat/completions \
 
 [Qwen3-TTS-12Hz-1.7B-VoiceDesign](https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-VoiceDesign) served via [faster-qwen3-tts](https://github.com/andimarafioti/faster-qwen3-tts) on an A10G GPU. Exposes a `/v1/audio/speech` endpoint. You describe a voice in natural language, send text, get back a WAV.
 
-The interesting problem here was **voice consistency**. VoiceDesign is zero-shot (no reference audio) but it re-rolls the voice on every call. To keep characters sounding the same across their lines, each voice description gets an appended anchor phrase: *"Always exactly this same voice, steady and consistent across takes."*
+The interesting problem here was voice consistency. VoiceDesign is zero-shot (no reference audio) but it re-rolls the voice on every call. To keep characters sounding the same across their lines, each voice description gets an appended anchor phrase: "Always exactly this same voice, steady and consistent across takes."
 
 > [!warning]
 > This is a hack. The proper fix is a clone endpoint with reference audio. But it works well enough for a hackathon demo and the voices stayed reasonably consistent across lines.
@@ -121,15 +121,31 @@ curl -X POST https://<your-url>/v1/audio/speech \
      }' --output speech.wav
 ```
 
+### Modal Usage
+
+We had $250 in Modal credits for the hackathon. As of writing this, we've spent roughly $30.
+
+<center><img src='https://raw.githubusercontent.com/nkapila6/nk/refs/heads/v4/content/posts/resources/small-talk/modal-build-small.png' /></center>
+
+The two endpoints:
+
+- **qwen-tts** (TTSServer): 395 calls. This is the voice. Every line of dialogue in every show is a separate TTS call, so this number climbs fast.
+- **nemotron-llama-cpp** (LlamaServer): 146 calls. This is the brain. Each call produces an entire show script (cast + dialogue + wardrobe as JSON), so you get a lot of output per call. Moderation passes also count here.
+  Both endpoints scale to zero when idle, so we only pay for actual GPU time. The `download_model` functions show 0 calls because they only run once during initial setup via `modal run`, not during regular usage.
+
+Most of the cost comes from TTS since it runs on every single line of dialogue. The LLM is cheap per call because the model is small (4B Q4 quantized) and each call finishes quickly.
+
+Reachy FM (the robot radio station) doesn't hit Modal at all. The songs are pre-generated using [Suno](https://suno.com), and the DJ mic breaks, album art, and synced karaoke lyrics are all static assets served. So the radio station is essentially free to run. It's a nice contrast: the live podcast shows are GPU-intensive and dynamic, while the FM station is pure vibes with zero inference cost.
+
 ## The cascade: the actual trick
 
 This is the core idea that makes the whole thing feel "live" instead of feeling like a batch job.
- 
+
 The concept is simple: while the current line of dialogue is playing, the next line is already being generated in the background. You always stay one step ahead. By the time the audience hears line N finish, line N+1 is already rendered and ready to go. No dead air, no loading spinners.
- 
+
 The script itself comes from a single LLM call. Once you have the full dialogue, you pipeline it through TTS one line at a time, always prefetching the next one. Shows can also self-continue: when a script runs out, the system feeds the last few lines back to the LLM as context and asks it to pick up naturally from there.
- 
-The implementation is surprisingly minimal. A few lines of async Python. But the *effect* is significant. It's the difference between something that feels like a batch job and something that feels like a live broadcast. This pipelining pattern is generalizable to a lot of real-time content generation problems and is probably the thing I'm most happy with from a systems design perspective.
+
+The implementation is surprisingly minimal. A few lines of async Python. But the _effect_ is significant. It's the difference between something that feels like a batch job and something that feels like a live broadcast. This pipelining pattern is generalizable to a lot of real-time content generation problems and is probably the thing I'm most happy with from a systems design perspective.
 
 ## Content moderation
 
@@ -157,15 +173,15 @@ LiveKit Cloud carries the WebRTC audio. The Space just mints tokens and runs pub
 
 Everything runs on models well under the 32B cap. Most of the work is done by a single 4B model.
 
-| Category                         | Why it qualifies                                     |
-| -------------------------------- | ---------------------------------------------------- |
-| **Thousand Token Wood** (track)  | A whimsical, AI-native entertainment platform        |
-| **NVIDIA** (sponsor)             | The brain is NVIDIA Nemotron                         |
-| **Modal** (sponsor)              | LLM and TTS both run on Modal at runtime             |
-| **Off Brand** (badge)            | Fully custom three.js UI built on `gradio.Server`    |
-| **Tiny Titan** (badge)           | The reasoning brain is a 4B model                    |
-| **Llama Champion** (achievement) | Nemotron is served through llama.cpp                 |
-| **Field Notes** (achievement)    | Full build write-up published on the HF blog         |
+| Category                         | Why it qualifies                                  |
+| -------------------------------- | ------------------------------------------------- |
+| **Thousand Token Wood** (track)  | A whimsical, AI-native entertainment platform     |
+| **NVIDIA** (sponsor)             | The brain is NVIDIA Nemotron                      |
+| **Modal** (sponsor)              | LLM and TTS both run on Modal at runtime          |
+| **Off Brand** (badge)            | Fully custom three.js UI built on `gradio.Server` |
+| **Tiny Titan** (badge)           | The reasoning brain is a 4B model                 |
+| **Llama Champion** (achievement) | Nemotron is served through llama.cpp              |
+| **Field Notes** (achievement)    | Full build write-up published on the HF blog      |
 
 ## What I learned
 
@@ -204,16 +220,16 @@ go build -o smalltalk-reachy .
 
 Add `-player "cat > /dev/null"` to mute audio, or `-space http://localhost:7860` to point at a local backend.
 
-## Repo layout
-
-| Path         | What                                                      |
-| ------------ | --------------------------------------------------------- |
-| `app.py`     | HF Space entrypoint (FastAPI host serving SPA and `/api`) |
-| `backend/`   | rooms, token minting, show gen, TTS cascade, moderation   |
-| `frontend/`  | three.js SPA (twins, themes, radio, green room, admin)    |
-| `companion/` | Go binary for a physical Reachy Mini                      |
-| `radio/`     | Reachy FM assets (songs, album art, synced lyrics)        |
-| `scripts/`   | asset fetchers, voice prerendering, deploy                |
+<!-- ## Repo layout -->
+<!---->
+<!-- | Path         | What                                                      | -->
+<!-- | ------------ | --------------------------------------------------------- | -->
+<!-- | `app.py`     | HF Space entrypoint (FastAPI host serving SPA and `/api`) | -->
+<!-- | `backend/`   | rooms, token minting, show gen, TTS cascade, moderation   | -->
+<!-- | `frontend/`  | three.js SPA (twins, themes, radio, green room, admin)    | -->
+<!-- | `companion/` | Go binary for a physical Reachy Mini                      | -->
+<!-- | `radio/`     | Reachy FM assets (songs, album art, synced lyrics)        | -->
+<!-- | `scripts/`   | asset fetchers, voice prerendering, deploy                | -->
 
 ## Final thoughts
 
