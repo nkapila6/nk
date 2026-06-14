@@ -123,7 +123,7 @@ curl -X POST https://<your-url>/v1/audio/speech \
 
 ### Modal Usage
 
-We had $250 in Modal credits for the hackathon. As of writing this, we've spent roughly $30.
+We had 250.00 USD in Modal credits for the hackathon. As of writing this, we've spent roughly 30.00 USD.
 
 <center><img src='https://raw.githubusercontent.com/nkapila6/nk/refs/heads/v4/content/posts/resources/small-talk/modal-build-small.png' /></center>
 
