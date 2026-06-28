@@ -50,6 +50,12 @@ I'm not going to spend much time here because I already wrote about it in my [CS
 
 If you have time, also do [Math for ML](https://mml-book.github.io/). It's free, the chapters are short, and it'll make every paper you read 10x more digestible.
 
+**Bonus**:
+
+- [MIT OCW Matrix Calculus for ML and Beyond](https://www.youtube.com/playlist?list=PLUl4u3cNGP62EaLLH92E_VCN4izBKK6OE): the first 4-5 videos are gold for understanding the chain rule in matrix form
+- [Math for Deep Learning (MaDL)](https://www.youtube.com/playlist?list=PL05umP7R6ij0bo4UtMdzEJ6TiLOqj4ZCm): Andreas Geiger's lectures, more applied
+- [Dive into Deep Learning: Mathematics appendix](https://d2l.ai/): a quick reference when you forget what a Jacobian is
+
 ## Phase 1: Machine Learning
 
 Yes you still need this. No, "I read the sklearn docs" doesn't count.
@@ -67,6 +73,10 @@ The goal of ML phase is not to memorize 47 algorithms. The goal is to internaliz
 - [StatQuest](https://www.youtube.com/@statquest) for intuition (the "BAM!" guy, you'll love him)
 - [Mitchell's textbook](https://www.cs.cmu.edu/~tom/mlbook.html) if you want the classic theory. Old but good. I wrote about why it's still worth reading [here](https://nkapila.me/masters/mitchell).
 - If you're at OMSCS or want a structured deep-dive, my [CS7641 review](https://nkapila.me/masters/cs7641-review) has the full reading list.
+- [TA Blogs: Supervised Learning](https://sites.gatech.edu/omscs7641/category/assignments/supervised-learning/): Georgia Tech's ML TA writeups, great for cementing concepts
+- [TA Blogs: Randomized Optimization](https://sites.gatech.edu/omscs7641/category/assignments/randomized-optimization/): covers RHC, SA, GA, MIMIC
+- [TA Blogs: Unsupervised Learning](https://sites.gatech.edu/omscs7641/category/assignments/unsupervised-learning/): GMM, EM, clustering deep-dive
+- [George's ML notes](https://teapowered.dev/assets/ml-notes.pdf): concise, well-organized reference
 
 **What to actually build**:
 
@@ -98,6 +108,10 @@ Build a 2-layer MLP in NumPy. No PyTorch, no autograd. Implement:
 - [Andrej Karpathy: Neural Networks Zero to Hero](https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ). If you watch only one playlist this year, make it this one. The micrograd video alone is worth 6 months of reading papers.
 - [UMich Lecture 6: Backpropagation](https://www.youtube.com/watch?v=dB-u77Y5a6A)
 - [Blog: Backpropagation for a Linear Layer](https://web.eecs.umich.edu/~justincj/teaching/eecs442/notes/linear-backprop.html)
+- [Derivative of SoftMax](https://www.youtube.com/watch?v=M59JElEPgIg): the one video that makes the cross-entropy + softmax gradient click
+- [CS224N Stanford (NLP)](https://web.stanford.edu/class/cs224n/): great for seeing how these fundamentals apply to language
+- [Deep Learning - Ian Goodfellow](https://www.deeplearningbook.org/): the bible. Chapters 6-8 cover everything in this phase.
+- [Understanding Deep Learning - Simon J.D. Prince](https://udlbook.github.io/udlbook/): better visuals than Goodfellow, more modern coverage
 
 **What you should be able to do at the end**:
 
@@ -136,8 +150,12 @@ Yes it'll be slow. That's the point. Once you've felt how slow `for` loops over 
 
 - I wrote some of this up in [DL A2 - CNNs using NumPy tips](https://nkapila.me/masters/dl-a2)
 - [UMich Lecture 7: Convolutional Networks](https://www.youtube.com/watch?v=ANyxBVxmdZ0)
+- [UMich Lecture 8: CNN Architectures](https://youtu.be/XaZIlVrIO-Q?list=PL5-TkQAfAZFbzxjBHtzdVCWE0Zbhomg7r)
+- [UMich Lecture 10: Training Neural Nets 1](https://youtu.be/lGbQlr1Ts7w?list=PL5-TkQAfAZFbzxjBHtzdVCWE0Zbhomg7r)
+- [UMich Lecture 11: Training Neural Nets 2](https://youtu.be/WUazOtlti0g?list=PL5-TkQAfAZFbzxjBHtzdVCWE0Zbhomg7r)
 - [cs231n: Convolutional Networks](https://cs231n.github.io/convolutional-networks/)
 - [Backpropagation in CNNs](https://youtu.be/z9hJzduHToc)
+- [CNN from Scratch, In Depth](https://youtu.be/jDe5BAsT2-Y): walks through the full NumPy implementation
 - [numpy.lib.stride_tricks.as_strided](https://numpy.org/doc/stable/reference/generated/numpy.lib.stride_tricks.as_strided.html): cursed but powerful, lets you vectorize convolutions without explicit loops
 
 **What you should be able to do**:
@@ -162,6 +180,8 @@ Build:
 - [StatQuest: LSTMs explained](https://www.youtube.com/watch?v=YCzL96nL7j0)
 - [UMich Lecture 12: RNNs](https://youtu.be/dUzLD91Sj-o)
 - [Colah's blog: Understanding LSTMs](https://colah.github.io/posts/2015-08-Understanding-LSTMs/) (the diagrams everyone steals)
+- [Seq2Seq Models (StatQuest)](https://www.youtube.com/watch?v=L8HKweZIOmg&t=786s): bridges RNNs to the encoder-decoder setup you'll use in 2.5
+- [Deep Learning - Chris Bishop](https://www.bishopbook.com/): chapters on sequence modeling are excellent, more modern than Goodfellow
 
 **What you should be able to do**:
 
@@ -213,6 +233,8 @@ Components to implement:
 - [3b1b: Attention in Transformers, visually explained](https://youtu.be/eMlx5fFNoYc)
 - [The Annotated Transformer](http://nlp.seas.harvard.edu/2018/04/03/attention.html) (Harvard's line-by-line PyTorch annotation of the original paper)
 - For RoPE and modern positional schemes: [RoPE explained](https://blog.eleuther.ai/rotary-embeddings/)
+- [Yann LeCun's Deep Learning course](https://www.youtube.com/playlist?list=PLgF7i4LH-YxacgG0OPmTYe1UUQAvcw9Ke): the attention lecture is particularly good
+- [Papers with Code](https://paperswithcode.com/): search any architecture and see implementations side-by-side
 
 **What you should be able to do**:
 
@@ -248,6 +270,8 @@ Concepts to internalize:
 - [The Illustrated GPT-2](https://jalammar.github.io/illustrated-gpt2/)
 - [HuggingFace LLM Course](https://huggingface.co/learn/llm-course) (free, good)
 - [GPU Mode](https://www.youtube.com/@GPUMODE) and [Stas Bekman's ML Engineering book](https://github.com/stas00/ml-engineering) if you want to go deep on infra
+- [Dive into Deep Learning (d2l.ai)](https://d2l.ai/): chapters on modern LLM architectures and pretraining objectives
+- [100 Days of Deep Learning - CampusX](https://www.youtube.com/playlist?list=PLKnIA16_RmvYuZauWaPlRTC54KxSNLtNn): covers post-training, RLHF, and alignment in a digestible way
 
 ### 3.2: Function calling / tool use
 
@@ -275,6 +299,7 @@ Things to understand:
 - [Anthropic tool use docs](https://docs.claude.com/en/docs/agents-and-tools/tool-use)
 - [OpenAI function calling docs](https://platform.openai.com/docs/guides/function-calling)
 - [Hugging Face Agents course](https://huggingface.co/learn/agents-course)
+- [Simon Willison on prompt injection](https://simonwillison.net/tags/prompt-injection/): critical reading before you let your agent browse the web
 
 ### 3.3: MCP (Model Context Protocol)
 
@@ -301,6 +326,7 @@ Some ideas:
 - [MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk)
 - [MCP TypeScript SDK](https://github.com/modelcontextprotocol/typescript-sdk)
 - The actual [MCP spec](https://spec.modelcontextprotocol.io/). Read it. It's short.
+- [Awesome MCP Servers](https://github.com/punkpeye/awesome-mcp-servers): a curated list of servers to learn from and remix
 
 > [!WARNING] MCP Is Moving Fast
 > MCP is moving fast. The transport layer (stdio vs HTTP+SSE vs streamable HTTP) has been in flux. Pick stdio first, it's the simplest. Add HTTP transport when you actually need it.
@@ -348,6 +374,8 @@ Or skip frameworks entirely. Honestly, for a single-agent ReAct loop with 3-4 to
 - [Anthropic: Building Effective Agents](https://www.anthropic.com/research/building-effective-agents) (the best practical writeup that exists)
 - [Lilian Weng: LLM Powered Autonomous Agents](https://lilianweng.github.io/posts/2023-06-23-agent/)
 - [Eugene Yan's blog](https://eugeneyan.com/writing/) on LLM patterns
+- [Inspect (AI Safety Institute)](https://inspect.aisi.org.uk/): evals framework for agentic systems
+- [Braintrust](https://www.braintrust.dev/): eval-driven development for LLM apps
 
 ### 3.5: The stuff nobody warns you about
 
@@ -356,6 +384,7 @@ Or skip frameworks entirely. Honestly, for a single-agent ReAct loop with 3-4 to
 - **Latency**: every tool call is a round trip. Stack them serially and the user waits 30 seconds. Parallelize aggressively.
 - **Prompt injection**: when an agent reads untrusted content (web pages, emails, PDFs), that content can hijack the agent. This is a real problem and there is no clean fix yet. [Simon Willison writes about this](https://simonwillison.net/tags/prompt-injection/) more than anyone.
 - **Determinism**: you don't have it. Same input, different outputs. Plan accordingly.
+- **Observability**: you can't debug what you can't see. [LangSmith](https://www.langchain.com/langsmith), [Weights & Biases](https://wandb.ai/), and [Arize](https://arize.com/) are worth knowing early.
 
 ## Closing thoughts
 
