@@ -17,8 +17,7 @@ Cool. Same. Half the people on Twitter are also building agents, the other half 
 
 This post is the roadmap I wish someone had handed me before I went down the rabbit hole. Not a "20 days to LLM mastery" sales funnel, just an honest path from ✨I sort of know what a derivative is✨ to ✨I can write an MCP server and a ReAct loop without copy-pasting from a YouTube tutorial✨.
 
-> Warning
->
+> [!WARNING] No Shortcuts
 > This roadmap assumes you actually want to understand things, not just `pip install langchain` and ship a chatbot. If you just want to ship a chatbot, close this tab. Go forth, ship, prosper.
 
 ## Let's clear the air
@@ -32,8 +31,7 @@ A few things upfront because I see the same questions in every Discord I'm in.
 - **What math do I need?** Linear algebra, multivariate calculus, basic probability. You don't need to be a mathematician but if you can't compute a Jacobian or read $\nabla$, you'll struggle.
 - **GPUs?** Colab free tier or [Lightning AI](https://lightning.ai/) gets you through 95% of this. Don't buy a 4090 to learn `torch.nn.Linear`.
 
-> Info
->
+> [!INFO] TL;DR
 > TL;DR of the roadmap below: ML → DL (from scratch in NumPy → PyTorch → transformers) → LLMs and post-training → tool calling → MCP → agents. If you're already past ML/DL, jump to Phase 3.
 
 ## Phase 0: Math prereqs
@@ -47,8 +45,7 @@ I'm not going to spend much time here because I already wrote about it in my [CS
 3. [The Matrix Calculus You Need For Deep Learning](https://explained.ai/matrix-calculus/) (this is the *entire* point of backprop, please read it twice)
 4. [An Intuitive Introduction to Probability](https://www.coursera.org/learn/introductiontoprobability) (you'll need this for VAEs, diffusion, RLHF, basically all of the interesting stuff)
 
-> Warning
->
+> [!WARNING] Vibes-Based Backprop
 > If you skip the matrix calculus reading, your understanding of backprop will be vibes-based. Vibes-based backprop is how you end up wondering why your gradients are exploding while staring at a `.backward()` call.
 
 If you have time, also do [Math for ML](https://mml-book.github.io/). It's free, the chapters are short, and it'll make every paper you read 10x more digestible.
@@ -78,8 +75,7 @@ The goal of ML phase is not to memorize 47 algorithms. The goal is to internaliz
 3. KMeans and PCA from scratch (UL is sneakily important for embeddings later)
 4. A small project: pick a Kaggle dataset, run 4-5 algorithms, write up *why* each one performed how it did. Not "X got 87%". Why X got 87%.
 
-> Info
->
+> [!INFO] Inductive Biases
 > The "why" matters more than the accuracy. I wrote about this in [Algorithmic Biases in Supervised Learning](https://nkapila.me/posts/sl-biases). Every algorithm has inductive biases. Learn them. They show up everywhere downstream.
 
 Skip RL for now. You don't need it for agents in the LLM sense. You'll come back to it when you want to understand RLHF / GRPO / DPO.
@@ -127,8 +123,7 @@ What you're learning here:
 - [MyGrad](https://github.com/rsokl/MyGrad): a real autodiff lib for NumPy. Read the source after you've built your own. It's a great study.
 - [What is Automatic Differentiation?](https://www.youtube.com/watch?v=wG_nF1awSSY)
 
-> Info
->
+> [!INFO] Salute
 > The day you write your own autograd and it correctly computes gradients for a 3-layer MLP, you will gain a permanent and unshakeable respect for the people who built PyTorch and JAX. Saluteee 🫡
 
 ### 2.3: CNNs with autodiff in NumPy
@@ -226,8 +221,7 @@ Components to implement:
 - Implement KV cache and explain why inference is so much faster than training
 - Read any modern LLM paper (Llama, Mistral, Qwen) and understand 80% of it without crying
 
-> Info
->
+> [!INFO] Side Quest
 > Bonus side quest: if you're feeling brave, after building GPT, do a small finetuning run with LoRA. You'll learn what "adapter parameters" means and why everyone's doing PEFT. The [HuggingFace PEFT docs](https://huggingface.co/docs/peft) are decent.
 
 At this point, congrats: you understand how LLMs work. Time to make them *do things*.
@@ -308,8 +302,7 @@ Some ideas:
 - [MCP TypeScript SDK](https://github.com/modelcontextprotocol/typescript-sdk)
 - The actual [MCP spec](https://spec.modelcontextprotocol.io/). Read it. It's short.
 
-> Warning
->
+> [!WARNING] MCP Is Moving Fast
 > MCP is moving fast. The transport layer (stdio vs HTTP+SSE vs streamable HTTP) has been in flux. Pick stdio first, it's the simplest. Add HTTP transport when you actually need it.
 
 ### 3.4: Agents (the real meat)
