@@ -57,7 +57,7 @@
     "hast-util-to-jsx-runtime": "^2.3.2",
     "hast-util-to-string": "^3.0.1",
     "is-absolute-url": "^5.0.0",
-    "js-yaml": "^4.3.0",
+    "js-yaml": "^5.2.0",
     "lightningcss": "^1.32.0",
     "mdast-util-find-and-replace": "^3.0.2",
     "mdast-util-to-hast": "^13.2.1",
@@ -110,7 +110,7 @@
     "@types/ws": "^8.5.13",
     "@types/yargs": "^17.0.33",
     "esbuild": "^0.28.0",
-    "prettier": "^3.9.1",
+    "prettier": "^3.9.3",
     "tsx": "^4.22.4",
     "typescript": "^6.0.3"
   }
