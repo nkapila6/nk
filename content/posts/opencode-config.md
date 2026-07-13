@@ -1,5 +1,5 @@
 ---
-title: "My OpenCode Config: A Boss, Five Workers, and Zero Prompts"
+title: "My OpenCode Config: Delegation Over Forward Passes"
 date: 2026-07-13
 tags:
   - opencode
@@ -318,6 +318,20 @@ The tool is boss-only. Workers have it denied. You don't want a junior-dev spamm
 > Reminders.app works fine but it's not my actual todo app. I use [TickTick](https://ticktick.com) for everything else. Right now the tool writes to Reminders because it's the only thing AppleScript can talk to without a third-party API. If I end up missing reminders because they're in a different app than the rest of my day, I'll swap the tool to hit TickTick's API instead. The abstraction is the same: tell the agent a time and a message, get a notification. The backend is interchangeable.
 
 If you use macOS and OpenCode, this is a fun one to build yourself. The whole thing is just shelling out to `osascript` from a TypeScript tool.
+
+## Remote Access From My Phone via Tailscale
+
+By default `opencode serve` binds to `127.0.0.1`, which is loopback-only. Fine locally, useless from another device. To drive my PC's OpenCode session from my phone, I bind to all interfaces and put both machines on a [Tailscale](https://tailscale.com) tailnet:
+
+```bash
+OPENCODE_SERVER_USERNAME=opencode OPENCODE_SERVER_PASSWORD=<your-password> \
+  opencode serve --hostname 0.0.0.0 --port 4096
+```
+
+On the phone I use [opencode-remote-android](https://github.com/giuliastro/opencode-remote-android), a Capacitor-packaged Android app that talks to the OpenCode HTTP API. In its settings I point it at the PC's Tailscale IP (`tailscale ip -4` on the PC to grab the `100.x.y.z` address), port `4096`, and the same Basic Auth username/password used to start the server. Because it rides Tailscale, it works over cellular too. The phone just needs the VPN toggled on.
+
+> [!WARNING] 0.0.0.0 is not Tailscale-only
+> `0.0.0.0` exposes the server to your whole LAN, not just the tailnet, so the password isn't optional. If you'd rather keep it Tailscale-only, bind directly to the PC's `100.x.y.z` address instead of `0.0.0.0`.
 
 ## The Compaction Plugin
 

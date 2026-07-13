@@ -13,13 +13,13 @@ const config: QuartzConfig = {
     enablePopovers: true,
     analytics: {
       provider: "google",
-      tagId: "G-GMSR2PN6RH"
+      tagId: "G-GMSR2PN6RH",
     },
     locale: "en-US",
     // baseUrl: "quartz.jzhao.xyz",
     baseUrl: "nkapila.me",
     ignorePatterns: ["private", "templates", ".obsidian"],
-    defaultDateType: "modified",
+    defaultDateType: "created",
     theme: {
       fontOrigin: "googleFonts",
       cdnCaching: true,
@@ -71,7 +71,7 @@ const config: QuartzConfig = {
       Plugin.ObsidianFlavoredMarkdown({ enableInHtmlEmbed: true }),
       Plugin.GitHubFlavoredMarkdown(),
       Plugin.TableOfContents({
-        maxDepth: 3
+        maxDepth: 3,
       }),
       Plugin.CrawlLinks({ markdownLinkResolution: "shortest" }),
       Plugin.Description(),
