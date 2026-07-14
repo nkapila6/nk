@@ -88,33 +88,43 @@ export async function fetchTtf(
     // ignore errors and fetch font
   }
 
-  // Get css file from google fonts
-  const cssResponse = await fetch(
-    `https://fonts.googleapis.com/css2?family=${fontName}:wght@${weight}`,
-  )
-  const css = await cssResponse.text()
+  try {
+    // Get css file from google fonts
+    const cssResponse = await fetch(
+      `https://fonts.googleapis.com/css2?family=${fontName}:wght@${weight}`,
+    )
+    const css = await cssResponse.text()
 
-  // Extract .ttf url from css file
-  const urlRegex = /url\((https:\/\/fonts.gstatic.com\/s\/.*?.ttf)\)/g
-  const match = urlRegex.exec(css)
+    // Extract .ttf url from css file
+    const urlRegex = /url\((https:\/\/fonts.gstatic.com\/s\/.*?.ttf)\)/g
+    const match = urlRegex.exec(css)
 
-  if (!match) {
+    if (!match) {
+      console.log(
+        styleText(
+          "yellow",
+          `\nWarning: Failed to fetch font ${rawFontName} with weight ${weight}, got ${cssResponse.statusText}`,
+        ),
+      )
+      return
+    }
+
+    // fontData is an ArrayBuffer containing the .ttf file data
+    const fontResponse = await fetch(match[1])
+    const fontData = Buffer.from(await fontResponse.arrayBuffer())
+    await fs.mkdir(cacheDir, { recursive: true })
+    await fs.writeFile(cachePath, fontData)
+
+    return fontData
+  } catch (error) {
     console.log(
       styleText(
         "yellow",
-        `\nWarning: Failed to fetch font ${rawFontName} with weight ${weight}, got ${cssResponse.statusText}`,
+        `\nWarning: Network error fetching font ${rawFontName} with weight ${weight}: ${error}`,
       ),
     )
     return
   }
-
-  // fontData is an ArrayBuffer containing the .ttf file data
-  const fontResponse = await fetch(match[1])
-  const fontData = Buffer.from(await fontResponse.arrayBuffer())
-  await fs.mkdir(cacheDir, { recursive: true })
-  await fs.writeFile(cachePath, fontData)
-
-  return fontData
 }
 
 export type SocialImageOptions = {
