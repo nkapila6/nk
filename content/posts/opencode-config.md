@@ -48,7 +48,7 @@ Why delegation beats doing everything yourself:
 
 - **The boss stays focused.** It doesn't get distracted by implementation details. It thinks about the problem, not the syntax.
 - **Workers are specialized.** Junior-dev is cheap and fast for boilerplate. 10x-dev is expensive but handles architecture. Researcher is read-only and costs almost nothing.
-- **Parallelism.** The boss can run up to 2 subagents at once (the plan caps concurrent agents at 3, and the boss counts as 1). Independent tasks run in parallel, dependent ones sequence.
+- **Parallelism.** The boss can run up to 9 subagents at once (the plan caps concurrent agents at 10, and the boss counts as 1). Independent tasks run in parallel, dependent ones sequence.
 - **Context isolation.** Each subagent gets a self-contained prompt. They don't share the boss's context. This means no context bleed, no hallucinated assumptions, no "I thought you already knew about that file."
 
 The routing logic is straightforward:
@@ -63,7 +63,7 @@ The routing logic is straightforward:
 
 The reviewer uses a _different model architecture_ (Gemma) than the devs (DeepSeek/Kimi) specifically to catch issues the dev models might miss. Different models make different mistakes. It's the only way to actually trust the output.
 
-These are the models I'm using based on the Ollama Cloud $20/month subscription I have. I picked these based on benchmarks, cost, and release date, mostly focusing on the latter.
+These are the models I'm using based on the Ollama Cloud $100/month subscription I have. I picked these based on benchmarks, cost, and release date, mostly focusing on the latter.
 
 ## Why These Models
 
@@ -93,7 +93,7 @@ The overhead is one forward pass to think. The savings are not spawning a $0.50 
 
 **Why not just use Claude Code / Cursor / Copilot?**
 
-Those are great tools. I use some of them. This config is for when you want to control the routing, the permissions, the compaction, and the tools yourself. Different tradeoffs. Claude Code is a polished product. This is a workshop. Pick the one that matches how you work.
+Those are great tools. I use some of them. In fact, I run the same boss-worker pattern in Claude Code with a matching set of subagents. Same architecture, different models. More on that below. This config is for when you want to control the routing, the permissions, the compaction, and the tools yourself. Different tradeoffs. Claude Code is a polished product. This is a workshop. Pick the one that matches how you work.
 
 **Does this actually save time?**
 
@@ -412,9 +412,30 @@ Key decisions:
 - **plugins**: dynamic-context-pruning (built-in), notificator (OS notifications for long-running tasks), shell-strategy (better shell command handling).
 - **build agent**: disabled. I don't use OpenCode's built-in build agent. The orchestrator handles everything.
 
+## The Claude Code Mirror
+
+I run the same boss-worker pattern in Claude Code. Same agent names, same roles, same permissions, different models. Claude Code can't spawn Ollama models, so I swap in Anthropic's lineup.
+
+The mapping is straightforward:
+
+| Agent      | OpenCode model       | Claude Code model | Why                                         |
+| ---------- | -------------------- | ----------------- | ------------------------------------------- |
+| junior-dev | devstral-small-2:24b | Haiku             | Cheapest slot. Boilerplate and simple edits |
+| senior-dev | deepseek-v4-flash    | Sonnet            | Workhorse. Best balance of cost and quality |
+| 10x-dev    | kimi-k2.7-code       | Opus              | Expensive slot. Hard problems only          |
+| researcher | devstral-small-2:24b | Haiku             | Read-only. Cheap and fast                   |
+| reviewer   | gemma4:31b           | Sonnet            | Needs to be smart enough to catch issues    |
+
+Sonnet is the best balance for most coding tasks. It's not the cheapest (that's Haiku) and not the smartest (that's Opus), but it hits the same sweet spot DeepSeek V4 Flash hits in the OpenCode config. Good enough for real implementation, cheap enough to spawn without thinking twice.
+
+The global rules file (CLAUDE.md) is identical to AGENTS.md. Same communication rules, same git commit style, same code style, same mechanical edits rule, same worktree preference, same autonomy boundaries. One file, two names. Both configs live in my [dotfiles](https://github.com/nkapila6/dotfiles) if you want to compare side by side.
+
+> [!INFO] Why mirror at all?
+> Sometimes I'm on a machine where Ollama Cloud isn't set up, or I want Opus for a specific task. Having the same agent structure in both tools means the muscle memory transfers. I type `/commit` in either tool and get the same conventional commit. I spawn a researcher in either tool and get the same read-only behavior. The models change, the patterns don't.
+
 ## What It Costs
 
-I'm on the Ollama Cloud $20/month plan. Everything runs through that. Here's roughly what a typical session looks like in terms of model usage:
+I'm on the Ollama Cloud $100/month plan. Everything runs through that. Here's roughly what a typical session looks like in terms of model usage:
 
 - **Junior-dev and researcher** run on devstral-small-2:24b. These are the cheap slots. I spawn them freely. A researcher that finds 5 files costs me essentially nothing (pennies, if Ollama Cloud billed in pennies). A junior-dev that renames a variable across 3 files costs the same.
 - **Senior-dev** runs on deepseek-v4-flash. The workhorse. Most implementation tasks land here. A typical task (implement a function, fix a bug, add a test) is one spawn, maybe 10-15 steps. This is where most of my model budget goes.
@@ -422,7 +443,10 @@ I'm on the Ollama Cloud $20/month plan. Everything runs through that. Here's rou
 - **Reviewer** runs on gemma4:31b. Medium cost. I run it after non-trivial changes, not after every single edit.
 - **Compaction** also costs a forward pass. When compaction fires, the full thread gets sent to the LLM for summarization. This is one of the hidden costs of long sessions. The `tail_turns: 15` setting means I'm compacting aggressively, which means more compaction forward passes but shorter ones.
 
-The Pro plan allows 3 concurrent cloud models at a time. The orchestrator counts as 1, so I can run at most 2 subagents in parallel. That's the real constraint, not total usage. A heavy day is several hours of coding, maybe 10+ subagent spawns across the session (sequential, not concurrent), a compaction or two. The 5-hour session limits and 7-day weekly limits reset on their own. I haven't hit a wall yet. If I were running Claude or GPT-4 through API, the same workload would cost significantly more. The models on Ollama Cloud (DeepSeek V4, Kimi K2.7, Gemma 4) are competitive with Claude on coding benchmarks. The real tradeoff isn't model quality, it's concurrency and usage limits. 3 models at a time, session caps, weekly caps. The routing design exists because of those constraints, not because the models are weak. You route to the cheapest model that can handle the task so you don't burn your GPU budget on a junior-dev task that devstral could do in its sleep.
+The Max plan allows 10 concurrent cloud models at a time. The orchestrator counts as 1, so I can run up to 9 subagents in parallel. That's the real constraint, not total usage. A heavy day is several hours of coding, maybe 10+ subagent spawns across the session (sequential, not concurrent), a compaction or two. The 5-hour session limits and 7-day weekly limits reset on their own. I haven't hit a wall yet. If I were running Claude or GPT-4 through API, the same workload would cost significantly more. The models on Ollama Cloud (DeepSeek V4, Kimi K2.7, Gemma 4) are competitive with Claude on coding benchmarks. The real tradeoff isn't model quality, it's concurrency and usage limits. 10 models at a time, session caps, weekly caps. The routing design exists because of those constraints, not because the models are weak. You route to the cheapest model that can handle the task so you don't burn your GPU budget on a junior-dev task that devstral could do in its sleep.
+
+> [!WARNING] Multiple sessions share the same concurrency budget
+> The orchestrator tracks its own subagent count but can't see concurrency from other OpenCode sessions on the same account. If you run two sessions side by side, each thinks it has 9 slots. Both spawn 9 subagents and you're at 18 concurrent against a 10 limit. Ollama queues the overflow, which means subagents silently slow down instead of failing. There's no CLI or API to query live cloud concurrency today. If you multi-session often, hardcode a lower ceiling per session.
 
 ## What Didn't Work
 
