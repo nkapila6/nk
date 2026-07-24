@@ -14,7 +14,7 @@ So you installed OpenCode! You typed your first prompt. It worked. Then you real
 
 That's the default experience. It's fine if you like playing prompt-engineer for 4 hours a day. But it's not actually _engineering_.
 
-I spent a few hours building a config that turns OpenCode from a chat-with-files into a proper engineering organization. A boss, five workers, custom tools, custom commands, a compaction plugin, and a set of global rules that make every agent sound like a human instead of a marketing brochure.
+I spent a few hours building a config that turns OpenCode from a chat-with-files into a proper engineering organization. A boss, five workers, custom tools, custom commands, a compaction plugin, a safeguard plugin that blocks reading sensitive files, a guardrails plugin that enforces rules via hooks, and a set of global rules that make every agent sound like a human instead of a marketing brochure.
 
 This post is the full walkthrough of that config. Every file, every decision, every tradeoff. If you use OpenCode, steal what works.
 
@@ -55,10 +55,10 @@ The routing logic is straightforward:
 
 | Task type                                   | Subagent   | Model                | Cost      |
 | ------------------------------------------- | ---------- | -------------------- | --------- |
-| Trivial (one-line fix, rename, boilerplate) | junior-dev | devstral-small-2:24b | cheapest  |
-| Normal (implement a function, fix a bug)    | senior-dev | deepseek-v4-flash    | medium    |
-| Hard (multi-file refactor, architecture)    | 10x-dev    | kimi-k2.7-code       | expensive |
-| Read-only (find, grep, summarize)           | researcher | devstral-small-2:24b | cheapest  |
+| Trivial (one-line fix, rename, boilerplate) | junior-dev | deepseek-v4-flash    | cheapest  |
+| Normal (implement a function, fix a bug)    | senior-dev | kimi-k2.7-code       | medium    |
+| Hard (multi-file refactor, architecture)    | 10x-dev    | deepseek-v4-pro      | expensive |
+| Read-only (find, grep, summarize)           | researcher | deepseek-v4-flash    | cheapest  |
 | Review (audit, validate, sanity-check)      | reviewer   | gemma4:31b           | medium    |
 
 The reviewer uses a _different model architecture_ (Gemma) than the devs (DeepSeek/Kimi) specifically to catch issues the dev models might miss. Different models make different mistakes. It's the only way to actually trust the output.
@@ -69,15 +69,15 @@ These are the models I'm using based on the Ollama Cloud $100/month subscription
 
 Model selection is the part where the config actually gets opinionated. The wrong model in the wrong slot is _worse than no config at all_.
 
-**Devstral Small 2 24B for junior-dev and researcher.** This is the cheapest model on Ollama Cloud. It's small enough to be fast, big enough to follow instructions and read code. I would not trust it with architecture decisions, but for "find every file that imports X" or "rename this variable" it's perfect. The researcher runs at temperature 0 because I want deterministic search results, not creative interpretations of what files exist.
+**DeepSeek v4 Flash for junior-dev and researcher.** The cheapest slot. Fast, follows instructions well, reads code fine. Not for architecture decisions but perfect for "find every file that imports X" or "rename this variable." Researcher runs at temperature 0 for deterministic results.
 
-**DeepSeek v4 Flash for senior-dev.** The workhorse. DeepSeek v4 Flash hits a sweet spot: strong enough for real implementation work, cheap enough that I don't think twice about spawning it. It follows existing patterns well, catches edge cases, and verifies its own work with lint/typecheck. If it can't handle something, it escalates up.
+**Kimi K2.7 Code for senior-dev.** The workhorse. Kimi is purpose-built for code. Strong enough for real implementation, cheap enough to spawn without thinking twice. Follows existing patterns, catches edge cases, verifies with lint/typecheck. This is where most coding tasks land. It also has a thinking mode for reasoning through problems before writing.
 
-**Kimi K2.7 Code for 10x-dev.** The expensive slot. Kimi is purpose-built for code and it shows. It handles multi-file refactors, complex architectural decisions, and hard logic that makes senior-dev struggle. I use this sparingly because it's the most expensive model in the config, but when I need it, I need it. It also has a thinking mode that lets it reason through problems before writing code.
+**DeepSeek v4 Pro for 10x-dev.** The expensive slot. Handles multi-file refactors, architectural decisions, and hard logic that makes senior-dev struggle. Use sparingly -- only when the workhorse isn't enough.
 
-**Gemma 4 31B for reviewer.** This is the deliberate mismatch. The devs all run DeepSeek or Kimi. The reviewer runs Gemma. Different model families, different training data, different failure modes. If DeepSeek has a blind spot, there's a decent chance Gemma catches it. Temperature 0 because I want consistent reviews, not ones that vary by mood. I'm biased because I did it. Sue me.
+**Gemma 4 31B for reviewer.** The deliberate mismatch. Devs run DeepSeek or Kimi. Reviewer runs Gemma. Different model families, different training data, different failure modes. Temperature 0 for consistent reviews. If DeepSeek has a blind spot, Gemma might catch it.
 
-**DeepSeek v4 Flash for socratic at temperature 0.3.** Same model as senior-dev but warmer. The temperature bump is intentional: I want the socratic agent to ask varied questions instead of repeating the same one every time. Temperature 0 would make it robotic and predictable. 0.3 gives it enough variation to feel like a real conversation without going off the rails.
+**DeepSeek v4 Flash for socratic at temperature 0.3.** Same model as junior-dev but warmer. The temperature bump gives it enough variation to ask varied questions instead of repeating the same one.
 
 The orchestrator and yolo agents don't specify a model. They use whatever OpenCode's default is for that session. The orchestrator is doing delegation, not generation, so the model matters less. What matters is that it can read, think, and route.
 
@@ -85,7 +85,7 @@ The orchestrator and yolo agents don't specify a model. They use whatever OpenCo
 
 **Do I really need 5 agents? Can't I just use one model for everything?**
 
-You can. One model, one agent, one prompt. It works fine for simple tasks. But you'll burn money on trivial work and get worse results on hard problems. The whole point of routing is matching the task to the right model. Devstral for boilerplate, Kimi for architecture, Gemma for review. One model doing all of that is a compromise in every direction.
+You can. One model, one agent, one prompt. It works fine for simple tasks. But you'll burn money on trivial work and get worse results on hard problems. The whole point of routing is matching the task to the right model. DeepSeek Flash for boilerplate, Kimi for implementation, DeepSeek Pro for architecture, Gemma for review. One model doing all of that is a compromise in every direction.
 
 **Isn't the orchestrator just overhead?**
 
@@ -101,7 +101,7 @@ The setup took a few hours. It saves time every single session after that. The c
 
 **What if I don't have an Ollama Cloud subscription?**
 
-The patterns work with any provider. Swap the model names. The architecture is provider-agnostic. If you're on OpenAI, put GPT-4o in the senior-dev slot and GPT-4o-mini in junior-dev. If you're on Anthropic, put Sonnet in 10x-dev and Haiku in junior-dev. The routing logic is the same.
+The patterns work with any provider. Swap the model names. The architecture is provider-agnostic. If you're on OpenAI, put GPT-4o in the senior-dev slot and GPT-4o-mini in junior-dev. If you're on Anthropic, put Opus in 10x-dev, Sonnet in senior-dev, and Haiku in junior-dev. The routing logic is the same.
 
 ## The Cast of Characters
 
@@ -117,13 +117,13 @@ The patterns work with any provider. Swap the model names. The architecture is p
 
 ### Subagents (spawned by orchestrator, cannot be tabbed to)
 
-**Junior-dev** (devstral-small-2:24b, 25 steps). The cheapest slot. Handles simple edits, small fixes, boilerplate, straightforward tasks. Denied: task, webfetch, websearch, skill, todo-file, snapshot, reminder. If it hits something harder than expected, it escalates to senior-dev or 10x-dev.
+**Junior-dev** (deepseek-v4-flash, 25 steps). The cheapest slot. Handles simple edits, small fixes, boilerplate, straightforward tasks. Denied: task, webfetch, websearch, skill, todo-file, snapshot, reminder. If it hits something harder than expected, it escalates to senior-dev or 10x-dev.
 
-**Senior-dev** (deepseek-v4-flash, 40 steps). The workhorse. Most coding tasks land here. Thinks about edge cases and error handling. Follows existing patterns. Verifies changes with lint/typecheck/tests. Escalates to 10x-dev for architecture decisions.
+**Senior-dev** (kimi-k2.7-code, 40 steps). The workhorse. Most coding tasks land here. Thinks about edge cases and error handling. Follows existing patterns. Verifies changes with lint/typecheck/tests. Escalates to 10x-dev for architecture decisions.
 
-**10x-dev** (kimi-k2.7-code, 60 steps). The expensive slot. Complex multi-file changes, architectural decisions, hard problems. Can use thinking mode. I use this sparingly, only when senior-dev would struggle.
+**10x-dev** (deepseek-v4-pro, 60 steps). The expensive slot. Complex multi-file changes, architectural decisions, hard problems. Can use thinking mode. I use this sparingly, only when senior-dev would struggle.
 
-**Researcher** (devstral-small-2:24b, 25 steps, temperature 0). Read-only codebase explorer. Denied edit. Bash restricted to read-only commands (rg, git log/diff/show, ls, cat, fd, find). Answers the specific question, doesn't explore beyond it. Reports in file:line format so the boss can route follow-ups.
+**Researcher** (deepseek-v4-flash, 25 steps, temperature 0). Read-only codebase explorer. Denied edit. Bash restricted to read-only commands (rg, git log/diff/show, ls, cat, fd, find). Answers the specific question, doesn't explore beyond it. Reports in file:line format so the boss can route follow-ups.
 
 **Reviewer** (gemma4:31b, 40 steps, temperature 0). Read-only code reviewer. Uses a DIFFERENT model architecture (Gemma) than the devs (DeepSeek/Kimi). This is intentional: different models make different mistakes. Categorizes findings as blocker / should-fix / nit. Cites file:line, quotes code, states the fix in one sentence but does NOT write the fix.
 
@@ -202,6 +202,47 @@ The highlights:
 - **Autonomy boundaries**: don't add/remove deps without asking. Don't refactor outside scope. Don't delete files. Don't touch CI/CD. If a change touches 3+ files, outline the plan first.
 - **Decision making**: ground every technical decision with a web search or clear justification.
 - **READMEs**: write in human natural style, not corporate/LLM-sounding. Concise. No boilerplate sections.
+
+## From Prompt to Hooks: Enforcing the Rules
+
+AGENTS.md rules are prompt-level instructions. The model reads them and mostly follows them, but "mostly" isn't "always." A model in the middle of a complex task will forget the rules, or rationalize why this one exception doesn't count.
+
+The solution: move enforceable rules into plugin hooks that block tool calls before they execute. The model can't "forget" a hook.
+
+Two plugins handle this:
+
+**safeguard.ts** -- blocks reading sensitive files. Hooks into `permission.ask` and `tool.execute.before` for the `read` tool. If a file matches a deny pattern (`.env`, SSH private keys, `*.pem`, cloud credentials, `.npmrc`, secrets files, etc.), the read is denied before the model ever sees the contents. SSH public keys (`.pub`, `known_hosts`, `authorized_keys`) are allowlisted. Configurable via options.
+
+**guardrails.ts** -- enforces 7 AGENTS.md rules via the `tool.execute.before` hook:
+
+1. **Git commit hygiene**: conventional commits, lowercase, subject-only, no AI attribution, no emoji
+2. **No pip**: blocks `pip install`, redirects to uv
+3. **No unauthorized dep changes**: blocks `yarn add`, `bun add`, `npm install <pkg>`, edits to `package.json`/`go.mod`/`Cargo.toml`/etc.
+4. **No file deletion**: blocks `rm`/`rmdir`/`unlink` (except build artifacts like `node_modules/`, `dist/`)
+5. **No touching CI/CD configs**: blocks edits to `Dockerfile`, `docker-compose.yml`, `Makefile`, `.github/workflows/`, deploy scripts, etc.
+6. **No committing explained/**: blocks `git add explained/`
+7. **No emoji in file content**: blocks emojis in edit/write tool calls
+
+Each rule is individually toggleable via plugin options. The plugin fails open on parse errors (doesn't break work if it can't parse a command) and fails closed on detected violations (blocks when it sees a clear violation).
+
+> [!INFO] Two layers of defense
+> The `permission.ask` hook denies at the permission layer (the user is never even asked). The `tool.execute.before` hook is the backstop that throws an error if the tool would have been auto-allowed. Belt and suspenders.
+
+Not everything is hookable. "No em dashes" can't be enforced because hooks can't intercept model text output. "Be blunt" is behavioral, not enforceable. The worktree workflow is too multi-step. These stay as prompt instructions. AGENTS.md now annotates each rule with `[Enforced by guardrails plugin]` or `[Prompt only]` so it's clear which rules are hooks and which are just instructions.
+
+The guardrails plugin structure is straightforward:
+
+```typescript
+export default (async ({ directory }, options = {}) => {
+  return {
+    "tool.execute.before": async (input, output) => {
+      // Check bash commands for commit hygiene, pip, dep changes, deletions, git add explained/
+      // Check edit/write for dep manifests, CI/CD configs, emoji in content
+      // Throw "Blocked: ..." on violation
+    },
+  }
+}) satisfies Plugin
+```
 
 ## Don't Burn Forward Passes on Regex
 
@@ -364,7 +405,7 @@ export default (async ({ client }) => {
 }) satisfies Plugin
 ```
 
-That's it. But it makes a massive difference. Before this plugin, I'd lose track of what the current task was after 30 minutes of work. Now the compaction preserves the signal and drops the noise.
+That's it. But it makes a massive difference. Before this plugin, I'd lose track of what the current task was after 30 minutes of work. Now the compaction preserves the signal and drops the noise. (It's now registered in the plugin array in opencode.jsonc -- it was dead code before, which was a bug.)
 
 > [!INFO] Full control if you want it
 > The hook gives you two fields: `output.context` (what I use here, appends to the default prompt) and `output.prompt` (replaces the default prompt entirely). If the default compaction prompt is doing something dumb and appending isn't enough, you can swap it out completely by setting `output.prompt`. I haven't needed to yet, but it's there.
@@ -383,7 +424,7 @@ The main config ties it all together:
 {
   "$schema": "https://opencode.ai/config.json",
   "default_agent": "orchestrator",
-  "small_model": "ollama-cloud/devstral-small-2:24b",
+  "small_model": "ollama-cloud/deepseek-v4-flash",
   "formatter": true,
   "compaction": { "auto": true, "prune": true, "tail_turns": 15 },
   "tool_output": { "max_lines": 200, "max_bytes": 8192 },
@@ -395,7 +436,14 @@ The main config ties it all together:
       "max_base64_bytes": 5242880,
     },
   },
-  "plugin": ["opencode-dynamic-context-pruning", "opencode-notificator", "opencode-shell-strategy"],
+  "plugin": [
+    "opencode-dynamic-context-pruning",
+    "opencode-notificator",
+    "opencode-shell-strategy",
+    ["./plugin/safeguard.ts", { "enabled": true }],
+    ["./plugin/guardrails.ts", { "enabled": true }],
+    "./plugin/aggressive-compaction.ts",
+  ],
   "agent": {
     "build": { "disable": true },
   },
@@ -405,11 +453,11 @@ The main config ties it all together:
 Key decisions:
 
 - **default_agent**: orchestrator. The boss is always the entry point.
-- **small_model**: devstral-small-2:24b. Cheap and fast for junior-dev and researcher.
+- **small_model**: deepseek-v4-flash. Cheap and fast for junior-dev and researcher.
 - **compaction**: auto + prune + tail_turns 15. Aggressive. Combined with my custom compaction plugin, this keeps sessions manageable.
 - **tool_output**: capped at 200 lines and 8KB. Prevents a single tool call from flooding the context.
 - **images**: auto-resized to 2000x2000, max 5MB base64. Keeps image attachments from blowing up the context.
-- **plugins**: dynamic-context-pruning (built-in), notificator (OS notifications for long-running tasks), shell-strategy (better shell command handling).
+- **plugins**: dynamic-context-pruning (built-in), notificator (OS notifications for long-running tasks), shell-strategy (better shell command handling), safeguard.ts (blocks reading sensitive files), guardrails.ts (enforces AGENTS.md rules via hooks), aggressive-compaction.ts (injects compaction guidance).
 - **build agent**: disabled. I don't use OpenCode's built-in build agent. The orchestrator handles everything.
 
 ## The Claude Code Mirror
@@ -420,13 +468,13 @@ The mapping is straightforward:
 
 | Agent      | OpenCode model       | Claude Code model | Why                                         |
 | ---------- | -------------------- | ----------------- | ------------------------------------------- |
-| junior-dev | devstral-small-2:24b | Haiku             | Cheapest slot. Boilerplate and simple edits |
-| senior-dev | deepseek-v4-flash    | Sonnet            | Workhorse. Best balance of cost and quality |
-| 10x-dev    | kimi-k2.7-code       | Opus              | Expensive slot. Hard problems only          |
-| researcher | devstral-small-2:24b | Haiku             | Read-only. Cheap and fast                   |
+| junior-dev | deepseek-v4-flash    | Haiku             | Cheapest slot. Boilerplate and simple edits |
+| senior-dev | kimi-k2.7-code       | Sonnet            | Workhorse. Best balance of cost and quality |
+| 10x-dev    | deepseek-v4-pro      | Opus              | Expensive slot. Hard problems only          |
+| researcher | deepseek-v4-flash    | Haiku             | Read-only. Cheap and fast                   |
 | reviewer   | gemma4:31b           | Sonnet            | Needs to be smart enough to catch issues    |
 
-Sonnet is the best balance for most coding tasks. It's not the cheapest (that's Haiku) and not the smartest (that's Opus), but it hits the same sweet spot DeepSeek V4 Flash hits in the OpenCode config. Good enough for real implementation, cheap enough to spawn without thinking twice.
+Sonnet is the best balance for most coding tasks. It's not the cheapest (that's Haiku) and not the smartest (that's Opus), but it hits the same sweet spot Kimi K2.7 Code hits in the OpenCode config. Good enough for real implementation, cheap enough to spawn without thinking twice.
 
 The global rules file (CLAUDE.md) is identical to AGENTS.md. Same communication rules, same git commit style, same code style, same mechanical edits rule, same worktree preference, same autonomy boundaries. One file, two names. Both configs live in my [dotfiles](https://github.com/nkapila6/dotfiles) if you want to compare side by side.
 
@@ -437,13 +485,13 @@ The global rules file (CLAUDE.md) is identical to AGENTS.md. Same communication 
 
 I'm on the Ollama Cloud $100/month plan. Everything runs through that. Here's roughly what a typical session looks like in terms of model usage:
 
-- **Junior-dev and researcher** run on devstral-small-2:24b. These are the cheap slots. I spawn them freely. A researcher that finds 5 files costs me essentially nothing (pennies, if Ollama Cloud billed in pennies). A junior-dev that renames a variable across 3 files costs the same.
-- **Senior-dev** runs on deepseek-v4-flash. The workhorse. Most implementation tasks land here. A typical task (implement a function, fix a bug, add a test) is one spawn, maybe 10-15 steps. This is where most of my model budget goes.
-- **10x-dev** runs on kimi-k2.7-code. I use this maybe once a day, sometimes less. When I do, it's worth it. Multi-file refactors and architecture work are where it earns its slot.
+- **Junior-dev and researcher** run on deepseek-v4-flash. These are the cheap slots. I spawn them freely. A researcher that finds 5 files costs me essentially nothing (pennies, if Ollama Cloud billed in pennies). A junior-dev that renames a variable across 3 files costs the same.
+- **Senior-dev** runs on kimi-k2.7-code. The workhorse. Most implementation tasks land here. A typical task (implement a function, fix a bug, add a test) is one spawn, maybe 10-15 steps. This is where most of my model budget goes.
+- **10x-dev** runs on deepseek-v4-pro. I use this maybe once a day, sometimes less. When I do, it's worth it. Multi-file refactors and architecture work are where it earns its slot.
 - **Reviewer** runs on gemma4:31b. Medium cost. I run it after non-trivial changes, not after every single edit.
 - **Compaction** also costs a forward pass. When compaction fires, the full thread gets sent to the LLM for summarization. This is one of the hidden costs of long sessions. The `tail_turns: 15` setting means I'm compacting aggressively, which means more compaction forward passes but shorter ones.
 
-The Max plan allows 10 concurrent cloud models at a time. The orchestrator counts as 1, so I can run up to 9 subagents in parallel. That's the real constraint, not total usage. A heavy day is several hours of coding, maybe 10+ subagent spawns across the session (sequential, not concurrent), a compaction or two. The 5-hour session limits and 7-day weekly limits reset on their own. I haven't hit a wall yet. If I were running Claude or GPT-4 through API, the same workload would cost significantly more. The models on Ollama Cloud (DeepSeek V4, Kimi K2.7, Gemma 4) are competitive with Claude on coding benchmarks. The real tradeoff isn't model quality, it's concurrency and usage limits. 10 models at a time, session caps, weekly caps. The routing design exists because of those constraints, not because the models are weak. You route to the cheapest model that can handle the task so you don't burn your GPU budget on a junior-dev task that devstral could do in its sleep.
+The Max plan allows 10 concurrent cloud models at a time. The orchestrator counts as 1, so I can run up to 9 subagents in parallel. That's the real constraint, not total usage. A heavy day is several hours of coding, maybe 10+ subagent spawns across the session (sequential, not concurrent), a compaction or two. The 5-hour session limits and 7-day weekly limits reset on their own. I haven't hit a wall yet. If I were running Claude or GPT-4 through API, the same workload would cost significantly more. The models on Ollama Cloud (DeepSeek V4 Flash, DeepSeek V4 Pro, Kimi K2.7, Gemma 4) are competitive with Claude on coding benchmarks. The real tradeoff isn't model quality, it's concurrency and usage limits. 10 models at a time, session caps, weekly caps. The routing design exists because of those constraints, not because the models are weak. You route to the cheapest model that can handle the task so you don't burn your GPU budget on a junior-dev task that deepseek-v4-flash could do in its sleep.
 
 > [!WARNING] Multiple sessions share the same concurrency budget
 > The orchestrator tracks its own subagent count but can't see concurrency from other OpenCode sessions on the same account. If you run two sessions side by side, each thinks it has 9 slots. Both spawn 9 subagents and you're at 18 concurrent against a 10 limit. Ollama queues the overflow, which means subagents silently slow down instead of failing. There's no CLI or API to query live cloud concurrency today. If you multi-session often, hardcode a lower ceiling per session.
@@ -453,7 +501,7 @@ The Max plan allows 10 concurrent cloud models at a time. The orchestrator count
 Not everything I tried made it into the final config. A few things I tried and threw away:
 
 - **A "planner" agent.** I tried a dedicated planning agent that would decompose tasks and hand them to the orchestrator. It added a layer of indirection with no benefit. The orchestrator already decomposes. Adding a planner on top just meant two agents thinking about the same problem and occasionally disagreeing (I should have known). Removed it within a day.
-- **A bigger model for junior-dev.** I tried deepseek-v4-flash for junior-dev instead of devstral. It was smarter, sure, but the whole point of junior-dev is to be cheap. Using a medium-cost model for boilerplate defeats the purpose. Devstral is dumb but fast and cheap, and that's exactly what you want for "rename this variable."
+- **A bigger model for junior-dev.** I tried deepseek-v4-flash for junior-dev instead of devstral. It was smarter, sure, and I initially reverted it because the whole point of junior-dev is to be cheap. But after devstral kept struggling with slightly-more-than-trivial tasks, I switched back to deepseek-v4-flash permanently. The cost difference is negligible on the Ollama Cloud plan, and junior-dev is actually useful now instead of needing escalation every other task.
 - **Letting workers spawn subagents.** Early version had `task: allow` on senior-dev. The idea was that senior-dev could delegate a research task to researcher if it needed to look something up. In practice, senior-dev would spawn researcher for things it could have just grepped itself, and the context overhead of spawning a subagent wasn't worth it. Now workers do their own research with bash.
 - **Auto-running tests after every edit.** I had a rule that senior-dev must run tests after every change. It sounded good in theory. In practice, half the time the tests didn't exist yet, or the change was intermediate and tests were expected to fail. It wasted steps and context. Now the `/fix-tests` command runs tests explicitly when you're ready for them.
 - **A "summarizer" agent for the end of sessions.** I tried having a dedicated agent that would summarize what was done at the end of a session and write it to a file. It was overkill. The todo-file tool already captures the task state, and the compaction plugin preserves the key decisions. If I need a summary, I ask the orchestrator directly.
@@ -470,16 +518,18 @@ A few honest takes after a few weeks with this config:
 - **The reviewer is the sleeper hit.** Having a different model architecture review the code is genuinely useful. Gemma catches things DeepSeek doesn't, and vice versa. The "blocker / should-fix / nit" categorization keeps the signal-to-noise ratio high.
 - **Compaction is still rough.** The plugin helps but compaction is fundamentally lossy. Long sessions still lose nuance. The todo-file tool is my workaround: the task plan survives even when the conversation history doesn't.
 - **The socratic agent is the surprise.** I built it for learning new codebases, but it became my default for understanding anything unfamiliar. `/trace` and `/whiteboard` are my most-used commands after `/commit`. There's something about being asked questions instead of given answers that makes the knowledge stick.
+- **Hooks beat prompt instructions.** The guardrails plugin turned AGENTS.md rules from "suggestions the model mostly follows" into "hard blocks that physically cannot be bypassed." A model can forget a rule. A hook doesn't forget. The safeguard plugin alone has prevented at least one near-miss where an agent would have read a .env file into context.
 
 The config is still evolving. I'll probably add more tools, tweak the routing, and maybe build a second orchestrator for a different workflow. But the foundation is _solid_.
 
-If you use OpenCode, steal the patterns. The boss-worker architecture, the compaction plugin, the snapshot tool, the reviewer with a different model. These are the pieces that turned OpenCode from a toy into a tool I actually trust to write code.
+If you use OpenCode, steal the patterns. The boss-worker architecture, the compaction plugin, the safeguard and guardrails plugins, the snapshot tool, the reviewer with a different model. These are the pieces that turned OpenCode from a toy into a tool I actually trust to write code.
 
 The full config is everything in this post. Copy what works, skip what doesn't.
 
 ## Changelog
 
 - [13.07.2026] Init.
+- [24.07.2026] Updated model lineup (junior-dev and researcher to deepseek-v4-flash, senior-dev to kimi-k2.7-code, 10x-dev to deepseek-v4-pro). Added safeguard and guardrails plugins. AGENTS.md rules now enforced via hooks. Registered aggressive-compaction plugin.
 
 ---
 
