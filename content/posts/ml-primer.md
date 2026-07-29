@@ -3,6 +3,8 @@ layout: post
 title: "A ML Primer: Presentation to UAE SWE Group"
 tags:
   - machine-learning
+  - events
+  - talks
 date: 2025-11-11
 updated: 2025-11-11
 ---
