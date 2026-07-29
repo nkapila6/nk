@@ -5,19 +5,26 @@
 // Define the missing variable or use an existing one
 $fullPageWidth: map.get($breakpoints, desktop);
 
-$red: #AF3029;
-$orange: #BC5215;
-$yellow: #AD8301;
-$green: #66800B;
-$cyan: #24837B;
-$blue: #205EA6;
-$purple: #5E409D;
-$magenta: #A02F6F;
+$red: #af3029;
+$orange: #bc5215;
+$yellow: #ad8301;
+$green: #66800b;
+$cyan: #24837b;
+$blue: #205ea6;
+$purple: #5e409d;
+$magenta: #a02f6f;
 
 /* Sidebar top margins */
 .left.sidebar,
 .right.sidebar {
   margin-top: 2.4rem !important;
+}
+
+/* Left sidebar independent scroll (desktop only) */
+@media all and ($desktop) {
+  .left.sidebar {
+    overflow-y: auto;
+  }
 }
 
 /* Top of note area */
@@ -84,7 +91,12 @@ a.tag-link {
 /* Others */
 .page {
   & article {
-    & > h1, & > h2, & > h3, & > h4, & > h5, & > h6 {
+    & > h1,
+    & > h2,
+    & > h3,
+    & > h4,
+    & > h5,
+    & > h6 {
       border-bottom: 1px solid var(--lightgray);
       font-size: 1rem;
       padding-bottom: 0.3em;
