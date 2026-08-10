@@ -7,10 +7,13 @@ updated: 2023-12-11
 ---
 Hi there 👋, I'm Nikhil.
 
-I'm Nikhil. I have an MS in CS from `Georgia Tech` with a specialization in Artificial Intelligence. I'm currently working as a Lead AI/ML Engineer. Been working in the lighting and controls industry, I have a passion towards building automation, control systems, edge level IoT hardware and how AI models can be optimized on this hardware.
+I'm an engineer who works across the stack, from industrial control and embedded hardware up to ML infrastructure and inference. I have an MS in CS from `Georgia Tech` with a specialization in Artificial Intelligence.
 
-My time at `Georgia Tech` has gotten me deeply intrigued into mathematics, machine learning and all things Bayesian. In my free time, I try to update my *inductive priors* on these topics as much as possible. 🙃
-I further want to look more into embedded devices and see how edge level AI inference would work!
+I co-own Luxtron, where I've spent years in building automation and lighting control (DALI, Helvar, Casambi, KNX) across the GCC, and now build the layer that bridges these systems into generalized PLC, HVAC, and BMS platforms, and lets LLM agents drive them. I like the messy end of the problem: making things work on real hardware in the field, not just clean datasets.
+
+I'm also going deep on CUDA and GPU architecture, working toward a small inference runtime, because what I really want to figure out is how to run AI efficiently on embedded and edge hardware.
+
+My time at `Georgia Tech` got me deeply intrigued by mathematics, machine learning, and all things Bayesian. In my free time I try to update my *inductive priors* on these topics as much as possible. 🙃
 
 Feel free to connect with me on [LinkedIn](https://linkedin.com/in/nikhilkapila)
 
@@ -26,8 +29,6 @@ Some of my recent projects can be seen [here](https://github.com/nkapila6?tab=re
 Below are some locations you could explore in the blog!
 - **Blog posts that aim to convey my learnt intuition**: [[posts]]
 - **Learning adventures at MS**: [[masters]]
-	- [Machine Learning](/tags/machine-learning)
-	- [Deep Learning](tags/deep-learning)
 - **Life Struggles Never End**: [[life]]
 
 ## Buy Me A Coffee
