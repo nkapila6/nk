@@ -344,3 +344,60 @@ header:has(#links-header) {
     }
   }
 }
+
+/* Sidebar events heading links to /events */
+.sidebar-events {
+  & > .recent-notes > h3 {
+    display: none;
+  }
+
+  & > .sidebar-events-title {
+    margin: 0.5rem 0 0.25rem;
+
+    a {
+      color: var(--dark);
+      background-color: transparent;
+    }
+  }
+}
+
+/* Events page list */
+.event-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 1.5rem;
+
+  .event-list-item {
+    margin: 0;
+    padding: 0.6rem 0;
+    border-top: 1px solid var(--lightgray);
+
+    &:first-child {
+      border-top: none;
+    }
+  }
+
+  .event-list-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+  }
+
+  .event-list-title {
+    font-weight: $semiBoldWeight;
+    background-color: transparent;
+  }
+
+  .event-list-date {
+    color: var(--gray);
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+
+  .event-list-desc {
+    margin: 0.2rem 0 0;
+    color: var(--darkgray);
+    font-size: 0.9rem;
+  }
+}

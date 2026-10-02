@@ -1,10 +1,13 @@
 import { h } from "preact"
 import { RecentNotes } from "@quartz-community/recent-notes/components"
+import { resolveRelative } from "@quartz-community/utils"
 
 const defaults = {
   limit: 5,
   recentTitle: "Recently Created",
   eventsTitle: "Events",
+  // heading links here so the sidebar list doubles as "see all"
+  eventsPage: "events",
   eventTags: ["events", "event", "talks", "talk", "hackathon"],
 }
 
@@ -34,7 +37,19 @@ export const SidebarNotes = (userOpts) => {
   const SidebarNotes = (props) =>
     h("div", { class: ["sidebar-notes", props.displayClass].filter(Boolean).join(" ") }, [
       h(Recent, { ...props, displayClass: undefined }),
-      h(Events, { ...props, displayClass: undefined }),
+      // recent-notes renders a plain h3 title, so draw our own linked one and hide theirs
+      h("div", { class: "sidebar-events" }, [
+        h(
+          "h3",
+          { class: "sidebar-events-title" },
+          h(
+            "a",
+            { href: resolveRelative(props.fileData.slug, opts.eventsPage), class: "internal" },
+            opts.eventsTitle,
+          ),
+        ),
+        h(Events, { ...props, displayClass: undefined }),
+      ]),
     ])
   SidebarNotes.css = Recent.css
   return SidebarNotes

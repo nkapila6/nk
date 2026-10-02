@@ -299,9 +299,20 @@ plugins:
           limit: 5
           commits: true
           groupByRepo: true
+        now:
+          limit: 1
+          title: Latest on GitHub
+          commits: false
     layout:
       position: beforeBody
       priority: 40
+  - source: ./plugins/event-list
+    enabled: true
+    options:
+      slug: events
+    layout:
+      position: beforeBody
+      priority: 45
   - source: ./plugins/page-redirect
     enabled: true
     layout:

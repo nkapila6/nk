@@ -8,7 +8,7 @@ updated: 2026-10-02
 ---
 Hi, I'm Nikhil 👋
 
-I build things that sit between real hardware and AI. My background is building control, and these days I'm building LLM agents that drive real hardware.
+I build things that sit between real hardware and AI. My background is building control, and these days I'm building LLM agents that drive real hardware. Here's [[now|what I'm up to right now]].
 
 I'm a Systems & AI Engineer and Partner at Luxtron, where I've spent 8 years on building control (DALI, Helvar, Casambi, KNX) across the GCC and commissioned 150+ control systems. Now I lead R&D: integrating with HVAC and BMS over Modbus and BACnet, letting agents operate a building, and building an AI employee harness to take repetitive work off the team.
 
@@ -39,6 +39,8 @@ More detail and demos on the [[projects]] page, and the rest is on [GitHub](http
 - [[posts/mcp-openvto-talk|From 1.2GB to 1.3MB]], AI Tinkerers Dubai
 - [[posts/ml-primer|A ML Primer]], UAE SWE Group
 - Jury member, BITS Pilani Tech Fest Hackathon, Dubai (2025)
+
+The full list is on the [[events]] page.
 
 ## Work with me
 
