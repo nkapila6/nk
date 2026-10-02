@@ -1,43 +1,57 @@
 ---
-title: Welcome, let's backpropagate together!
+title: Nikhil Kapila
+description: Engineer working from lighting control and embedded hardware up to GPU inference. Systems Engineer and Partner at Luxtron, MS CS (AI) from Georgia Tech.
 comments: false
 exclude: true
 date: 2023-12-11
-updated: 2023-12-11
+updated: 2026-10-02
 ---
-Hi there 👋, I'm Nikhil.
+Hi, I'm Nikhil 👋
 
-I'm an engineer who works across the stack, from industrial control and embedded hardware up to ML infrastructure and inference. I have an MS in CS from `Georgia Tech` with a specialization in Artificial Intelligence.
+I build things that sit between real hardware and AI. Most of my work is in building automation and lighting control, and lately in getting LLM agents to drive those systems.
 
-I co-own Luxtron, where I've spent years in building automation and lighting control (DALI, Helvar, Casambi, KNX) across the GCC, and now build the layer that bridges these systems into generalized PLC, HVAC, and BMS platforms, and lets LLM agents drive them. I like the messy end of the problem: making things work on real hardware in the field, not just clean datasets.
+I'm a Systems Engineer and Partner at Luxtron, where I've spent 7+ years on lighting control (DALI, Helvar, Casambi, KNX) across the GCC. Right now I'm building the layer that connects these systems to PLC, HVAC and BMS platforms, so an agent can actually operate a building.
 
-I'm also going deep on CUDA and GPU architecture, working toward a small inference runtime, because what I really want to figure out is how to run AI efficiently on embedded and edge hardware.
+The other half of my time goes into GPUs and inference. I'm learning CUDA and GPU architecture, serving models on cloud GPUs, and writing a small inference engine for ARM64. The goal is simple: run AI well on edge hardware, not just in a data center.
 
-My time at `Georgia Tech` got me deeply intrigued by mathematics, machine learning, and all things Bayesian. In my free time I try to update my *inductive priors* on these topics as much as possible. 🙃
+I have an MS in Computer Science (AI) from `Georgia Tech`.
 
-Feel free to connect with me on [LinkedIn](https://linkedin.com/in/nikhilkapila)
+## Things I've built
 
-# Backpropagating? What are you talking about?
-In machine learning, [backpropagation](https://en.wikipedia.org/wiki/Backpropagation) is a technique to update the weights of a neural network. In the same way, this site aims to be an archive of posts and notes that help you update the weights of your brains' neurons!
+- **[mcp-helvarnet](https://github.com/nkapila6/mcp-helvarnet) / [mcp-casambi](https://github.com/nkapila6/mcp-casambi)**: MCP servers that let LLMs control Helvar and Casambi lighting. Built by reverse-engineering the protocols.
+- **[[posts/small-talk|Small Talk]]**: AI-to-AI robot podcast. Won NVIDIA Nemotron Community Choice and Modal credits at the Hugging Face Build Small Hackathon.
+- **[[posts/mcp-openvto-talk|mcp-openvto]]**: virtual try-on app shrunk from 1.2GB to 1.3MB and exposed as a C++ MCP server.
+- **[CNN attention paper](https://arxiv.org/abs/2412.11657)**: co-author.
 
-# Open Source Contributions and Projects
-While I update my weights on deep learning architectures, I'm trying not to be a code monkey and am skilling up my coding skills through open source contributions and projects.
+## GPUs and inference
 
-Some of my recent projects can be seen [here](https://github.com/nkapila6?tab=repositories) and my recent PRs can be seen [here](https://github.com/search?q=is%3Apr%20author%3Ankapila6&type=pullrequests)
+- **[llama-modal-serve](https://github.com/nkapila6/llama-modal-serve)**: serves Nemotron-3-Nano-4B (GGUF via llama.cpp) and Qwen3-TTS on Modal A10Gs with scale-to-zero. This is the backend behind Small Talk, and the whole hackathon ran on about 30 USD of GPU time.
+- **[ggufparser](https://github.com/nkapila6/ggufparser)**: a GGUF model file parser in Rust.
+- **[cuda-man](https://github.com/nkapila6/cuda-man)**: offline man pages for the CUDA API, so `man 3 cudaStreamCreate` works again. Python 3, standard library only.
+- **[cs149](https://github.com/nkapila6/cs149)**: working through Stanford's parallel computing course (SIMD, multi-core, CUDA) to get the fundamentals right.
 
-# Locations
-Below are some locations you could explore in the blog!
-- **Blog posts that aim to convey my learnt intuition**: [[posts]]
-- **Learning adventures at MS**: [[masters]]
-- **Life Struggles Never End**: [[life]]
+More on [GitHub](https://github.com/nkapila6), and my PRs are [here](https://github.com/search?q=is%3Apr%20author%3Ankapila6&type=pullrequests).
 
-## Buy Me A Coffee
-If the knowledge shared or the software I've built has been helpful to you. Please do buy me a coffee, would really appreciate it! 😄
+## Talks
+
+- [[posts/mcp-openvto-talk|From 1.2GB to 1.3MB]], AI Tinkerers Dubai
+- [[posts/ml-primer|A ML Primer]], UAE SWE Group
+
+## Work with me
+
+I take on freelance and part-time work in MCP integrations, agents for industrial and building systems, and GPU/edge inference. Email me at [blog@nkapila.me](mailto:blog@nkapila.me) or find me on [LinkedIn](https://linkedin.com/in/nikhilkapila).
+
+## The blog
+
+This site is called Backpropagation with NK. [Backprop](https://en.wikipedia.org/wiki/Backpropagation) is how a neural net updates its weights, and these posts are me updating mine.
+
+- [[posts]]: things I learned and how I think about them
+- [[masters]]: Georgia Tech OMSCS course reviews and notes
+- [[life]]: everything else
+
+If something here helped you, you can buy me a coffee.
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/X8X51MK4A1)
-
-# Contact
-If you have any questions, please feel free to drop me an email at [blog@nkapila.me](mailto:blog@nkapila.me)
 
 ---
 
