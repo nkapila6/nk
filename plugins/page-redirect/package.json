@@ -1,0 +1,30 @@
+{
+  "name": "page-redirect",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Opens frontmatter redirect URLs in a new tab",
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.js",
+    "./components": "./dist/index.js",
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.js",
+  "quartz": {
+    "name": "page-redirect",
+    "displayName": "Page Redirect",
+    "category": "component",
+    "version": "1.0.0",
+    "quartzVersion": ">=5.0.0",
+    "dependencies": [],
+    "defaultEnabled": true,
+    "defaultOptions": {},
+    "components": {
+      "PageRedirect": {
+        "displayName": "Page Redirect",
+        "defaultPosition": "afterBody",
+        "defaultPriority": 5
+      }
+    }
+  }
+}

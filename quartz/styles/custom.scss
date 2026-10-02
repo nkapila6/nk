@@ -1,3 +1,224 @@
+@use "sass:map";
+@use "./base.scss";
 @use "./variables.scss" as *;
 
-// put your custom CSS here!
+// Define the missing variable or use an existing one
+$fullPageWidth: map.get($breakpoints, desktop);
+
+$red: #af3029;
+$orange: #bc5215;
+$yellow: #ad8301;
+$green: #66800b;
+$cyan: #24837b;
+$blue: #205ea6;
+$purple: #5e409d;
+$magenta: #a02f6f;
+
+/* Sidebar top margins */
+.left.sidebar,
+.right.sidebar {
+  margin-top: 2.4rem !important;
+}
+
+/* Tighter left sidebar */
+.left.sidebar {
+  gap: 0.8rem;
+}
+
+/* Left sidebar independent scroll (desktop only) */
+@media all and ($desktop) {
+  .left.sidebar {
+    overflow-y: auto;
+  }
+}
+
+/* Top of note area */
+.breadcrumb-container {
+  font-size: 0.9em;
+
+  & a {
+    color: var(--darkgray);
+    font-style: italic;
+  }
+}
+
+.article-title {
+  margin-top: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.content-meta {
+  color: var(--gray);
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.tags {
+  font-size: 0.8em;
+  margin-top: 0 !important;
+}
+
+a.tag-link {
+  color: var(--darkgray);
+  background-color: var(--lightgray) !important;
+}
+
+/* Explorer */
+
+.folder-outer {
+  font-size: 0.9rem;
+
+  & li {
+    margin: 0.4em 0;
+  }
+}
+
+/* Recent notes */
+// plugin css lives in a cascade layer, so base h3/a rules win unless set here
+
+.recent-notes {
+  & > h3 {
+    margin: 0.5rem 0 0.25rem;
+  }
+
+  & .recent-ul {
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+
+    & h3 {
+      font-size: 1rem;
+      margin: 0;
+    }
+
+    & .meta {
+      margin: 0.1rem 0 0.4rem 0;
+      opacity: 0.6;
+    }
+
+    & a.internal {
+      background-color: transparent;
+    }
+  }
+
+  & > ul.recent-ul > li {
+    margin: 0;
+    line-height: 1.35;
+  }
+
+  & .tag-link {
+    display: none;
+  }
+}
+
+/* Others */
+// v5 wraps rendered markdown in .markdown-rendered, so match both
+.page article,
+.page article > .markdown-rendered {
+  & > h1,
+  & > h2,
+  & > h3,
+  & > h4,
+  & > h5,
+  & > h6 {
+    border-bottom: 1px solid var(--lightgray);
+    font-size: 1rem;
+    padding-bottom: 0.3em;
+  }
+
+  & > h1 {
+    font-size: 1.1rem;
+    color: $red;
+  }
+
+  & > h2 {
+    color: $orange;
+  }
+
+  & > h3 {
+    color: $yellow;
+  }
+
+  & > h4 {
+    color: $green;
+  }
+
+  & > h5 {
+    color: $cyan;
+  }
+
+  & > h6 {
+    color: $purple;
+  }
+}
+
+.page .page-header {
+  @media all and (max-width: $fullPageWidth) {
+    margin-top: 1rem;
+  }
+}
+
+.page-title {
+  font-size: 1.4rem;
+
+  & a {
+    color: var(--dark);
+  }
+}
+
+/* Links header */
+// lives here rather than in the plugin: plugin css is layered and loses to base img/a rules
+header:has(#links-header) {
+  display: block;
+  margin-top: 1rem;
+}
+
+#links-header {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 1em;
+  font-size: 1.2em;
+  justify-content: space-between;
+  margin: 0 0.2em;
+
+  span {
+    margin-top: 0.75em;
+  }
+
+  img {
+    display: inline;
+    height: 1em;
+    margin: 0 0.3em 0 0;
+    vertical-align: sub;
+  }
+
+  a {
+    color: var(--dark);
+  }
+}
+
+.links-header-rule {
+  background-color: var(--gray);
+  border: none;
+  border-top: 1px var(--gray) solid;
+  margin-top: 1.3rem;
+}
+
+@media all and (max-width: map.get($breakpoints, mobile)) {
+  #links-header {
+    flex-wrap: nowrap;
+    overflow: scroll;
+    white-space: nowrap;
+
+    & > * {
+      width: calc(33.33% - 0.67em);
+    }
+
+    & > *:nth-child(3n-1) {
+      text-align: center;
+    }
+
+    & > *:nth-child(3n) {
+      text-align: right;
+    }
+  }
+}

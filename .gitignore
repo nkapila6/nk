@@ -12,3 +12,6 @@ replit.nix
 .quartz/
 quartz/cli/tui/dist/
 .turbo/
+
+# local plugin paths are machine-specific; CI regenerates this
+quartz.lock.json
