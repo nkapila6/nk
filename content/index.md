@@ -32,7 +32,7 @@ I have an MS in CS (AI) from `Georgia Tech`, and I founded the OMSCS UAE chapter
 - **[cuda-man](https://github.com/nkapila6/cuda-man)**: offline man pages for the CUDA API.
 - **[cs149](https://github.com/nkapila6/cs149)**: working through Stanford's parallel computing course (SIMD, multi-core, CUDA).
 
-More on [GitHub](https://github.com/nkapila6).
+More detail and demos on the [[projects]] page, and the rest is on [GitHub](https://github.com/nkapila6).
 
 ## Talks
 

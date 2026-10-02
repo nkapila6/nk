@@ -1,14 +1,13 @@
 import { h } from "preact"
 
-const emoji = (path) =>
-  `https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/${path}`
-
+// icons are fluentui-emoji (MIT), self-hosted in quartz/static/icons
 const defaults = {
   links: [
-    { title: "Home", href: "/", icon: emoji("Card%20index/Color/card_index_color.svg") },
-    { title: "Masters", href: "/masters/", icon: emoji("Books/Color/books_color.svg") },
-    { title: "Life", href: "/life", icon: emoji("Brain/Color/brain_color.svg") },
-    { title: "Posts", href: "/posts", icon: emoji("File%20folder/Flat/file_folder_flat.svg") },
+    { title: "Home", href: "/", icon: "/static/icons/home.svg" },
+    { title: "Masters", href: "/masters/", icon: "/static/icons/masters.svg" },
+    { title: "Life", href: "/life", icon: "/static/icons/life.svg" },
+    { title: "Projects", href: "/projects", icon: "/static/icons/projects.svg" },
+    { title: "Posts", href: "/posts", icon: "/static/icons/posts.svg" },
   ],
 }
 
