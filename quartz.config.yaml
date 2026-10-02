@@ -286,6 +286,22 @@ plugins:
       position: left
       priority: 40
       display: desktop-only
+  - source: ./plugins/github-activity
+    enabled: true
+    options:
+      user: nkapila6
+      pages:
+        index:
+          limit: 1
+          title: Latest on GitHub
+          commits: false
+        projects:
+          limit: 5
+          commits: true
+          groupByRepo: true
+    layout:
+      position: beforeBody
+      priority: 40
   - source: ./plugins/page-redirect
     enabled: true
     layout:

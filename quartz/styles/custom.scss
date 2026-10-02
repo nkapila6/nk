@@ -206,19 +206,141 @@ header:has(#links-header) {
 @media all and (max-width: map.get($breakpoints, mobile)) {
   #links-header {
     flex-wrap: nowrap;
-    overflow: scroll;
+    overflow-x: auto;
     white-space: nowrap;
+    justify-content: flex-start;
+    column-gap: 1.2em;
 
     & > * {
-      width: calc(33.33% - 0.67em);
+      flex: none;
+    }
+  }
+}
+
+/* GitHub activity feed */
+.gh-activity {
+  border: 1px solid var(--lightgray);
+  border-radius: 8px;
+  padding: 0.6rem 0.9rem;
+  margin: 0.8rem 0 1.2rem;
+  font-size: 0.85rem;
+
+  .gh-activity-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+
+    h3 {
+      margin: 0;
+      font-size: 0.95rem;
     }
 
-    & > *:nth-child(3n-1) {
-      text-align: center;
+    a {
+      color: var(--gray);
+      font-size: 0.8rem;
+    }
+  }
+
+  .gh-activity-list {
+    list-style: none;
+    padding: 0;
+    margin: 0.4rem 0 0;
+
+    & > li {
+      margin: 0;
+      padding: 0.3rem 0;
+      border-top: 1px dashed var(--lightgray);
+
+      &:first-child {
+        border-top: none;
+      }
+    }
+  }
+
+  .gh-activity-line {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .gh-activity-what a {
+    background-color: transparent;
+  }
+
+  .gh-activity-repo {
+    font-weight: $semiBoldWeight;
+  }
+
+  .gh-activity-branch {
+    font-family: var(--codeFont);
+    font-size: 0.75rem;
+    color: var(--gray);
+    margin-left: 0.4rem;
+  }
+
+  .gh-activity-summary {
+    color: var(--gray);
+    font-size: 0.8rem;
+    margin-left: 0.5rem;
+  }
+
+  a.gh-activity-detail {
+    display: block;
+    background-color: transparent;
+  }
+
+  .gh-activity-time {
+    color: var(--gray);
+    white-space: nowrap;
+  }
+
+  .gh-activity-detail {
+    color: var(--darkgray);
+    opacity: 0.8;
+    font-family: var(--codeFont);
+    font-size: 0.75rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .gh-activity-empty {
+    color: var(--gray);
+  }
+}
+
+.gh-activity-full {
+  font-size: 0.9rem;
+  padding: 0.8rem 1.1rem;
+}
+
+// home page: a single inline line instead of a card
+.gh-activity-compact {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  padding: 0.4rem 0.8rem;
+
+  .gh-activity-header {
+    flex: none;
+
+    h3 {
+      font-size: 0.85rem;
+      color: var(--gray);
     }
 
-    & > *:nth-child(3n) {
-      text-align: right;
+    a {
+      display: none;
+    }
+  }
+
+  .gh-activity-list {
+    flex: 1;
+    min-width: 0;
+    margin: 0;
+
+    & > li {
+      padding: 0;
     }
   }
 }
