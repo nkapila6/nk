@@ -7,7 +7,13 @@ const defaults = {
     index: { limit: 1, commits: false, title: "Latest on GitHub" },
     projects: { limit: 5, commits: true, groupByRepo: true },
   },
+  // used for every other content page; set to null to show only on listed pages
+  default: { limit: 1, commits: false, title: "Latest on GitHub" },
 }
+
+// folder and tag listings aren't posts, skip them
+const isListing = (slug) =>
+  !slug || slug === "404" || slug.endsWith("/index") || slug === "tags" || slug.startsWith("tags/")
 
 // runs in the browser on first load and after every SPA navigation.
 // wrapped in an IIFE because all component scripts get bundled into one file
@@ -253,7 +259,7 @@ document.addEventListener("nav", async () => {
 export const GithubActivity = (userOpts) => {
   const opts = { ...defaults, ...userOpts }
   const GithubActivity = ({ fileData }) => {
-    const page = opts.pages[fileData.slug]
+    const page = opts.pages[fileData.slug] ?? (isListing(fileData.slug) ? null : opts.default)
     if (!page) return null
     const variant = page.commits ? "full" : "compact"
     return h(

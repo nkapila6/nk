@@ -299,10 +299,10 @@ plugins:
           limit: 5
           commits: true
           groupByRepo: true
-        now:
-          limit: 1
-          title: Latest on GitHub
-          commits: false
+      default:
+        limit: 1
+        title: Latest on GitHub
+        commits: false
     layout:
       position: beforeBody
       priority: 40
