@@ -10,6 +10,8 @@ date: 2025-06-21
 draft: true
 ---
 
+<ascii-art piece="c" class="ascii-logo"></ascii-art>
+
 # A beginners' guide away from scanf()
 
 Forked from The Wayback Machine - <https://web.archive.org/web/20250417094758/https://sekrit.de/webdocs/c/beginners-guide-away-from-scanf.html>
