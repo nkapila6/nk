@@ -1,13 +1,12 @@
 import { h } from "preact"
 
-// icons are fluentui-emoji (MIT), self-hosted in quartz/static/icons
 const defaults = {
   links: [
-    { title: "Home", href: "/", icon: "/static/icons/home.svg" },
-    { title: "Masters", href: "/masters/", icon: "/static/icons/masters.svg" },
-    { title: "Life", href: "/life", icon: "/static/icons/life.svg" },
-    { title: "Projects", href: "/projects", icon: "/static/icons/projects.svg" },
-    { title: "Posts", href: "/posts", icon: "/static/icons/posts.svg" },
+    { title: "Home", href: "/" },
+    { title: "Masters", href: "/masters/" },
+    { title: "Life", href: "/life" },
+    { title: "Projects", href: "/projects" },
+    { title: "Posts", href: "/posts" },
   ],
 }
 
