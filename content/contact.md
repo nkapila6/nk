@@ -19,4 +19,4 @@ It is so nice to see you here!
 2. [Georgia Tech Email](mailto:nkapila6@gatech.edu)
 
 # Resume
-[Resume](https://drive.proton.me/urls/860ZJP1F2R#Cd05CqkmPuOg)
+[Resume](https://drive.google.com/file/d/1wh4z93llH6so8e8tKE8LgGvSlIwTv5qO/view?usp=sharing)
