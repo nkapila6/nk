@@ -756,3 +756,25 @@ body[data-slug="index"] {
 .gh-cal-l4 {
   color: color-mix(in srgb, var(--secondary) 45%, var(--dark));
 }
+
+// side by side photos in posts, cropped to the same shape so the row lines up
+.photo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  margin: 1rem 0;
+
+  img {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    margin: 0;
+    border-radius: 4px;
+  }
+}
+
+article video {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
