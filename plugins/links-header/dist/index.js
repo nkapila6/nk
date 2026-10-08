@@ -3,6 +3,7 @@ import { h } from "preact"
 const defaults = {
   links: [
     { title: "Home", href: "/" },
+    { title: "Events", href: "/events" },
     { title: "Masters", href: "/masters/" },
     { title: "Life", href: "/life" },
     { title: "Projects", href: "/projects" },
