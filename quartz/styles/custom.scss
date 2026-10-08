@@ -432,6 +432,12 @@ ascii-art.ascii-scene {
   margin: 0.5rem auto 1.5rem;
 }
 
+// narrow text pieces (campfire) look lost on the left, so center them
+ascii-art.ascii-center {
+  width: fit-content;
+  margin-inline: auto;
+}
+
 .ascii-logos {
   display: flex;
   flex-wrap: wrap;
@@ -457,6 +463,12 @@ ascii-art.ascii-404 {
   margin: 2rem auto;
 }
 
+// quartz's base sets html to 100vw, which includes a classic always-on scrollbar,
+// so every page ran ~15px under it. auto is the visible width
+html {
+  width: auto;
+}
+
 /* ASCII theme */
 // everything that makes the site read like a terminal lives in this block,
 // so it can be dropped in one go
@@ -473,17 +485,26 @@ body {
   font-size: 1em;
   text-transform: lowercase;
 
-  // brackets are always there, just invisible, so hover doesn't shift the row
+  // brackets hang outside the link so seven of them still fit on one row.
+  // the padding keeps the outer two on screen
+  padding-inline: 0.9em;
+
+  a {
+    position: relative;
+  }
   a::before,
   a::after {
-    color: transparent;
+    position: absolute;
+    color: var(--gray);
     transition: color 0.15s;
   }
   a::before {
-    content: "[ ";
+    content: "[";
+    right: calc(100% + 0.3em);
   }
   a::after {
-    content: " ]";
+    content: "]";
+    left: calc(100% + 0.3em);
   }
   a:hover::before,
   a:hover::after {
@@ -777,4 +798,46 @@ article video {
   width: 100%;
   height: auto;
   border-radius: 4px;
+}
+
+/* contact page */
+.contact-card {
+  border: 1px dashed var(--lightgray);
+  padding: 0.9rem 1.1rem;
+  margin: 1.2rem 0 2rem;
+  font-family: var(--codeFont);
+  font-size: 0.95rem;
+
+  .contact-prompt {
+    color: var(--secondary);
+    margin-bottom: 0.6rem;
+  }
+
+  a {
+    display: flex;
+    gap: 1rem;
+    padding: 0.25rem 0;
+    color: var(--dark);
+    background: none;
+    border-bottom: 1px dotted var(--lightgray);
+    overflow-wrap: anywhere;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      color: var(--secondary);
+    }
+
+    span {
+      flex: none;
+      width: 5.5rem;
+      color: var(--gray);
+    }
+
+    span::after {
+      content: " ->";
+    }
+  }
 }
