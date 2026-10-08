@@ -5,6 +5,8 @@ import { resolveRelative, formatDate } from "@quartz-community/utils"
 const defaults = {
   slug: "events",
   eventTags: ["events", "event", "talks", "talk", "hackathon"],
+  // ascii.rest piece drawn above the list; markdown can't get above beforeBody
+  art: null,
 }
 
 export const EventList = (userOpts) => {
@@ -22,9 +24,10 @@ export const EventList = (userOpts) => {
       .filter((p) => isEvent(p) && !p.frontmatter?.draft && p.slug !== opts.slug)
       .sort((a, b) => (when(b)?.getTime?.() ?? 0) - (when(a)?.getTime?.() ?? 0))
 
-    if (!events.length) return h("p", { class: "event-list-empty" }, "Nothing here yet.")
+    const art = opts.art && h("ascii-art", { piece: opts.art, class: "ascii-scene" })
+    if (!events.length) return h("div", null, [art, h("p", { class: "event-list-empty" }, "Nothing here yet.")])
 
-    return h(
+    const list = h(
       "ul",
       { class: "event-list" },
       events.map((p) => {
@@ -47,6 +50,7 @@ export const EventList = (userOpts) => {
         ])
       }),
     )
+    return art ? h("div", null, [art, list]) : list
   }
   return EventList
 }

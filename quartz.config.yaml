@@ -311,6 +311,7 @@ plugins:
     enabled: true
     options:
       slug: events
+      art: ocean-sunset
     layout:
       position: beforeBody
       priority: 45
