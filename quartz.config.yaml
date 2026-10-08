@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=./quartz/plugins/quartz-plugins.schema.json
 configuration:
-  pageTitle: "📉 Backpropagation with NK"
+  pageTitle: "Backpropagation with NK"
   pageTitleSuffix: ""
   enableSPA: true
   enablePopovers: true
@@ -17,7 +17,7 @@ configuration:
     fontOrigin: googleFonts
     cdnCaching: true
     typography:
-      header: Inter
+      header: JetBrains Mono
       body: Inter
       code: JetBrains Mono
     colors:
@@ -106,8 +106,8 @@ plugins:
     enabled: true
     options:
       useThemeFonts: false
-      title: Inter
-      header: Inter
+      title: JetBrains Mono
+      header: JetBrains Mono
       body: Inter
       code: JetBrains Mono
   - source: "@quartz-themes/core"
@@ -293,8 +293,9 @@ plugins:
       pages:
         index:
           limit: 1
-          title: Latest on GitHub
+          title: GitHub activity
           commits: false
+          calendar: true
         projects:
           limit: 5
           commits: true
@@ -323,6 +324,11 @@ plugins:
     layout:
       position: footer
       priority: 50
+  - source: ./plugins/ascii-art
+    enabled: true
+    layout:
+      position: footer
+      priority: 60
 layout:
   groups:
     toolbar:
