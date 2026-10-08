@@ -158,7 +158,9 @@ a.tag-link {
 }
 
 .page-title {
-  font-size: 1.4rem;
+  // mono runs wider than Inter, this keeps "Backpropagation" on one line
+  font-size: 1.25rem;
+  overflow-wrap: normal;
 
   & a {
     color: var(--dark);
@@ -400,4 +402,357 @@ header:has(#links-header) {
     color: var(--darkgray);
     font-size: 0.9rem;
   }
+}
+
+// ascii.rest pieces (plugins/ascii-art)
+ascii-art {
+  color: var(--darkgray);
+  overflow: hidden;
+
+  // undo quartz's code block styling on the text pieces
+  > pre {
+    border: none;
+    background: none;
+    padding: 0;
+    overflow: hidden;
+  }
+}
+
+// text pieces draw in the element's font size, so this sets their width
+ascii-art.ascii-hero {
+  font-size: clamp(5px, 1vw, 8px);
+  margin: 0 0 1.5rem;
+  opacity: 0.85;
+}
+
+// coloured scenes draw to a canvas as wide as the element, height follows the
+// piece's aspect (2:1 for desert-night), so width alone sets how tall it gets
+ascii-art.ascii-scene {
+  width: min(100%, 520px);
+  margin: 0.5rem auto 1.5rem;
+}
+
+.ascii-logos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 1.5rem 0 2rem;
+
+  ascii-art {
+    width: 48px;
+  }
+}
+
+ascii-art.ascii-logo {
+  width: 90px;
+  float: right;
+  margin: 0 0 1rem 1rem;
+}
+
+ascii-art.ascii-404 {
+  font-size: clamp(5px, 1.2vw, 9px);
+  width: fit-content;
+  margin: 2rem auto;
+}
+
+/* ASCII theme */
+// everything that makes the site read like a terminal lives in this block,
+// so it can be dropped in one go
+$mono: var(--codeFont);
+
+body {
+  // faint dot grid, like graph paper under the text
+  background-image: radial-gradient(color-mix(in srgb, var(--lightgray) 70%, transparent) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+
+#links-header {
+  font-family: $mono;
+  font-size: 1em;
+  text-transform: lowercase;
+
+  // brackets are always there, just invisible, so hover doesn't shift the row
+  a::before,
+  a::after {
+    color: transparent;
+    transition: color 0.15s;
+  }
+  a::before {
+    content: "[ ";
+  }
+  a::after {
+    content: " ]";
+  }
+  a:hover::before,
+  a:hover::after {
+    color: var(--secondary);
+  }
+}
+
+.links-header-rule,
+article hr {
+  border: none;
+  background: none;
+  height: 1.2em;
+  overflow: hidden;
+  white-space: nowrap;
+  color: var(--gray);
+  font-family: $mono;
+  line-height: 1.2em;
+
+  &::after {
+    content: "────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────";
+  }
+}
+
+article > .markdown-rendered > h2::before {
+  content: "## ";
+  color: var(--gray);
+}
+
+article > .markdown-rendered > h3::before {
+  content: "### ";
+  color: var(--gray);
+}
+
+// blinking block cursor after the page title
+h1.article-title::after {
+  content: "█";
+  margin-left: 0.15em;
+  color: var(--secondary);
+  animation: ascii-blink 1.1s steps(1) infinite;
+}
+
+@keyframes ascii-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  h1.article-title::after {
+    animation: none;
+  }
+}
+
+.gh-activity {
+  border-radius: 0;
+  border-style: dashed;
+  font-family: $mono;
+}
+
+// full-screen landing on the home page. nothing above it is positioned, so
+// absolute pins it to the first viewport and the page starts one screen down
+body[data-slug="index"] {
+  padding-top: 100vh;
+  padding-top: 100svh;
+}
+
+.landing {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 100vh;
+  height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.2rem;
+  padding: 0 1rem;
+  box-sizing: border-box;
+  font-family: $mono;
+
+  ascii-art.ascii-backprop {
+    // 100x30 cell piece, sized to whichever of width or height runs out first
+    font-size: min(1.45vw, 2.1vh);
+    color: var(--dark);
+    width: fit-content;
+  }
+
+  .landing-line {
+    margin: 0;
+    color: var(--darkgray);
+    font-size: clamp(0.8rem, 1.2vw, 1.05rem);
+    text-align: center;
+  }
+
+  .landing-prompt {
+    color: var(--secondary);
+  }
+
+  .landing-typed {
+    display: inline-block;
+    vertical-align: bottom;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 0;
+    border-right: 0.6em solid var(--secondary);
+    animation:
+      landing-type 2.6s steps(64) 0.8s forwards,
+      landing-caret 1.1s steps(1) infinite;
+  }
+
+  .landing-scroll {
+    position: absolute;
+    background: none;
+    bottom: 1.5rem;
+    color: var(--gray);
+    font-size: 0.85rem;
+    animation: landing-bob 2s ease-in-out infinite;
+
+    &:hover {
+      color: var(--secondary);
+    }
+  }
+}
+
+@keyframes landing-type {
+  to {
+    width: 64ch;
+  }
+}
+
+@keyframes landing-caret {
+  50% {
+    border-color: transparent;
+  }
+}
+
+@keyframes landing-bob {
+  50% {
+    transform: translateY(0.35rem);
+  }
+}
+
+@media all and (max-width: map.get($breakpoints, mobile)) {
+  .landing .landing-typed {
+    white-space: normal;
+    width: auto;
+    animation: none;
+    border-right: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing .landing-typed {
+    width: auto;
+    animation: none;
+  }
+  .landing .landing-scroll {
+    animation: none;
+  }
+}
+
+/* GitHub contribution graph (github-activity, calendar: true) */
+// the compact feed is one flex row, so the graph wraps onto its own line under it
+.gh-activity-compact:has(.gh-cal) {
+  flex-wrap: wrap;
+}
+
+.gh-cal {
+  flex-basis: 100%;
+  order: 3;
+  min-width: 0;
+  margin: 0.6rem 0 0.4rem;
+  font-family: var(--codeFont);
+
+  .gh-cal-stats {
+    color: var(--darkgray);
+    font-size: 0.8rem;
+    margin: 0 0 0.7rem;
+  }
+
+  // one row, columns as wide as their label so "contributions" doesn't get cut
+  dl.gh-cal-stats {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, auto);
+    justify-content: space-between;
+    gap: 0.4rem;
+
+    @media all and (max-width: map.get($breakpoints, mobile)) {
+      grid-auto-flow: row;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  .gh-cal-stat {
+    border-left: 1px solid var(--lightgray);
+    padding-left: 0.4rem;
+    min-width: 0;
+
+    dd {
+      margin: 0;
+      color: var(--dark);
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    dt {
+      color: var(--gray);
+      font-size: 0.6rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .gh-cal-scroll {
+    overflow-x: auto;
+    scrollbar-width: thin;
+  }
+
+  .gh-cal-months,
+  .gh-cal-grid {
+    display: grid;
+    grid-template-columns: repeat(var(--weeks), 1fr);
+    min-width: calc(var(--weeks) * 11px);
+  }
+
+  .gh-cal-months {
+    color: var(--gray);
+    font-size: 0.65rem;
+    height: 1.1em;
+    margin-bottom: 0.15rem;
+  }
+
+  .gh-cal-grid {
+    grid-template-rows: repeat(7, 1fr);
+    grid-auto-flow: column;
+  }
+
+  .gh-cal-legend {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.15rem;
+    color: var(--gray);
+    font-size: 0.65rem;
+    margin-top: 0.3rem;
+  }
+}
+
+.gh-cal-d {
+  text-align: center;
+  font-size: 0.7rem;
+  line-height: 1.15;
+  cursor: default;
+}
+
+.gh-cal-l0 {
+  color: var(--lightgray);
+}
+.gh-cal-l1 {
+  color: color-mix(in srgb, var(--secondary) 50%, var(--lightgray));
+}
+.gh-cal-l2 {
+  color: color-mix(in srgb, var(--secondary) 80%, var(--lightgray));
+}
+.gh-cal-l3 {
+  color: var(--secondary);
+}
+.gh-cal-l4 {
+  color: color-mix(in srgb, var(--secondary) 45%, var(--dark));
 }
