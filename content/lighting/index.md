@@ -4,4 +4,7 @@ date: 1
 comments: false
 exclude: true
 ---
-My thoughts on topics in the industry such as energy efficiency, control systems, sustainability, etc  ⚡️
+
+<ascii-art piece="lighthouse" class="ascii-hero"></ascii-art>
+
+My thoughts on topics in the industry such as energy efficiency, control systems, sustainability, etc.
