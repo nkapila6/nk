@@ -5,6 +5,8 @@ exclude: true
 comments: false
 ---
 
+<ascii-art piece="morse" options='{"text":"say hi"}' class="ascii-hero"></ascii-art>
+
 # Professional Links
 It is so nice to see you here!
 
