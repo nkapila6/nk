@@ -22,6 +22,9 @@ const script = `
 ;(() => {
 const CACHE_MS = 10 * 60 * 1000
 const API = "https://api.github.com"
+// github has no unauthenticated contributions endpoint, this open source proxy
+// scrapes the public profile graph and allows CORS
+const CAL_API = "https://github-contributions-api.jogruber.de/v4/"
 // stars dominate the public feed and say nothing about what I built
 const SKIP = new Set(["WatchEvent", "MemberEvent", "GollumEvent"])
 
@@ -235,7 +238,119 @@ function render(list, items, user) {
   }
 }
 
+
+async function countStars(user) {
+  let stars = 0
+  for (let page = 1; page <= 5; page++) {
+    const repos = await getJson(API + "/users/" + user + "/repos?type=owner&per_page=100&page=" + page)
+    // forks included: stars on my fork were given to my fork
+    for (const r of repos) stars += r.stargazers_count
+    if (repos.length < 100) break
+  }
+  return stars
+}
+
+// all-time total in the header, last 12 months in the grid. the full history
+// would be mostly empty columns from before i was active
+async function loadCalendar(user) {
+  const now = new Date()
+  const today = now.toLocaleDateString("en-CA")
+  const start = new Date(now.getFullYear() - 1, now.getMonth(), now.getDate() + 1).toLocaleDateString("en-CA")
+  const key = "gh-cal:" + user + ":all:v2"
+  const cached = cacheGet(key)
+  if (cached) return cached
+  const count = (q) => getJson(API + "/search/" + q + "&per_page=1").then((r) => r.total_count).catch(() => null)
+  const [cal, profile, commits, prs, issues, stars] = await Promise.all([
+    getJson(CAL_API + user),
+    getJson(API + "/users/" + user).catch(() => ({})),
+    count("commits?q=author:" + user),
+    count("issues?q=author:" + user + "+type:pr"),
+    count("issues?q=author:" + user + "+type:issue"),
+    countStars(user).catch(() => null),
+  ])
+  const data = {
+    stats: [
+      ["contributions", Object.values(cal.total || {}).reduce((a, b) => a + b, 0)],
+      ["commits", commits],
+      ["stars", stars],
+      ["PRs", prs],
+      ["issues", issues],
+      ["repos", profile.public_repos],
+      ["followers", profile.followers],
+      ["following", profile.following],
+    ],
+    // years come newest first and run to dec 31, so trim and sort
+    days: cal.contributions
+      .filter((d) => d.date >= start && d.date <= today)
+      .sort((a, b) => (a.date < b.date ? -1 : 1))
+      .map((d) => [d.date, d.level, d.count]),
+  }
+  cacheSet(key, data)
+  return data
+}
+
+const MONTHS = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"]
+
+function renderCalendar(box, data) {
+  box.replaceChildren()
+  // all time, anything that failed to load is just left out
+  const stats = el("dl", "gh-cal-stats")
+  for (const [label, n] of data.stats) {
+    if (n == null) continue
+    const item = el("div", "gh-cal-stat")
+    item.append(el("dd", null, n.toLocaleString("en-US")), el("dt", null, label))
+    stats.append(item)
+  }
+  box.append(stats)
+
+  // columns are weeks starting sunday, so pad the first one
+  const pad = new Date(data.days[0][0] + "T00:00:00").getDay()
+  const weeks = Math.ceil((pad + data.days.length) / 7)
+  const scroll = el("div", "gh-cal-scroll")
+  const months = el("div", "gh-cal-months")
+  const grid = el("div", "gh-cal-grid")
+  months.style.setProperty("--weeks", weeks)
+  grid.style.setProperty("--weeks", weeks)
+
+  for (let i = 0; i < pad; i++) grid.append(el("span", "gh-cal-pad"))
+  let lastMonth = -1
+  data.days.forEach(([date, level, count], i) => {
+    const d = el("span", "gh-cal-d gh-cal-l" + level, level ? "●" : "·")
+    d.title = count + " contribution" + (count === 1 ? "" : "s") + " on " + date
+    grid.append(d)
+    const month = Number(date.slice(5, 7)) - 1
+    const week = Math.floor((pad + i) / 7)
+    // label a month at the first full week it starts, unless it's too close to
+    // the right edge to fit
+    if (month !== lastMonth && (pad + i) % 7 === 0 && week <= weeks - 3) {
+      lastMonth = month
+      const m = el("span", null, MONTHS[month])
+      m.style.gridColumn = week + 1 + " / span 3"
+      months.append(m)
+    }
+  })
+  scroll.append(months, grid)
+  box.append(scroll)
+
+  const legend = el("div", "gh-cal-legend", "less ")
+  for (let l = 0; l <= 4; l++) legend.append(el("span", "gh-cal-d gh-cal-l" + l, l ? "●" : "·"))
+  legend.append(document.createTextNode(" more"))
+  box.append(legend)
+  // newest weeks are on the right, show those first on narrow screens
+  scroll.scrollLeft = scroll.scrollWidth
+}
+
 document.addEventListener("nav", async () => {
+  for (const box of document.querySelectorAll(".gh-cal")) {
+    if (box.dataset.loaded === "1") continue
+    box.dataset.loaded = "1"
+    const user = box.dataset.user
+    loadCalendar(user)
+      .then((data) => renderCalendar(box, data))
+      .catch(() => {
+        box.replaceChildren(el("div", "gh-cal-stats", "Couldn't load the contribution graph right now."))
+      })
+  }
   for (const root of document.querySelectorAll(".gh-activity")) {
     const list = root.querySelector(".gh-activity-list")
     if (!list || root.dataset.loaded === "1") continue
@@ -285,6 +400,8 @@ export const GithubActivity = (userOpts) => {
             "@" + opts.user,
           ),
         ]),
+        page.calendar &&
+          h("div", { class: "gh-cal", "data-user": opts.user }, h("div", { class: "gh-cal-stats" }, "Loading...")),
         h(
           "ul",
           { class: "gh-activity-list" },
