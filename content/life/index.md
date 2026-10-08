@@ -6,7 +6,7 @@ exclude: true
 comments: false
 ---
 
-<ascii-art piece="bonsai" class="ascii-hero"></ascii-art>
+<ascii-art piece="campfire" class="ascii-hero ascii-center"></ascii-art>
 
 `Tat Tvam Asi (तत् त्वम् असि).`
 
