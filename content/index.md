@@ -6,7 +6,14 @@ exclude: true
 date: 2023-12-11
 updated: 2026-10-02
 ---
-Hi, I'm Nikhil 👋
+
+<div class="landing">
+<ascii-art src="/static/ascii/pieces/backprop.js" label="a small neural net training with backpropagation" class="ascii-backprop"></ascii-art>
+<p class="landing-line"><span class="landing-prompt">$ whoami</span> <span class="landing-typed">nikhil kapila. systems &amp; ai engineer. hardware to gpu inference.</span></p>
+<a class="landing-scroll" href="#quartz-body">scroll ↓</a>
+</div>
+
+Hi, I'm Nikhil
 
 I build things that sit between real hardware and AI. My background is building control, and these days I'm building LLM agents that drive real hardware. Here's [[now|what I'm up to right now]].
 
@@ -17,6 +24,18 @@ I also spent the first half of 2026 as Group Data & AI Manager at a British educ
 On the side I go deep on GPUs and inference: learning CUDA, serving models on cloud GPUs, and writing a small inference engine for ARM64. The goal is to run AI well on edge hardware, not just in a data center.
 
 I have an MS in CS (AI) from `Georgia Tech`, and I founded the OMSCS UAE chapter.
+
+<div class="ascii-logos">
+<ascii-art piece="python"></ascii-art>
+<ascii-art piece="go"></ascii-art>
+<ascii-art piece="typescript"></ascii-art>
+<ascii-art piece="c"></ascii-art>
+<ascii-art piece="cpp"></ascii-art>
+<ascii-art piece="zig"></ascii-art>
+<ascii-art piece="fedora"></ascii-art>
+<ascii-art piece="linux-mint"></ascii-art>
+<ascii-art piece="debian"></ascii-art>
+</div>
 
 ## Things I've built
 
