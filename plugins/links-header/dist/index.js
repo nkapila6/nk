@@ -8,6 +8,7 @@ const defaults = {
     { title: "Life", href: "/life" },
     { title: "Projects", href: "/projects" },
     { title: "Posts", href: "/posts" },
+    { title: "Contact", href: "/contact" },
   ],
 }
 
