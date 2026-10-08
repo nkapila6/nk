@@ -6,6 +6,8 @@ comments: false
 date: 2026-10-02
 ---
 
+<ascii-art piece="hourglass" class="ascii-hero"></ascii-art>
+
 _Updated October 2026. This is a [now page](https://nownownow.com/about): what I'm focused on at the moment, not a full bio._
 
 ## Work
