@@ -80,4 +80,4 @@ If something here helped you, you can buy me a coffee.
 ---
 
 > [!info] Attribution
-> Built with [Quartz](https://github.com/jackyzha0/quartz), written in [Obsidian](https://obsidian.md/).
+> Built with [Quartz](https://github.com/jackyzha0/quartz), written in [Obsidian](https://obsidian.md/). ASCII art pieces from [ascii.rest](https://ascii.rest) by [@bas3line](https://github.com/bas3line) (MIT), self-hosted here.
