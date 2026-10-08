@@ -6,6 +6,8 @@ exclude: true
 comments: false
 ---
 
+<ascii-art piece="bonsai" class="ascii-hero"></ascii-art>
+
 `Tat Tvam Asi (तत् त्वम् असि).`
 
 Life is just an adventure. Who knows where it takes us? 
