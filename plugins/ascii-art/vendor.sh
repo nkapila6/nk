@@ -5,7 +5,7 @@ set -eu
 cd "$(dirname "$0")/../.."
 out=quartz/static/ascii
 base=https://ascii.rest
-pieces="not-found hourglass ocean-sunset morse desert-night bonsai lighthouse typewriter
+pieces="not-found hourglass ocean-sunset marine-drive desert-night campfire lighthouse typewriter
 python go typescript c cpp zig fedora linux-mint debian $*"
 
 mkdir -p "$out/pieces" "$out/fonts"
