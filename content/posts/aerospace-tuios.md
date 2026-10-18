@@ -24,6 +24,8 @@ This post is how I got them to share. No rewriting either config, no retraining 
 
 For reference: AeroSpace 0.21.3-Beta, tuios 0.10.1, Ghostty, macOS.
 
+If you just want to steal the configs, they're in my dotfiles: [aerospace.toml](https://github.com/nkapila6/dotfiles/blob/main/config/aerospace/aerospace.toml), [tuios](https://github.com/nkapila6/dotfiles/blob/main/config/tuios/config.toml) and [ghostty](https://github.com/nkapila6/dotfiles/blob/main/config/ghostty/config).
+
 ## Let's clear the air
 
 - **Is this actually a problem or a skill issue?** It's a real problem. AeroSpace is i3-flavoured, so `alt-<anything>` is basically its whole personality. tuios also lives on Option for workspaces, splits and window cycling. Same keys, different jobs.
@@ -77,7 +79,7 @@ Then the mode itself, which binds exactly one thing, the way back out:
 alt-shift-semicolon = "mode main"
 ```
 
-That's the whole trick. The flow:
+That's the whole trick. The full thing, service mode and all, is in my [aerospace.toml](https://github.com/nkapila6/dotfiles/blob/main/config/aerospace/aerospace.toml). The flow:
 
 1. `alt-shift-;` then `t`. AeroSpace goes quiet.
 2. Use tuios like the docs intended. `opt+1` switches tuios workspaces, `opt+h` preselects a split, `opt+tab` cycles windows.
