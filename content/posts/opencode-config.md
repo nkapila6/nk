@@ -1,5 +1,5 @@
 ---
-title: "My OpenCode Config: Delegation Over Forward Passes"
+title: "Delegate: My OpenCode Config"
 date: 2026-07-13
 tags:
   - opencode
@@ -9,6 +9,9 @@ tags:
   - llm
   - agents
 ---
+
+>[!warning]
+>Out of date for a while now. I switched to omp since it allows to spawn subagents and async agentic work that OpenCode v1 did not have. This was added in OpenCode v2 but I have not tried it yet. My configuration remains the same irrespective of the harness used.
 
 So you installed OpenCode! You typed your first prompt. It worked. Then you realized: this is just a chat interface with file access. You're still doing all the thinking, all the routing, all the context management.
 
