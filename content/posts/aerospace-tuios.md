@@ -1,5 +1,5 @@
 ---
-title: "AeroSpace and tuios: Two Window Managers, One Option Key"
+title: "Two WMs, One Option Key"
 description: How to run AeroSpace and tuios together on macOS without fighting over the Option key, using an AeroSpace binding mode.
 date: 2026-10-18
 tags:
