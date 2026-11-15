@@ -1,5 +1,5 @@
 ---
-title: "How to Backpropagate Your Way to Agents: A Roadmap"
+title: "Gradient Descent to Agenthood"
 date: 2026-06-28
 tags:
   - machine-learning
