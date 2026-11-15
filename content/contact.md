@@ -14,7 +14,7 @@ It is so nice to see you here! Email is the fastest way to reach me.
 <a href="mailto:spamnikhil@pm.me"><span>email</span>spamnikhil@pm.me</a>
 <a href="https://linkedin.com/in/nikhilkapila"><span>linkedin</span>in/nikhilkapila</a>
 <a href="https://github.com/nkapila6/"><span>github</span>@nkapila6</a>
-<a href="https://drive.google.com/file/d/1wh4z93llH6so8e8tKE8LgGvSlIwTv5qO/view?usp=sharing"><span>resume</span>google drive</a>
+<a href="https://drive.google.com/file/d/1LUzwL5CZsHV87Nc8Le40Nj7SJDdo-x21/view?usp=sharing"><span>resume</span>google drive</a>
 <a href="mailto:nkapila6@gatech.edu"><span>gatech</span>nkapila6@gatech.edu</a>
 </div>
 
