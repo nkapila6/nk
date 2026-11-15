@@ -14,7 +14,11 @@ lastmod: 2024-04-20
 date: 2024-04-20
 updated: 2025-06-21
 ---
+
 Tips-n-tricks blog post to navigate OMSCS’s CS7641 Machine Learning (ML) course.
+
+>[!warning]
+>As of Spring 2027, this review does not hold since the entire course is no longer being run by Dr. LaGrow. End of an era. This was a good run and happy to have helped many folks along the way with my honest thoughts.
 
 ## **Important note**
 
