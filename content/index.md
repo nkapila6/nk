@@ -23,7 +23,7 @@ I also spent the first half of 2026 as Group Data & AI Manager at a British educ
 
 On the side I go deep on GPUs and inference: learning CUDA, serving models on cloud GPUs, and writing a small inference engine for ARM64. The goal is to run AI well on edge hardware, not just in a data center.
 
-I have an MS in CS (AI) from `Georgia Tech`, and I founded the OMSCS UAE chapter.
+I have an MS in CS (AI) from `Georgia Tech`, and I founded the [OMSCS UAE chapter](https://omscs.gatech.edu/2026-omscs-conference-lmgs).
 
 <div class="ascii-logos">
 <ascii-art piece="python"></ascii-art>
